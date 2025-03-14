@@ -1,0 +1,14 @@
+{
+    "questions": [
+      {
+        "question": "What one word best describes what AI can do?",
+        "options": ["Calculate", "Decide", "Think", "Predict"],
+        "correct_answer": "Predict"
+      },
+      {
+        "question": "Which AI system would be useful for a self-driving car?",
+        "options": ["GPS", "Entertainment Trends", "Weather Patterns", "International News"],
+        "correct_answer": "GPS"
+      }
+    ]
+  }
