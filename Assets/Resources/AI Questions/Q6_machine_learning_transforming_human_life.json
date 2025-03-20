@@ -1,0 +1,29 @@
+{
+    "questions": [
+      {
+        "question": "What do AI researchers call the type of systems likely to emerge by 2050 and beyond?",
+        "options": ["Broad AI", "Universal AI", "AI for Enterprise", "General AI"],
+        "correct_answer": "General AI"
+      },
+      {
+        "question": "What type of AI do services, such as Netflix, use to recommend offerings to users?",
+        "options": ["Broad AI", "General AI", "Future AI", "Narrow AI"],
+        "correct_answer": "Narrow AI"
+      },
+      {
+        "question": "Tesla cars are all connected and share what they learn when autonomously driving. This is an example of which of the following levels of AI?",
+        "options": ["General AI", "Broad AI", "Programmable AI", "Future AI"],
+        "correct_answer": "Broad AI"
+      },
+      {
+        "question": "Which of the following represents the idea that AI will move into all industries, from finance, to education, to healthcare, increasing productivity and enabling new opportunities?",
+        "options": ["Broad AI", "Future AI", "Programmable AI", "AI everywhere"],
+        "correct_answer": "AI everywhere"
+      },
+      {
+        "question": "With the use of billions of sensors, what is the new idea that will help to improve the Earth’s safety, sustainability, and security?",
+        "options": ["Personalization", "Narrow AI", "Instrumented planet", "Tabulated Earth"],
+        "correct_answer": "Instrumented planet"
+      }
+    ]
+}

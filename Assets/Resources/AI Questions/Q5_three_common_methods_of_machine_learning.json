@@ -1,0 +1,29 @@
+{
+    "questions": [
+        {
+            "question": "Which method of learning does an AI system use when it uses the process of trial and error?",
+            "options": ["Reinforcement learning", "Supervised learning", "Unsupervised learning", "Classical conditioning"],
+            "correct_answer": "Reinforcement learning"
+        },
+        {
+            "question": "You train Google Photos to identify people in photographs. As a result, Google Photos can recognize their faces. What kind of learning is this?",
+            "options": ["Transitory learning", "Supervised learning", "Unsupervised learning", "Reinforcement learning"],
+            "correct_answer": "Supervised learning"
+        },
+        {
+            "question": "YouTube and Netflix often recommend options to users. What kind of learning is used to generate these recommendations?",
+            "options": ["Unsupervised learning", "Supervised learning", "Commentary learning", "Reinforcement learning"],
+            "correct_answer": "Unsupervised learning"
+        },
+        {
+            "question": "Fill in the blank. All supervised learning algorithms need __________ data.",
+            "options": ["Unstructured", "Raw", "Labeled", "Unlabeled"],
+            "correct_answer": "Labeled"
+        },
+        {
+            "question": "Fill in the blank. __________ learning occurs when the algorithm is given unlabeled data.",
+            "options": ["Supervised", "Reinforcement", "Classical", "Unsupervised"],
+            "correct_answer": "Unsupervised"
+        }
+    ]
+}

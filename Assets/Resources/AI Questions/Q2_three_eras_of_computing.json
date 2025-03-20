@@ -1,0 +1,30 @@
+{
+    "questions": [
+      {
+        "question": "In which era did computers guide astronauts from Earth to the moon and advance to handle more than one kind of instruction?",
+        "options": ["The Era of AI", "The Era of Tabulation", "The Era of Industrialization", "The Era of Programming"],
+        "correct_answer": "The Era of Programming"
+      },
+      {
+        "question": "In which era did the advancements in fields ranging from cancer research to energy production show how its achievements impact people every day, and that it has exponentially increasing abilities?",
+        "options": ["The Era of AI", "The Era of Industrialization", "The Era of Programming", "The Era of Tabulation"],
+        "correct_answer": "The Era of AI"
+      },
+      {
+        "question": "In which era did machines help humans sort data into structures to reveal its secrets, that is, to reveal more insight than just simply counting to get a sum total?",
+        "options": ["The Era of Tabulation", "The Era of AI", "The Era of Programming", "The Era of Industrialization"],
+        "correct_answer": "The Era of Tabulation"
+      },
+      {
+        "question": "What were the main causes of the First Winter of AI? (Two are correct)",
+        "options": ["High expectations", "Intellectual property theft", "Buggy program code and slow language execution", "Lack of funding"],
+        "correct_answer": ["High expectations", "Lack of funding"]
+      },
+      {
+        "question": "Which of the following is the correct order of the three eras of computing?",
+        "options": ["Programming, Tabulation, AI", "AI, Programming, Tabulation", "Tabulation, AI, Programming", "Tabulation, Programming, AI"],
+        "correct_answer": "Tabulation, Programming, AI"
+      }
+    ]
+  }
+  

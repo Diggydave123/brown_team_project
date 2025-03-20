@@ -1,0 +1,54 @@
+{
+    "questions": [
+        {
+            "question": "Which cybersecurity role does Thembi serve in her organization?",
+            "options": [
+                "Penetration tester",
+                "Cybersecurity engineer",
+                "Security software developer",
+                "Digital forensics investigator"
+            ],
+            "correct_answer": "Cybersecurity engineer"
+        },
+        {
+            "question": "Which of the following tasks relates to security assurance?",
+            "options": [
+                "Identifying and analyzing potential threats to computer systems",
+                "Encoding sensitive data that her department shares with others",
+                "Verifying that the firewall protects the network effectively",
+                "Confirming the identity of someone trying to access protected data"
+            ],
+            "correct_answer": "Verifying that the firewall protects the network effectively"
+        },
+        {
+            "question": "Which cybersecurity role does Mateus have in this scenario?",
+            "options": [
+                "Network security architect",
+                "Penetration tester",
+                "Malware analyst",
+                "Digital forensics investigator"
+            ],
+            "correct_answer": "Penetration tester"
+        },
+        {
+            "question": "Which of the following skills are important for Steffen to describe?",
+            "options": [
+                "Selling ability",
+                "Problem solving",
+                "Adaptability",
+                "Communication"
+            ],
+            "correct_answer": ["Problem solving", "Adaptability", "Communication"]
+        },
+        {
+            "question": "Which of the following items is an industry-recognized cybersecurity certification that you can consider in the future?",
+            "options": [
+                "CompTIA Cybersecurity Analyst (CySA+)",
+                "Certified Ethical Hacker (CEH)",
+                "CompTIA Data Guardian (CDG)",
+                "Certified Virus Defense Specialist (CVDS)"
+            ],
+            "correct_answer": ["CompTIA Cybersecurity Analyst (CySA+)", "Certified Ethical Hacker (CEH)"]
+        }
+    ]
+}

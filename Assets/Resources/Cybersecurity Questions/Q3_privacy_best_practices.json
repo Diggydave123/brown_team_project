@@ -1,0 +1,39 @@
+{
+    "questions": [
+        {
+            "question": "True or false? Cybersecurity experts consider hackers bypassing security measures a malicious activity.",
+            "options": ["True", "False"],
+            "correct_answer": "False"
+        },
+        {
+            "question": "You download a game to your computer. But when you open the file, the game doesn’t start. Worse, your computer starts behaving like someone else is controlling it. For example, the cursor moves by itself and clicks items on the screen. What type of malware might be causing these issues?",
+            "options": ["Trojan", "Ransomware", "Virus", "Worm"],
+            "correct_answer": "Trojan"
+        },
+        {
+            "question": "The New York State Department of Financial Services fined First American Financial Corp USD 487,616.",
+            "options": ["Financial", "Operational", "Reputational"],
+            "correct_answer": "Financial"
+        },
+        {
+            "question": "The organization needed to implement a new process where a quality control officer reviews code before it goes live.",
+            "options": ["Financial", "Operational", "Reputational"],
+            "correct_answer": "Operational"
+        },
+        {
+            "question": "First American Financial Corp broke customers’ trust, resulting in fewer business engagements with the company.",
+            "options": ["Financial", "Operational", "Reputational"],
+            "correct_answer": "Reputational"
+        },
+        {
+            "question": "A local banking organization institutes two-factor authentication for users when logging into their accounts. Which of the GAPP 10 best practices for organizational privacy is being applied?",
+            "options": ["Monitoring and enforcement", "Security", "Choice and consent", "Quality"],
+            "correct_answer": "Security"
+        },
+        {
+            "question": "A doctor’s office has patients sign a form that includes a notice indicating the processes the office uses to secure patient records. Which of the GAPP 10 best practices for organizational privacy is being applied?",
+            "options": ["Monitoring and enforcement", "Disclosure to third parties", "Security", "Notice"],
+            "correct_answer": "Notice"
+        }
+    ]
+}

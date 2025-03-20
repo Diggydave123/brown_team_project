@@ -1,0 +1,30 @@
+{
+    "questions": [
+      {
+        "question": "If names and email addresses are organized using a spreadsheet software, like Google Sheets or Microsoft Excel, which type of data is this?",
+        "options": ["Structured data", "Semi-structured data", "Unstructured data", "True data"],
+        "correct_answer": "Structured data"
+      },
+      {
+        "question": "Approximately how much of the world’s data today is unstructured?",
+        "options": ["90%", "80%", "40%", "85%"],
+        "correct_answer": "80%"
+      },
+      {
+        "question": "Shelby writes a survey that includes the following question: 'Do you like chocolate (circle Yes or No), and why?' Which of the following describes the data Shelby will collect?",
+        "options": ["Unstructured data", "Neither structured data nor unstructured data", "Structured data", "Both structured data and unstructured data"],
+        "correct_answer": "Both structured data and unstructured data"
+      },
+      {
+        "question": "Which of the following is most likely to be unstructured data?",
+        "options": ["The breeds of entrants in a dog show", "Social media posts", "Ingredients for baking bread", "Prescriptions for patients in a large hospital"],
+        "correct_answer": "Social media posts"
+      },
+      {
+        "question": "Fill in the blank. Data that is not completely raw and contains elements such as tags and organizational metadata is known as _______________.",
+        "options": ["Unstructured data", "Structured data", "Semi-structured data", "True data"],
+        "correct_answer": "Semi-structured data"
+      }
+    ]
+  }
+  

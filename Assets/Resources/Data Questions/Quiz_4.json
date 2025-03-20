@@ -1,0 +1,45 @@
+{
+    "questions": [
+      {
+        "question": "In which step did Charles share that he spends most of his time, nearly 80%?",
+        "options": [
+          "Analyze",
+          "Clean",
+          "Collect",
+          "Visualize"
+        ],
+        "correct_answer": "Clean"
+      },
+      {
+        "question": "In which step did Charles share that he gets excited to investigate and use the right analytical methods to find root causes?",
+        "options": [
+          "Collect",
+          "Visualize",
+          "Analyze",
+          "Clean"
+        ],
+        "correct_answer": "Analyze"
+      },
+      {
+        "question": "In which step did Charles share that he is careful to follow the company guidelines when storing data for security purposes?",
+        "options": [
+          "Visualize",
+          "Clean",
+          "Analyze",
+          "Collect"
+        ],
+        "correct_answer": "Collect"
+      },
+      {
+        "question": "In which step did Charles share he figures out the best way to depict his results in a team presentation?",
+        "options": [
+          "Analyze",
+          "Collect",
+          "Visualize",
+          "Clean"
+        ],
+        "correct_answer": "Visualize"
+      }
+    ]
+  }
+  

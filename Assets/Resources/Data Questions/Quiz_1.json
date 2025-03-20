@@ -1,0 +1,45 @@
+{
+    "questions": [
+        {
+            "question": "Fill in the blank. Text in a book, audio files, and social media posts are examples of _______________ data.",
+            "options": [
+                "Database",
+                "Structured",
+                "Unstructured",
+                "Complex"
+            ],
+            "correct_answer": "Unstructured"
+        },
+        {
+            "question": "Which of the following conclusions can you make about structured data? Select the two that apply.",
+            "options": [
+                "Examples can include images, text messages, and social media posts.",
+                "It's organized into rows and columns in a spreadsheet or database.",
+                "It's raw data that is stored in its original, undefined format.",
+                "Examples can include names, dates, and addresses."
+            ],
+            "correct_answers": [
+                "It's organized into rows and columns in a spreadsheet or database.",
+                "Examples can include names, dates, and addresses."
+            ]
+        },
+        {
+            "question": "What type of data is on a driver's license that records a person's eye color and hair color?",
+            "options": [
+                "Quantitative data",
+                "Qualitative data"
+            ],
+            "correct_answer": "Qualitative data"
+        },
+        {
+            "question": "What type of data is this? (Customer's marital status column in a spreadsheet)",
+            "options": [
+                "Continuous",
+                "Discrete",
+                "Ordinal",
+                "Nominal"
+            ],
+            "correct_answer": "Nominal"
+        }
+    ]
+}

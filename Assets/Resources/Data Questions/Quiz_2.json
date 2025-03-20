@@ -1,0 +1,19 @@
+{
+    "questions": [
+        {
+            "question": "Fill in the blank. The __________ of big data refers to the ability to obtain monetary, medical, social, or personal benefits from the data.",
+            "options": ["Value", "Velocity", "Volume", "Veracity"],
+            "correct_answer": "Value"
+        },
+        {
+            "question": "What is the speed at which new data is generated and moves around?",
+            "options": ["Veracity", "Velocity", "Volume", "Value"],
+            "correct_answer": "Velocity"
+        },
+        {
+            "question": "Fill in the blank. With big data, the __________ is the quality and trustworthiness of the data.",
+            "options": ["Veracity", "Velocity", "Volume", "Value"],
+            "correct_answer": "Veracity"
+        }
+    ]
+}

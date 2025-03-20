@@ -1,0 +1,30 @@
+{
+    "questions": [
+      {
+        "question": "What one word best describes what AI can do?",
+        "options": ["Calculate", "Decide", "Think", "Predict"],
+        "correct_answer": "Predict"
+      },
+      {
+        "question": "Which of the following Narrow AI systems would you want to include when building the Broad AI system for a self-driving car?",
+        "options": ["Information from the global positioning system (GPS)", "Entertainment trends", "Long-term weather patterns", "International news"],
+        "correct_answer": "Information from the global positioning system (GPS)"
+      },
+      {
+        "question": "Complete the sentence. _______________ performs tasks without human intervention and completes mundane and repetitive tasks for humans, while _______________ allows humans to make final decisions after analyzing data, reports, and other types of data.",
+        "options": ["Augmented intelligence, AI", "AI, augmented intelligence", "AI, Narrow AI", "Augmented intelligence, Narrow AI"],
+        "correct_answer": "AI, augmented intelligence"
+      },
+      {
+        "question": "Fill in the blank. ___________ systems are used to predict global weather, trace pandemics, and help businesses predict future trends?",
+        "options": ["General AI", "Narrow AI", "Broad AI", "Targeted AI"],
+        "correct_answer": "Broad AI"
+      },
+      {
+        "question": "Complete the sentence. Artificial intelligence (AI) refers to the ability of a machine to ________________ and ________________.",
+        "options": ["secure data, create algorithms", "identify emotions, transfer data", "learn patterns, make predictions", "create algorithms, generalize information"],
+        "correct_answer": "learn patterns, make predictions"
+      }
+    ]
+  }
+  
