@@ -1,0 +1,274 @@
+{
+    "questions": [
+      {
+        "question": "What one word best describes what AI can do?",
+        "options": ["Calculate", "Decide", "Think", "Predict"],
+        "correct_answer": "Predict"
+      },
+      {
+        "question": "Which of the following Narrow AI systems would you want to include when building the Broad AI system for a self-driving car?",
+        "options": ["Information from the global positioning system (GPS)", "Entertainment trends", "Long-term weather patterns", "International news"],
+        "correct_answer": "Information from the global positioning system (GPS)"
+      },
+      {
+        "question": "Complete the sentence. _______________ performs tasks without human intervention and completes mundane and repetitive tasks for humans, while _______________ allows humans to make final decisions after analyzing data, reports, and other types of data.",
+        "options": ["Augmented intelligence, AI", "AI, augmented intelligence", "AI, Narrow AI", "Augmented intelligence, Narrow AI"],
+        "correct_answer": "AI, augmented intelligence"
+      },
+      {
+        "question": "Fill in the blank. ___________ systems are used to predict global weather, trace pandemics, and help businesses predict future trends?",
+        "options": ["General AI", "Narrow AI", "Broad AI", "Targeted AI"],
+        "correct_answer": "Broad AI"
+      },
+      {
+        "question": "Complete the sentence. Artificial intelligence (AI) refers to the ability of a machine to ________________ and ________________.",
+        "options": ["secure data, create algorithms", "identify emotions, transfer data", "learn patterns, make predictions", "create algorithms, generalize information"],
+        "correct_answer": "learn patterns, make predictions"
+      },
+      {
+        "question": "In which era did computers guide astronauts from Earth to the moon and advance to handle more than one kind of instruction?",
+        "options": ["The Era of AI", "The Era of Tabulation", "The Era of Industrialization", "The Era of Programming"],
+        "correct_answer": "The Era of Programming"
+      },
+      {
+        "question": "In which era did the advancements in fields ranging from cancer research to energy production show how its achievements impact people every day, and that it has exponentially increasing abilities?",
+        "options": ["The Era of AI", "The Era of Industrialization", "The Era of Programming", "The Era of Tabulation"],
+        "correct_answer": "The Era of AI"
+      },
+      {
+        "question": "In which era did machines help humans sort data into structures to reveal its secrets, that is, to reveal more insight than just simply counting to get a sum total?",
+        "options": ["The Era of Tabulation", "The Era of AI", "The Era of Programming", "The Era of Industrialization"],
+        "correct_answer": "The Era of Tabulation"
+      },
+      {
+        "question": "Which of the following is the correct order of the three eras of computing?",
+        "options": ["Programming, Tabulation, AI", "AI, Programming, Tabulation", "Tabulation, AI, Programming", "Tabulation, Programming, AI"],
+        "correct_answer": "Tabulation, Programming, AI"
+      },
+      {
+        "question": "If names and email addresses are organized using a spreadsheet software, like Google Sheets or Microsoft Excel, which type of data is this?",
+        "options": ["Structured data", "Semi-structured data", "Unstructured data", "True data"],
+        "correct_answer": "Structured data"
+      },
+      {
+        "question": "Approximately how much of the world’s data today is unstructured?",
+        "options": ["90%", "80%", "40%", "85%"],
+        "correct_answer": "80%"
+      },
+      {
+        "question": "Shelby writes a survey that includes the following question: 'Do you like chocolate (circle Yes or No), and why?' Which of the following describes the data Shelby will collect?",
+        "options": ["Unstructured data", "Neither structured data nor unstructured data", "Structured data", "Both structured data and unstructured data"],
+        "correct_answer": "Both structured data and unstructured data"
+      },
+      {
+        "question": "Which of the following is most likely to be unstructured data?",
+        "options": ["The breeds of entrants in a dog show", "Social media posts", "Ingredients for baking bread", "Prescriptions for patients in a large hospital"],
+        "correct_answer": "Social media posts"
+      },
+      {
+        "question": "Fill in the blank. Data that is not completely raw and contains elements such as tags and organizational metadata is known as _______________.",
+        "options": ["Unstructured data", "Structured data", "Semi-structured data", "True data"],
+        "correct_answer": "Semi-structured data"
+      },
+      {
+        "question": "Which of the following is an example of a probabilistic calculation?",
+        "options": ["A 78% chance of being wrong", "Wording that is probably correct", "An unreliable calculation", "A strong feeling you are most likely correct"],
+        "correct_answer": "A 78% chance of being wrong"
+      },
+      {
+        "question": "Tomas is programming an app to help people find their way in his city. He programs every possible route from the university auditorium to the museum. Which of the following is Tomas likely using?",
+        "options": ["Programmable computing", "Heuristic computing", "Machine learning", "Deep learning"],
+        "correct_answer": "Programmable computing"
+      },
+      {
+        "question": "Why does machine learning find answers in unstructured data more quickly than a programmable computer?",
+        "options": ["Machine learning assembles all the data into a table before calculating.", "Machine learning can search every combination of factors very quickly.", "Machine learning analyzes every data combination.", "Machine learning uses the most sophisticated program code."],
+        "correct_answer": "Machine learning can search every combination of factors very quickly."
+      },
+      {
+        "question": "Fill in the blank. Machine learning can analyze _______________ data more quickly than a programmable computer can.",
+        "options": ["Supervised", "Triangulated", "Dark", "Structured"],
+        "correct_answer": "Dark"
+      },
+      {
+        "question": "Complete the sentence. Machine learning is a type of AI with many advantages over programmable computers, including the distinguishing capability to _______________ and _______________.",
+        "options": ["Use structured data, locate solutions", "Predict, learn", "Search, define", "Use databases, find solutions"],
+        "correct_answer": "Predict, learn"
+      },
+      {
+        "question": "Which method of learning does an AI system use when it uses the process of trial and error?",
+        "options": ["Reinforcement learning", "Supervised learning", "Unsupervised learning", "Classical conditioning"],
+        "correct_answer": "Reinforcement learning"
+    },
+    {
+        "question": "You train Google Photos to identify people in photographs. As a result, Google Photos can recognize their faces. What kind of learning is this?",
+        "options": ["Transitory learning", "Supervised learning", "Unsupervised learning", "Reinforcement learning"],
+        "correct_answer": "Supervised learning"
+    },
+    {
+        "question": "YouTube and Netflix often recommend options to users. What kind of learning is used to generate these recommendations?",
+        "options": ["Unsupervised learning", "Supervised learning", "Commentary learning", "Reinforcement learning"],
+        "correct_answer": "Unsupervised learning"
+    },
+    {
+        "question": "Fill in the blank. All supervised learning algorithms need __________ data.",
+        "options": ["Unstructured", "Raw", "Labeled", "Unlabeled"],
+        "correct_answer": "Labeled"
+    },
+    {
+        "question": "Fill in the blank. __________ learning occurs when the algorithm is given unlabeled data.",
+        "options": ["Supervised", "Reinforcement", "Classical", "Unsupervised"],
+        "correct_answer": "Unsupervised"
+    },
+    {
+        "question": "What do AI researchers call the type of systems likely to emerge by 2050 and beyond?",
+        "options": ["Broad AI", "Universal AI", "AI for Enterprise", "General AI"],
+        "correct_answer": "General AI"
+      },
+      {
+        "question": "What type of AI do services, such as Netflix, use to recommend offerings to users?",
+        "options": ["Broad AI", "General AI", "Future AI", "Narrow AI"],
+        "correct_answer": "Narrow AI"
+      },
+      {
+        "question": "Tesla cars are all connected and share what they learn when autonomously driving. This is an example of which of the following levels of AI?",
+        "options": ["General AI", "Broad AI", "Programmable AI", "Future AI"],
+        "correct_answer": "Broad AI"
+      },
+      {
+        "question": "Which of the following represents the idea that AI will move into all industries, from finance, to education, to healthcare, increasing productivity and enabling new opportunities?",
+        "options": ["Broad AI", "Future AI", "Programmable AI", "AI everywhere"],
+        "correct_answer": "AI everywhere"
+      },
+      {
+        "question": "With the use of billions of sensors, what is the new idea that will help to improve the Earth’s safety, sustainability, and security?",
+        "options": ["Personalization", "Narrow AI", "Instrumented planet", "Tabulated Earth"],
+        "correct_answer": "Instrumented planet"
+      },
+      {
+        "question": "Which of the following acts on behalf of people in the physical world in a way that complements human abilities?",
+        "options": ["Augmented intelligence", "Machine learning algorithms", "Expert systems", "Cognitive computing systems"],
+        "correct_answer": "Augmented intelligence"
+    },
+    {
+        "question": "Which of the following is the level of AI that is more versatile, can handle a wider range of related tasks, and is focused on integrating AI within specific business processes?",
+        "options": ["Narrow AI", "Broad AI", "General AI"],
+        "correct_answer": "Broad AI"
+    },
+    {
+        "question": "Which of the following is a key attribute of an artificial intelligence system?",
+        "options": ["AI systems are self-aware.", "AI systems make predictions.", "AI systems can judge.", "AI systems have experience."],
+        "correct_answer": "AI systems make predictions."
+    },
+    {
+        "question": "Which of the following methods of learning describes how an AI system learns using trial and error?",
+        "options": ["Reinforcement learning", "Supervised learning", "Unsupervised learning"],
+        "correct_answer": "Reinforcement learning"
+    },
+    {
+        "question": "Which of the following explains why an AI trained with machine learning can rapidly map the best route between two points on a map?",
+        "options": ["It performs millions of tiny calculations quickly, trying different routes through trial and error.", "It relies on a complete database of all possible routes through the city.", "It predicts traffic problems based on stored alternative routes for every possible situation.", "It uses predefined programming instructions to navigate through traffic."],
+        "correct_answer": "It performs millions of tiny calculations quickly, trying different routes through trial and error."
+    },
+    {
+        "question": "In which of the following eras of computing did an IBM system beat a chess champion, a robot drive itself down a 131-mile desert trail, and IBM Watson beat two Jeopardy! grand champions?",
+        "options": ["Era of Programming", "Era of Tabulation", "Era of AI"],
+        "correct_answer": "Era of AI"
+    },
+    {
+        "question": "How does machine learning enable decision-making in complex scenarios, such as medical treatment choices?",
+        "options": ["By ignoring potential outcomes and personal experience in decision making", "By offering deterministic solutions based on fixed criteria", "By relying solely on AI systems to make treatment decisions without human input", "By providing probabilistic statements with confidence levels for different treatment options"],
+        "correct_answer": "By providing probabilistic statements with confidence levels for different treatment options"
+    },
+    {
+        "question": "Which of the following describes how machine learning differs from classical systems in structuring unstructured data?",
+        "options": ["Machine learning offers probabilistic statements instead of binary decisions.", "Machine learning relies on deterministic algorithms to process unstructured data.", "Machine learning constructs a predetermined structure of routes based on a database.", "Machine learning relies on human judgment to structure unstructured data."],
+        "correct_answer": "Machine learning offers probabilistic statements instead of binary decisions."
+    },
+    {
+        "question": "Which of the following is a likely consequence of AI becoming more pervasive across industries?",
+        "options": ["Enhanced productivity and the creation of new opportunities", "Reliance on current machine interface technologies will be strengthened", "Humans and machine interactions will become increasingly standardized", "Increased compartmentalization of AI implementation"],
+        "correct_answer": "Enhanced productivity and the creation of new opportunities"
+    },
+    {
+        "question": "Which of the following types of data can be analyzed more quickly by machine learning than by a programmable computer?",
+        "options": ["Organized", "Systematic", "Structured", "Unstructured"],
+        "correct_answer": "Unstructured"
+    },
+    {
+        "question": "Which level of AI refers to machines that can perform any intellectual task that a human can?",
+        "options": ["General AI", "Narrow AI", "Broad AI"],
+        "correct_answer": "General AI"
+    },
+    {
+        "question": "Which of the following is an example of structured data?",
+        "options": ["Movie reviews", "Flight schedules", "Videos", "Social media posts"],
+        "correct_answer": "Flight schedules"
+    },
+    {
+        "question": "Which of the following types of data is categorized as qualitative data, and cannot be processed and analyzed by conventional data tools and methods?",
+        "options": ["Semi-structured data", "Unstructured data", "Data in a database", "Structured data"],
+        "correct_answer": "Unstructured data"
+    },
+    {
+        "question": "Which of the following statements most accurately describes semi-structured data?",
+        "options": ["Data that lacks any built-in organization or structure, such as images and texts", "Information that can be organized in rows and columns, like in a spreadsheet", "Data that combines features of both structured and unstructured data, using metadata for organization", "Quantitative data processed and analyzed by conventional data tools"],
+        "correct_answer": "Data that combines features of both structured and unstructured data, using metadata for organization"
+    },
+    {
+        "question": "Which of the following is the best reason to support moving to an AI system for analyzing social media data?",
+        "options": ["Social media data contains a mix of structured and unstructured data.", "Social media data lacks complexity.", "Social media data is completely structured.", "Social media data is completely unstructured."],
+        "correct_answer": "Social media data contains a mix of structured and unstructured data."
+    },
+    {
+        "question": "Which of the following is a primary application of LLMs?",
+        "options": [
+            "Predicting stock market trends",
+            "Conducting automatic hardware diagnostics",
+            "Solving mathematical equations",
+            "Generating text based on given prompts"
+        ],
+        "correct_answer": "Generating text based on given prompts"
+    },
+    {
+        "question": "Which of the following best describes a large language model (LLM)?",
+        "options": [
+            "It is a type of machine learning model that processes and generates human-like text.",
+            "It is a database system optimized for handling large volumes of text data.",
+            "It is a specialized networking model that processes data from different sources.",
+            "It is a software tool used primarily for data encryption."
+        ],
+        "correct_answer": "It is a type of machine learning model that processes and generates human-like text."
+    },
+    {
+        "question": "What makes transformers special in handling text?",
+        "options": [
+            "They can pay attention to all parts of the sentence at once.",
+            "They can read and write text simultaneously.",
+            "They work better with numbers than with words.",
+            "They focus only on the most recent word in a sentence."
+        ],
+        "correct_answer": "They can pay attention to all parts of the sentence at once."
+    },
+    {
+        "question": "Which technologies have advanced the operation of LLMs?",
+        "options": [
+            "High-performance parallel computing",
+            "Machine learning and artificial neural networks",
+            "Distributed ledger technology",
+            "Biometric analysis techniques"
+        ],
+        "correct_answer": "Machine learning and artificial neural networks"
+    },
+    {
+        "question": "Why is a large amount of data important for training large language models (LLMs)?",
+        "options": [
+            "It decreases the model's reliance on internet connectivity.",
+            "Large datasets reduce the model's speed, making it more thorough in processing text.",
+            "It helps the model to improve its accuracy by learning from a wide variety of text examples.",
+            "Large data sets are required to meet regulatory compliance for data storage."
+        ],
+        "correct_answer": "It helps the model to improve its accuracy by learning from a wide variety of text examples."
+    }
+    ]
+  }

@@ -1,0 +1,338 @@
+{
+    "questions": [
+        {
+            "question": "Fill in the blank. Text in a book, audio files, and social media posts are examples of _______________ data.",
+            "options": [
+                "Database",
+                "Structured",
+                "Unstructured",
+                "Complex"
+            ],
+            "correct_answer": "Unstructured"
+        },
+        {
+            "question": "What type of data is on a driver's license that records a person's eye color and hair color?",
+            "options": [
+                "Quantitative data",
+                "Qualitative data"
+            ],
+            "correct_answer": "Qualitative data"
+        },
+        {
+            "question": "What type of data is this? (Customer's marital status column in a spreadsheet)",
+            "options": [
+                "Continuous",
+                "Discrete",
+                "Ordinal",
+                "Nominal"
+            ],
+            "correct_answer": "Nominal"
+        },
+        {
+            "question": "Fill in the blank. The __________ of big data refers to the ability to obtain monetary, medical, social, or personal benefits from the data.",
+            "options": ["Value", "Velocity", "Volume", "Veracity"],
+            "correct_answer": "Value"
+        },
+        {
+            "question": "What is the speed at which new data is generated and moves around?",
+            "options": ["Veracity", "Velocity", "Volume", "Value"],
+            "correct_answer": "Velocity"
+        },
+        {
+            "question": "Fill in the blank. With big data, the __________ is the quality and trustworthiness of the data.",
+            "options": ["Veracity", "Velocity", "Volume", "Value"],
+            "correct_answer": "Veracity"
+        },
+        {
+            "question": "A company uses data analytics to get a 'snapshot' of its business and to identify issues. The company's data sources are past and present revenue reports and stock prices. Which type of analytics uses this type of data?",
+            "options": [
+              "Descriptive analytics",
+              "Prescriptive analytics",
+              "Predictive analytics",
+              "Diagnostic analytics"
+            ],
+            "correct_answer": "Descriptive analytics"
+          },
+          {
+            "question": "Which type of analytics recommends actions to take to eliminate a future problem or take advantage of a promising trend?",
+            "options": [
+              "Predictive analytics",
+              "Prescriptive analytics",
+              "Descriptive analytics",
+              "Diagnostic analytics"
+            ],
+            "correct_answer": "Prescriptive analytics"
+          },
+          {
+            "question": "Which type of analytics drills down the trends and patterns to identify the causes of problems?",
+            "options": [
+              "Descriptive analytics",
+              "Diagnostic analytics",
+              "Predictive analytics",
+              "Prescriptive analytics"
+            ],
+            "correct_answer": "Diagnostic analytics"
+          },
+          {
+            "question": "Which type of analytics makes forecasts about the future?",
+            "options": [
+              "Descriptive analytics",
+              "Prescriptive analytics",
+              "Diagnostic analytics",
+              "Predictive analytics"
+            ],
+            "correct_answer": "Predictive analytics"
+          },
+          {
+            "question": "In which step did Charles share that he spends most of his time, nearly 80%?",
+            "options": [
+              "Analyze",
+              "Clean",
+              "Collect",
+              "Visualize"
+            ],
+            "correct_answer": "Clean"
+          },
+          {
+            "question": "In which step did Charles share that he gets excited to investigate and use the right analytical methods to find root causes?",
+            "options": [
+              "Collect",
+              "Visualize",
+              "Analyze",
+              "Clean"
+            ],
+            "correct_answer": "Analyze"
+          },
+          {
+            "question": "In which step did Charles share that he is careful to follow the company guidelines when storing data for security purposes?",
+            "options": [
+              "Visualize",
+              "Clean",
+              "Analyze",
+              "Collect"
+            ],
+            "correct_answer": "Collect"
+          },
+          {
+            "question": "In which step did Charles share he figures out the best way to depict his results in a team presentation?",
+            "options": [
+              "Analyze",
+              "Collect",
+              "Visualize",
+              "Clean"
+            ],
+            "correct_answer": "Visualize"
+          },
+          {
+            "question": "Which of the following statements about data visualizations is correct?",
+            "options": [
+              "Data analysts typically use one of four types of visualizations.",
+              "The goal is to have a visual that is effective, attractive, and impactive.",
+              "Data visualizations turn narratives into numbers.",
+              "The audience should be confused when they first see a visualization."
+            ],
+            "correct_answer": "The goal is to have a visual that is effective, attractive, and impactive."
+          },
+          {
+            "question": "Which type of visualization is best-suited for ranking a large number of categories, showing correlation, and using for before-after analysis?",
+            "options": [
+              "Pie chart",
+              "Bar chart",
+              "Line chart",
+              "Scatter plot chart"
+            ],
+            "correct_answer": "Bar chart"
+          },
+          {
+            "question": "During analysis, data analysts create visualizations like charts, graphs, and maps to explore and interpret data to identify patterns or trends. Which of the following is another reason data analysts create data visualizations?",
+            "options": [
+              "Organize data in a usable format, such as a spreadsheet, for people to easily access",
+              "Publish data in a presentation template",
+              "Increase the complexity and significance of the presentation",
+              "Communicate results and help people understand the insights to make decisions"
+            ],
+            "correct_answer": "Communicate results and help people understand the insights to make decisions"
+          },
+          {
+            "question": "You are examining data in a case study. The case study data is the daily height and weight of newborn babies that has been collected during their stay in a hospital before going home. What type of data is this?",
+            "options": [
+              "Ordinal",
+              "Nominal",
+              "Continuous",
+              "Discrete"
+            ],
+            "correct_answer": "Continuous"
+          },
+          {
+            "question": "The data analyst for an insurance company has performed diagnostic analytics on data and discovered some unexpected patterns in insurance claims. Next, the data analyst wants to drill down and find out the reason for these unexpected patterns. What kind of analytics will the data analyst use to answer the question, 'Why is this happening?'",
+            "options": [
+              "Diagnostic analytics",
+              "Predictive analytics",
+              "Prescriptive analytics",
+              "Descriptive analytics"
+            ],
+            "correct_answer": "Diagnostic analytics"
+          },
+          {
+            "question": "A credit card company database has the names of card holders, dates card holders make purchases, and the type of payment method used. What kind of data is this?",
+            "options": [
+              "Unstructured data",
+              "Structured data",
+              "Ordinal data",
+              "Qualitative data"
+            ],
+            "correct_answer": "Structured data"
+          },
+          {
+            "question": "You are considering buying a new desk for your home office. It is black, made of steel, and the table height can be adjusted. What kind of information is this?",
+            "options": [
+              "Qualitative data",
+              "Discrete data",
+              "Ordinal data",
+              "Quantitative data"
+            ],
+            "correct_answer": "Qualitative data"
+          },
+          {
+            "question": "You are reviewing a spreadsheet containing information about the people who will be attending a conference. You notice that one of the columns contains the city in which each attendee lives. What type of data is this?",
+            "options": [
+              "Nominal",
+              "Continuous",
+              "Ordinal",
+              "Discrete"
+            ],
+            "correct_answer": "Nominal"
+          },
+          {
+            "question": "A national weather service uses data analytics to analyze weather in one part of the country. The weather service uses the results to determine future weather conditions in other parts of the country. What type of analytics is the national weather service using?",
+            "options": [
+              "Diagnostic analytics",
+              "Predictive analytics",
+              "Prescriptive analytics",
+              "Descriptive analytics"
+            ],
+            "correct_answer": "Predictive analytics"
+          },
+          {
+            "question": "MyBank is noticing incorrect formatting and typos in the data it receives from one of its sources. What characteristic of big data does this scenario describe?",
+            "options": [
+              "Volume",
+              "Velocity",
+              "Variety",
+              "Veracity",
+              "Value"
+            ],
+            "correct_answer": "Veracity"
+          },
+          {
+            "question": "A social media company's website contains videos posted by users and comments made by viewers. What kind of data is this?",
+            "options": [
+              "Qualitative data",
+              "Unstructured data",
+              "Nominal data",
+              "Structured data"
+            ],
+            "correct_answer": "Unstructured data"
+          },
+          {
+            "question": "A large retail company has collected a huge amount of data, such as customer purchases, sales, financial reports, and payroll, in its computer systems. This data is located in databases. What is the purpose of a database?",
+            "options": [
+              "To duplicate data to ensure a backup can be saved",
+              "To collect all types of data in tables and make it meaningful",
+              "To store structured data to make it easier to analyze",
+              "To organize unstructured data into a standard format"
+            ],
+            "correct_answer": "To store structured data to make it easier to analyze"
+          },
+          {
+            "question": "You need to display the number of customer service calls your team answered over the past month to determine trends and the busiest times. Which chart is best for this type of visualization?",
+            "options": [
+              "Line chart",
+              "Pie chart",
+              "Map",
+              "Scatter plot chart"
+            ],
+            "correct_answer": "Line chart"
+          },
+          {
+            "question": "You're a data analyst for a company and have gathered a large data set. Your next step is to \"wrangle\" the data to make sure it doesn’t have missing or inaccurate values. In what step of the data analysis process is data \"wrangled?\"",
+            "options": [
+              "Analyze",
+              "Visualize",
+              "Clean",
+              "Collect"
+            ],
+            "correct_answer": "Clean"
+          },
+          {
+            "question": "The data analysts at a large grocery chain are reviewing data about customer buying to observe relationships and determine insights about the business. What step of the data analysis process are they performing?",
+            "options": [
+              "Clean",
+              "Analyze",
+              "Collect",
+              "Visualize"
+            ],
+            "correct_answer": "Analyze"
+          },
+          {
+            "question": "BigTech deployed a new mobile app to its customers and as a result has generated much more data about customers than before. What characteristic of big data does this scenario describe?",
+            "options": [
+              "Veracity",
+              "Volume",
+              "Velocity",
+              "Variety",
+              "Value"
+            ],
+            "correct_answer": "Volume"
+          },
+          {
+            "question": "Which of the following statements about the importance of data in our world is NOT correct?",
+            "options": [
+              "Data is one of the most valuable assets organizations can have, whether it's in business, finance, healthcare, retail, technology, or marketing, and more.",
+              "Nonprofit organizations, governments, and academic institutions cannot use data that can help solve challenges faced by the people they serve.",
+              "Data insights can help drive the business forward for success by potentially cutting costs, increasing profits, and finding new innovations."
+            ],
+            "correct_answer": "Nonprofit organizations, governments, and academic institutions cannot use data that can help solve challenges faced by the people they serve."
+          },
+          {
+            "question": "Which of the following is one of the most fundamental characteristics of a data scientist?",
+            "options": [
+                "Being proficient in R or Python",
+                "Having a sense of curiosity about all things",
+                "Using open-source software libraries and packages",
+                "Having a strong background in high power computing (HPC)"
+            ],
+            "correct_answer": "Having a sense of curiosity about all things"
+        },
+        {
+            "question": "When thinking about the 5 main Vs of data, what does Veracity refer to?",
+            "options": [
+                "Refers to the vast amounts of data generated every second",
+                "Refers to the different types of data we can now use",
+                "Refers to the speed at which new data is generated and the speed at which data moves around",
+                "Refers to the trustworthiness of the data"
+            ],
+            "correct_answer": "Refers to the trustworthiness of the data"
+        },
+        {
+            "question": "Data in all of its forms, both structured and unstructured, would be the focus of which of the following 5 Vs of data?",
+            "options": [
+                "Volume",
+                "Velocity",
+                "Variety",
+                "Veracity"
+            ],
+            "correct_answer": "Variety"
+        },
+        {
+            "question": "A data analyst is reviewing an Excel spreadsheet from an insurance company. The customer data that she is analyzing is sorted by name, home address, policy number, etc. What type of data is she most likely working with?",
+            "options": [
+                "Structured data",
+                "Unstructured data",
+                "Bilaterally structured data",
+                "Unilaterally structured data"
+            ],
+            "correct_answer": "Structured data"
+        }        
+    ]
+}

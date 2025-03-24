@@ -1,0 +1,143 @@
+{
+    "questions": [
+        {
+            "question": "True or false? Cybersecurity experts consider hackers bypassing security measures a malicious activity.",
+            "options": ["True", "False"],
+            "correct_answer": "False"
+        },
+        {
+            "question": "You download a game to your computer. But when you open the file, the game doesn’t start. Worse, your computer starts behaving like someone else is controlling it. For example, the cursor moves by itself and clicks items on the screen. What type of malware might be causing these issues?",
+            "options": ["Trojan", "Ransomware", "Virus", "Worm"],
+            "correct_answer": "Trojan"
+            
+        },
+        {
+            "question": "The New York State Department of Financial Services fined First American Financial Corp USD 487,616. What type of risk does this represent?",
+            "options": ["Financial", "Operational", "Reputational"],
+            "correct_answer": "Financial"
+        },
+        {
+            "question": "The organization needed to implement a new process where a quality control officer reviews code before it goes live. What type of risk does this represent?",
+            "options": ["Financial", "Operational", "Reputational"],
+            "correct_answer": "Operational"
+        },
+        {
+            "question": "First American Financial Corp broke customers’ trust, resulting in fewer business engagements with the company. What type of risk does this represent?",
+            "options": ["Financial", "Operational", "Reputational"],
+            "correct_answer": "Reputational"
+        },
+        {
+            "question": "A local banking organization institutes two-factor authentication for users when logging into their accounts. Which of the GAPP 10 best practices for organizational privacy is being applied?",
+            "options": ["Monitoring and enforcement", "Security", "Choice and consent", "Quality"],
+            "correct_answer": "Security"
+        },
+        {
+            "question": "A doctor’s office has patients sign a form that includes a notice indicating the processes the office uses to secure patient records. Which of the GAPP 10 best practices for organizational privacy is being applied?",
+            "options": ["Monitoring and enforcement", "Disclosure to third parties", "Security", "Notice"],
+            "correct_answer": "Notice"
+        },
+        {
+            "question": "How do antimalware programs identify malware?",
+            "options": ["Rainbow tables", "Malware signatures", "Authentication codes", "Packet sniffers"],
+            "correct_answer": "Malware signatures"
+        },
+        {
+            "question": "Imagine you download a game, but when you open the file it does not start. Worse, your computer starts to behave as if someone else is controlling it. What type of malware might be causing these issues?",
+            "options": ["Rootkit", "Spyware", "Trojan", "Virus"],
+            "correct_answer": "Trojan"
+        },
+        {
+            "question": "What does a hijacker do?",
+            "options": [
+                "Modify browser settings without user authorization",
+                "Collect and report information about the user",
+                "Restrict user access to the system or its data",
+                "Overwrite files or delete or corrupt data"
+            ],
+            "correct_answer": "Modify browser settings without user authorization"
+        },
+        {
+            "question": "Which cybersecurity tool would prevent a man-in-the-middle attacker on this network from intercepting an email that you send?",
+            "options": ["Packet sniffer", "Endpoint protection", "VPN", "Firewall"],
+            "correct_answer": "VPN"
+        },
+        {
+            "question": "What must you select in the Malwarebytes window to schedule a new scan?",
+            "options": [
+                "The number of quarantined items",
+                "The Scan button",
+                "The scan’s scheduled time",
+                "The Settings icon"
+            ],
+            "correct_answer": "The scan’s scheduled time"
+        },
+        {
+            "question": "Where can you set specific types of protection On or Off in Browser Guard?",
+            "options": [
+                "Settings window",
+                "Current Website pane",
+                "Statistics pane",
+                "Options window"
+            ],
+            "correct_answer": "Settings window"
+        },
+        {
+            "question": "With Privacy VPN, you can choose the location of the VPN server you will use.",
+            "options": [
+                "False",
+                "True"
+            ],
+            "correct_answer": "True"
+        },
+        {
+            "question": "What must you select in the Malwarebytes window to delete a quarantined file?",
+            "options": [
+                "Detection History",
+                "Real-Time Protection",
+                "Settings icon",
+                "Scanner"
+            ],
+            "correct_answer": "Detection History"
+        },
+        {
+            "question": "What must you do before you can delete a spyware file that AdwCleaner has detected?",
+            "options": [
+                "Restart the device.",
+                "Perform another scan.",
+                "Disable the network adapter.",
+                "Open the scan’s log file."
+            ],
+            "correct_answer": "Restart the device."
+        },
+        {
+            "question": "Which cybersecurity role does Thembi serve in her organization?",
+            "options": [
+                "Penetration tester",
+                "Cybersecurity engineer",
+                "Security software developer",
+                "Digital forensics investigator"
+            ],
+            "correct_answer": "Cybersecurity engineer"
+        },
+        {
+            "question": "Which of the following tasks relates to security assurance?",
+            "options": [
+                "Identifying and analyzing potential threats to computer systems",
+                "Encoding sensitive data that her department shares with others",
+                "Verifying that the firewall protects the network effectively",
+                "Confirming the identity of someone trying to access protected data"
+            ],
+            "correct_answer": "Verifying that the firewall protects the network effectively"
+        },
+        {
+            "question": "Which cybersecurity role does Mateus have in this scenario?",
+            "options": [
+                "Network security architect",
+                "Penetration tester",
+                "Malware analyst",
+                "Digital forensics investigator"
+            ],
+            "correct_answer": "Penetration tester"
+        }
+    ]
+}
