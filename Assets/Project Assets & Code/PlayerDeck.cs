@@ -10,6 +10,11 @@ public class PlayerDeck : MonoBehaviour {
     public int x;
     public int deckSize;
 
+    public GameObject cardInDeck1;
+    public GameObject cardInDeck2;
+    public GameObject cardInDeck3;
+    public GameObject cardInDeck4;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         x = 0;
@@ -23,12 +28,24 @@ public class PlayerDeck : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         
+        if(deckSize < 30){
+            cardInDeck1.SetActive(false);
+        }
+        if(deckSize < 20){
+            cardInDeck2.SetActive(false);
+        }
+        if(deckSize < 5){
+            cardInDeck3.SetActive(false);
+        }
+        if(deckSize < 1){
+            cardInDeck4.SetActive(false);
+        }
+
     }
 
-    public void Shuffle(){
+    public void Shuffle() {
         for(int i =0; i < deckSize; i++){
             container[0] = deck[i];
             int randomIndex = Random.Range(i, deckSize);
