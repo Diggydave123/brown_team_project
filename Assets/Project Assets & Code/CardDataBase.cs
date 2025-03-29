@@ -11,5 +11,6 @@ public class CardDataBase : MonoBehaviour {
         cardList.Add(new Card (2, "B", 3, 3000, "It's B", Resources.Load<Sprite>("2"), "Blue"));
         cardList.Add(new Card (3, "C", 5, 6000, "It's C", Resources.Load<Sprite>("3"), "Yellow"));
         cardList.Add(new Card (4, "D", 1, 1000, "It's D",Resources.Load<Sprite>("4"), "Green"));
+        Debug.Log(cardList[1]);
     }
 }

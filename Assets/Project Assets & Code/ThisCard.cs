@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro; // ADD THIS
+using TMPro;
+using System; // ADD THIS
 
 public class ThisCard : MonoBehaviour {
 
@@ -31,8 +32,9 @@ public class ThisCard : MonoBehaviour {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        thisCard.Add(null); // Ensure list has a slot
-        thisCard [0] = CardDataBase.cardList[thisId];
+
+        thisCard.Add(CardDataBase.cardList[thisId]); // Ensure list has a slot
+        //thisCard [0] = CardDataBase.cardList[thisId];
     }
 
     // Update is called once per frame
