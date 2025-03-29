@@ -25,6 +25,9 @@ public class ThisCard : MonoBehaviour {
     public Image thatImage;
     public Image frame; // This part of the code is to personalize the cards
 
+    public bool cardBack;
+    public static bool staticCardBack;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -63,5 +66,7 @@ public class ThisCard : MonoBehaviour {
         if(thisCard[0].color == "Green"){
             frame.GetComponent<Image>().color = new Color32(255,0,225,225);
         }
+
+        staticCardBack = cardBack;
     }
 }
