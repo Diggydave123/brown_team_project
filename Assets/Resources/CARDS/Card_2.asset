@@ -12,7 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bb80141d11ac14f9f804935e368e2e, type: 3}
   m_Name: Card_2
   m_EditorClassIdentifier: 
-  cardName: Space
-  art: {fileID: -1369081752325662867, guid: b14adea58775ddf4b8e5aa7015ee3081, type: 3}
-  cardDetail: MAKAKO
-  cardFlavor: "MAKAQUI\xD1O"
+  properties:
+  - stringValue: MAMAHUEVO
+    intValue: 0
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: a87616f5e864a26468ea1d9b3f769c95, type: 2}
+  - stringValue: WHATEVER YOU WANT, WHATEVER YOU LIKE
+    intValue: 0
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 953f53c6a99f5054a8c6b8e3489c9264, type: 2}
+  - stringValue: WOIFHodfaksdlgasfaa
+    intValue: 0
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 0830778809d93db49b39b611052e20b6, type: 2}
+  - stringValue: 
+    intValue: 0
+    sprite: {fileID: -1369081752325662867, guid: b14adea58775ddf4b8e5aa7015ee3081, type: 3}
+    element: {fileID: 11400000, guid: ce91656d33c1b2d448189930d2d9cfca, type: 2}
+  - stringValue: 
+    intValue: 1
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 86f60e5e01ffc19488bdffbc3be62852, type: 2}

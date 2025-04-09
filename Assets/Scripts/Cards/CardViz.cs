@@ -6,12 +6,8 @@ using TMPro;
 
 namespace SA{
     public class CardViz : MonoBehaviour {
-        public TextMeshProUGUI title;
-        public TextMeshProUGUI detail;
-        public TextMeshProUGUI flavor;
-        public Image art;
-
         public Card card;
+        public CardVizProperties[] properties;
 
         private void Start(){
             LoadCard(card);
@@ -23,16 +19,42 @@ namespace SA{
                 return;
 
             card = c;
-            title.text = c.cardName;
-            detail.text = c.cardDetail;
 
-            if(string.IsNullOrEmpty(c.cardFlavor)){
-                flavor.gameObject.SetActive(false);
-            } else {
-                flavor.gameObject.SetActive(true);
-                flavor.text = c.cardFlavor; 
+            for (int i = 0; i < c.properties.Length; i++)
+            {
+                CardProperties cp = c.properties[i];
+                CardVizProperties p = GetProperty(cp.element);
+                if (p == null)
+                    continue;
+
+                if(cp.element is ElementInt)
+                {
+                    p.text.text = cp.intValue.ToString();
+                } 
+                else if(cp.element is ElementText)
+                {
+                    p.text.text = cp.stringValue;
+                } 
+                else if (cp.element is ElementImage) 
+                {
+                    p.image.sprite = cp.sprite;
+                }
             }
-            art.sprite = c.art;
+        }
+
+        public CardVizProperties GetProperty(Element e)
+        {
+            CardVizProperties result = null;
+
+            for (int i = 0; i < properties.Length; i++)
+            {
+                if (properties[i].element == e)
+                {
+                    result = properties[i];
+                    break;
+                }
+            }
+            return result;
         }
     }
 }
