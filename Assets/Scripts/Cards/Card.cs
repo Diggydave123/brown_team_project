@@ -6,11 +6,9 @@ using NUnit.Framework;
 namespace SA{
     [CreateAssetMenu(menuName = "Card")]
     public class Card : ScriptableObject {
+        public CardType cardType;
         public CardProperties[] properties;
-        // public string cardName;
-        // public Sprite art;
-        // public string cardDetail;
-        // public string cardFlavor;
+        
 
     }
 }
