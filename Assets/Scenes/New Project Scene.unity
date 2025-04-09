@@ -226,6 +226,30 @@ PrefabInstance:
       propertyPath: flavor
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[0].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[1].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[2].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[3].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[4].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[4].image
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7529004496575685336, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1556,6 +1580,30 @@ PrefabInstance:
       propertyPath: flavor
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[0].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[1].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[2].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[3].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[4].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[4].image
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7529004496575685336, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2150,6 +2198,30 @@ PrefabInstance:
       propertyPath: flavor
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[0].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[1].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[2].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[3].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[4].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[4].image
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7529004496575685336, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2435,6 +2507,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: flavor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[0].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[1].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[2].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[3].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[4].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[4].image
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7529004496575685336, guid: 919952d1c52050a468918b2b140f773d, type: 3}
@@ -3681,6 +3777,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: flavor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[0].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[1].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[2].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[3].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[4].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: properties.Array.data[4].image
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7529004496575685336, guid: 919952d1c52050a468918b2b140f773d, type: 3}
