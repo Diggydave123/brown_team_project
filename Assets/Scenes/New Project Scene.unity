@@ -227,6 +227,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: statsHolder
       value: 
       objectReference: {fileID: 0}
@@ -1809,6 +1813,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: statsHolder
       value: 
       objectReference: {fileID: 0}
@@ -2451,6 +2459,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: statsHolder
       value: 
       objectReference: {fileID: 0}
@@ -2784,6 +2796,10 @@ PrefabInstance:
     - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: flavor
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: statsHolder
@@ -4079,6 +4095,10 @@ PrefabInstance:
     - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: flavor
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3509773965716396694, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: statsHolder

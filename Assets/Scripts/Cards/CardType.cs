@@ -12,9 +12,9 @@ namespace SA
         {
             Element t = GameManager.GetResourcesManager().typeElement;
             CardVizProperties type = viz.GetProperty(t);
-            Debug.Log("Element: " + t);
-            Debug.Log("CardVizProperty: " + type);
-            Debug.Log("Text Component: " + type?.text);
+            // Debug.Log("Element: " + t);
+            // Debug.Log("CardVizProperty: " + type);
+            // Debug.Log("Text Component: " + type?.text);
             type.text.text = typeName;
         }
     }
