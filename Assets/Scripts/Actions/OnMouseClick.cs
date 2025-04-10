@@ -25,14 +25,26 @@ namespace SA.GameStates
                     IClickable c = r.gameObject.GetComponentInParent<IClickable>();
                     if(c != null)
                     {
-                        c.OnHighlight();
+                        c.OnClick();
                         break;
                     } 
                 }
             }  
-        
+        }   
+    }
+}
 
-          /*PointerEventData pointerData = new PointerEventData(EventSystem.current)
+
+
+
+
+
+
+
+
+
+
+/*PointerEventData pointerData = new PointerEventData(EventSystem.current)
             {
                 position = Input.mousePosition
             };
@@ -62,6 +74,3 @@ namespace SA.GameStates
             }
             
             } */
-        }   
-    }
-}
