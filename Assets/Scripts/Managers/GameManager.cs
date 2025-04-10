@@ -1,18 +1,17 @@
+using SA.GameStates;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
-namespace SA
+namespace SA 
 {
-    public static class GameManager
+    public class GameManager : MonoBehaviour
     {
-        private static ResourcesManager _resourcesManager;
-        public static ResourcesManager GetResourcesManager()
-        {
-            if (_resourcesManager == null)
-            {
-                _resourcesManager = Resources.Load("ResourcesManager") as ResourcesManager;
-            }
+        public State currentState;
 
-            return _resourcesManager;
+        private void Update()
+        {
+            currentState.Tick(Time.deltaTime);
         }
     }
 }
