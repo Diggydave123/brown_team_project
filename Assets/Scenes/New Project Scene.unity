@@ -1192,19 +1192,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3224331624032614258, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3224331624032614258, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3224331624032614258, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 276.26
       objectReference: {fileID: 0}
     - target: {fileID: 3224331624032614258, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 4250254817430877097, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: m_RaycastTarget
@@ -1320,7 +1320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8324893039288209311, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8482719749784199875, guid: 919952d1c52050a468918b2b140f773d, type: 3}
       propertyPath: m_RaycastTarget
@@ -2681,6 +2681,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1475744669}
   - component: {fileID: 1475744670}
+  - component: {fileID: 1475744671}
+  - component: {fileID: 1475744672}
   m_Layer: 0
   m_Name: Curretn Selected Card
   m_TagString: Untagged
@@ -2718,6 +2720,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCard: {fileID: 11400000, guid: 1e3c4621a10592844a31030c6687f012, type: 2}
   cardViz: {fileID: 914357390}
+--- !u!114 &1475744671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475744668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a055b694402bd469a86915f1319e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 11683d59336808b4ca1c3e8227234d7f, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1475744670}
+        m_TargetAssemblyTypeName: SA.GameElements.CurretnSelected, Assembly-CSharp
+        m_MethodName: LoadCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1475744672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475744668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a055b694402bd469a86915f1319e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: e73498c34a5d2d54780ba477a7432fad, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1475744670}
+        m_TargetAssemblyTypeName: SA.GameElements.CurretnSelected, Assembly-CSharp
+        m_MethodName: CloseCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1501197118
 PrefabInstance:
   m_ObjectHideFlags: 0

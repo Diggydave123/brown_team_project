@@ -12,13 +12,7 @@ namespace SA.GameStates
         {
             if(Input.GetMouseButton(0))
             {
-                PointerEventData pointerData = new PointerEventData(EventSystem.current)
-                {
-                    position = Input.mousePosition
-                };
-
-                List<RaycastResult> results = new List<RaycastResult>();
-                EventSystem.current.RaycastAll(pointerData, results);
+                List<RaycastResult> results = Settings.GetUIObjs();
 
                 foreach (RaycastResult r in results)
                 {
