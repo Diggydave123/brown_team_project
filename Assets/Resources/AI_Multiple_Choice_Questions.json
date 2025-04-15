@@ -3,7 +3,7 @@
       {
         "question": "What were the main causes of the First Winter of AI? (Two are correct)",
         "options": ["High expectations", "Intellectual property theft", "Buggy program code and slow language execution", "Lack of funding"],
-        "correct_answer": ["High expectations", "Lack of funding"]
+        "correct_answers": ["High expectations", "Lack of funding"]
       }
     ]
   }

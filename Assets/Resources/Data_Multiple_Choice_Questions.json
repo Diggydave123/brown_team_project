@@ -33,7 +33,7 @@
                 "Records in IBM DB2 database",
                 "Twitter feeds"
             ],
-            "correct_answer": [
+            "correct_answers": [
                 "Facebook images",
                 "Twitter feeds"
             ]
@@ -46,7 +46,7 @@
                 "Performing advanced data analysis",
                 "Visualizing the results to reveal patterns"
             ],
-            "correct_answer": [
+            "correct_answers": [
                 "Preparing data for analysis and processing",
                 "Performing advanced data analysis",
                 "Visualizing the results to reveal patterns"
