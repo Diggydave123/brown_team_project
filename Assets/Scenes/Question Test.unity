@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &129351323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2008,7 +2008,9 @@ MonoBehaviour:
   multiOptionContainer: {fileID: 1025218380}
   answerButtonPrefab: {fileID: 6068168547980687481, guid: 2270aae655c62794a9ac68a76844362e, type: 3}
   answerToggleBoxPrefab: {fileID: 5315135844354321538, guid: 871a3a55fbac5d741a11aa4d5ba71764, type: 3}
-  continueButton: {fileID: 455963438}
+  singleContinueButton: {fileID: 455963438}
+  multiContinueButton: {fileID: 2073508970}
+  multiSubmitButton: {fileID: 1518013024}
   wasAnswerCorrect: 0
 --- !u!224 &1088595155
 RectTransform:
@@ -3439,7 +3441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1929003213
 MonoBehaviour:
   m_ObjectHideFlags: 0
