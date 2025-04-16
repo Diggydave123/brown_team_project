@@ -22,13 +22,10 @@ namespace SA
             if(card.value.viz.card.cardType == creatureType)
             {
                 Debug.Log("Place card down");
-                // Place card down
-                card.value.transform.SetParent(areaGrid.value.transform);
-                card.value.transform.localPosition = Vector3.zero;
-                card.value.transform.localEulerAngles = Vector3.zero;
-                card.value.transform.localScale = Vector3.one;
+                Settings.SetParentForCard(card.value.transform, areaGrid.value.transform);
                 card.value.transform.gameObject.SetActive(true);
                 card.value.currentLogic = cardDownLogic;
+                // Place card down
             }
         }
     }
