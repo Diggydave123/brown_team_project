@@ -18,7 +18,14 @@ MonoBehaviour:
   - SPELL
   - SPELL
   - RESOURCE
+  - RESOURCE
+  - RESOURCE
+  - RESOURCE
+  - RESOURCE
+  - RESOURCE
+  - RESOURCE
   handGrid: {fileID: 11400000, guid: 9b6d94f0af422e24ebe9d171396b2889, type: 2}
+  resourcesGrid: {fileID: 11400000, guid: 8afbf19a191d4b64ab2f6401a8bca441, type: 2}
   downGrid: {fileID: 11400000, guid: 21064e1d010f3024296e257241a05616, type: 2}
   handLogic: {fileID: 11400000, guid: 5e536287341944645bda48c6b3c8850a, type: 2}
   downLogic: {fileID: 11400000, guid: 8fb5a97eac83a8641aaf62141c69079c, type: 2}

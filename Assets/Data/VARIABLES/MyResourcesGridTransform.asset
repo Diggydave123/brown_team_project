@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49c953dba70d6844d90df67d9f1ce9c9, type: 3}
-  m_Name: MyCardsDownGridTransform 1
+  m_Name: MyResourcesGridTransform
   m_EditorClassIdentifier: 
   value: {fileID: 0}
