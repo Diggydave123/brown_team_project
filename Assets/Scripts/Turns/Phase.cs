@@ -8,6 +8,7 @@ namespace SA
 {
     public abstract class Phase : ScriptableObject
     {
+        public string phaseName;
         public bool forceExit;
         public abstract bool IsComplete();
         [System.NonSerialized]

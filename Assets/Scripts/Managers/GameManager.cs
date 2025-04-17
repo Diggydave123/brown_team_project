@@ -10,6 +10,9 @@ namespace SA
         public PlayerHolder currentPlayer;
         public State currentState;
         public GameObject cardPrefab;
+        public SO.GameEvent onTurnChanged;
+        public SO.GameEvent onPhaseChanged;
+        public SO.StringVariable turnText;
 
         public int turnIndex;
         public Turn[] turns;
@@ -19,6 +22,8 @@ namespace SA
         {
             Settings.gameManager = this;
             CreateStartingCards();
+            turnText.value = turns[turnIndex].turnName;
+            onTurnChanged.Raise();
         }
 
         void CreateStartingCards()
@@ -48,6 +53,9 @@ namespace SA
                 {
                     turnIndex = 0;
                 }
+
+                turnText.value = turns[turnIndex].turnName;
+                onTurnChanged.Raise();
             }
 
             if (currentState != null)

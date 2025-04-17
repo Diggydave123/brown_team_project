@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 933fd06e1959499478484f5f2ec8d26d, type: 3}
-  m_Name: Battle Phase
+  m_Script: {fileID: 11500000, guid: 00c3067b9456f9842828f641594ecc03, type: 3}
+  m_Name: Current Phase
   m_EditorClassIdentifier: 
-  phaseName: Battle Phase
-  forceExit: 1
+  value: {fileID: 0}

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86cb4fd249bb7bc4a94887b46a58c443, type: 3}
   m_Name: Players Turn
   m_EditorClassIdentifier: 
+  turnName: Player
+  currentPhase: {fileID: 11400000, guid: 2d9beac41758dc7439a2997f9147405c, type: 2}
   phases:
   - {fileID: 11400000, guid: 81c83b442f7a72a47ab3ac16ef869470, type: 2}
   - {fileID: 11400000, guid: 8f6de5bbebaaeac4cb2e17a686b9f35a, type: 2}

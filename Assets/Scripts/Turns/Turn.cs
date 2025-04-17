@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SO;
 using UnityEngine;
 
 namespace SA
@@ -8,13 +9,15 @@ namespace SA
     [CreateAssetMenu(menuName = "Turns/Turn")]
     public class Turn : ScriptableObject
     {
+        public string turnName;
         [System.NonSerialized]
         public int index = 0;
+        public PhaseVariable currentPhase;
         public Phase[] phases;
         public bool Execute()
         {
             bool result = false;
-
+            currentPhase.value = phases[index];
             phases[index].OnStartPhase();
 
             bool phaseIsComplete = phases[index].IsComplete();
@@ -28,9 +31,12 @@ namespace SA
                     index = 0;
                     result = true;
                 }
+
+                //currentPhase.value = phases[index];
+                //onPhaseComplete.Raise();
+
             }
             return result;
         }
-
 	}
 }
