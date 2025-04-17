@@ -645,8 +645,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlayer: {fileID: 11400000, guid: e63d73a87ce0b5143af0d36b643c77c2, type: 2}
-  currentState: {fileID: 11400000, guid: e5b4db667ed6a3541858a81225655ab9, type: 2}
+  currentState: {fileID: 0}
   cardPrefab: {fileID: 8324893039288209311, guid: 919952d1c52050a468918b2b140f773d, type: 3}
+  turnIndex: 0
+  turns:
+  - {fileID: 11400000, guid: 71fd9f4186ab58e46a580231ecd676c5, type: 2}
+  - {fileID: 11400000, guid: d27824746d4cb1a41a39760a1f8ad307, type: 2}
 --- !u!4 &223803076
 Transform:
   m_ObjectHideFlags: 0

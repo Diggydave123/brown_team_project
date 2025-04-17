@@ -11,6 +11,10 @@ namespace SA
         public State currentState;
         public GameObject cardPrefab;
 
+        public int turnIndex;
+        public Turn[] turns;
+
+
         private void Start()
         {
             Settings.gameManager = this;
@@ -35,7 +39,21 @@ namespace SA
 
         private void Update()
         {
-            currentState.Tick(Time.deltaTime);
+            bool IsComplete = turns[turnIndex].Execute();
+
+            if (IsComplete)
+            {
+                turnIndex++;
+                if (turnIndex > turns.Length - 1)
+                {
+                    turnIndex = 0;
+                }
+            }
+
+            if (currentState != null)
+            {
+                currentState.Tick(Time.deltaTime);
+            }
         }
 
         public void SetState(State state)
