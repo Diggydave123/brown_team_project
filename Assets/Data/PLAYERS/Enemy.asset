@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09306466c33389949a09e5c78e9309a6, type: 3}
-  m_Name: Local Player
+  m_Name: Enemy
   m_EditorClassIdentifier: 
-  username: Player
+  username: Enemy
   startingCards:
   - REPO
   - SPELL

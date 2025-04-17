@@ -12,9 +12,6 @@ namespace SA
         {
             Element t = Settings.GetResourcesManager().typeElement;
             CardVizProperties type = viz.GetProperty(t);
-            // Debug.Log("Element: " + t);
-            // Debug.Log("CardVizProperty: " + type);
-            // Debug.Log("Text Component: " + type?.text);
             type.text.text = typeName;
         }
     }

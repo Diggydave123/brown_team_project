@@ -22,7 +22,7 @@ namespace SA
         {
             Settings.gameManager = this;
             CreateStartingCards();
-            turnText.value = turns[turnIndex].turnName;
+            turnText.value = turns[turnIndex].player.username;
             onTurnChanged.Raise();
         }
 
@@ -54,7 +54,7 @@ namespace SA
                     turnIndex = 0;
                 }
 
-                turnText.value = turns[turnIndex].turnName;
+                turnText.value = turns[turnIndex].player.username;
                 onTurnChanged.Raise();
             }
 
