@@ -38,5 +38,10 @@ namespace SA
             }
             return result;
         }
+
+        public void EndCurrentPhase()
+        {
+            phases[index].forceExit = true;
+        }
 	}
 }

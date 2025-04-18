@@ -7,7 +7,10 @@ namespace SA
 {
     public class GameManager : MonoBehaviour
     {
+        public PlayerHolder[] all_players;
         public PlayerHolder currentPlayer;
+        public CardHolders playerOneHolder;
+        public CardHolders otherPlayersHolder;
         public State currentState;
         public GameObject cardPrefab;
         public SO.GameEvent onTurnChanged;
@@ -21,29 +24,62 @@ namespace SA
         private void Start()
         {
             Settings.gameManager = this;
+
+            SetupPlayers();
+
             CreateStartingCards();
             turnText.value = turns[turnIndex].player.username;
             onTurnChanged.Raise();
         }
 
+        void SetupPlayers()
+        {
+            foreach (PlayerHolder p in all_players)
+            {
+                if (p.isHumanPlayer)
+                {
+                    p.currentHolder = playerOneHolder;
+                }
+                else
+                {
+                    p.currentHolder = otherPlayersHolder;
+                }
+            }
+        }
+
+
         void CreateStartingCards()
         {
             ResourcesManager rm = Settings.GetResourcesManager();
 
-            for (int i = 0; i < currentPlayer.startingCards.Length; i++)
+            for (int p = 0; p < all_players.Length; p++)
             {
-                GameObject go = Instantiate(cardPrefab) as GameObject;
-                CardViz v = go.GetComponent<CardViz>();
-                v.LoadCard(rm.GetCardInstance(currentPlayer.startingCards[i]));
-                CardInstance inst = go.GetComponent<CardInstance>();
-                inst.currentLogic = currentPlayer.handLogic;
-                Settings.SetParentForCard(go.transform, currentPlayer.handGrid.value);
-        
+                for (int i = 0; i < all_players[p].startingCards.Length; i++)
+                {
+                    GameObject go = Instantiate(cardPrefab) as GameObject;
+                    CardViz v = go.GetComponent<CardViz>();
+                    v.LoadCard(rm.GetCardInstance(all_players[p].startingCards[i]));
+                    CardInstance inst = go.GetComponent<CardInstance>();
+                    inst.currentLogic = all_players[p].handLogic;
+                    Settings.SetParentForCard(go.transform, all_players[p].currentHolder.handGrid.value);
+                    all_players[p].handCards.Add(inst);
+            
+                }
             }
         }
 
+        public bool switchPlayer;
+
         private void Update()
         {
+            if (switchPlayer)
+            {
+                switchPlayer = false;
+
+                playerOneHolder.LoadPlayer(all_players[0]);
+                otherPlayersHolder.LoadPlayer(all_players[1]);
+            }
+
             bool IsComplete = turns[turnIndex].Execute();
 
             if (IsComplete)
@@ -69,5 +105,9 @@ namespace SA
             currentState = state;
         }
 
+        public void EndCurrentPhase()
+        {
+            turns[turnIndex].EndCurrentPhase();
+        }
     }
 }

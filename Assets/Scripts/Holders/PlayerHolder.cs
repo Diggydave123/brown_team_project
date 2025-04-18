@@ -10,16 +10,18 @@ namespace SA
     {
         public string username;
         public string[] startingCards;
-        public SO.TransformVariable handGrid;
-        public SO.TransformVariable resourcesGrid;
-        public SO.TransformVariable downGrid;
 
         public int resourcesPerTurn = 1;
         [System.NonSerialized]
         public int resourcesDroppedThisTurn;
 
+        public bool isHumanPlayer;
+
         public GE_Logic handLogic;
         public GE_Logic downLogic;
+
+        [System.NonSerialized]
+        public CardHolders currentHolder;
 
         [System.NonSerialized]
         public List<CardInstance> handCards = new List<CardInstance>();
@@ -31,7 +33,7 @@ namespace SA
         {
             get 
             {
-                return resourcesGrid.value.GetComponentsInChildren<CardViz>().Length;
+                return currentHolder.resourcesGrid.value.GetComponentsInChildren<CardViz>().Length;
             }
         }
 
@@ -58,6 +60,15 @@ namespace SA
                 }
             }
             return result;
+        }
+
+        public void DropCard(CardInstance inst)
+        {
+            if(handCards.Contains(inst))
+            {
+                handCards.Remove(inst);
+            }
+            cardsDown.Add(inst);
         }
 
         public bool CanUseCard(Card c)

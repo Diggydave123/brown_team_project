@@ -30,7 +30,7 @@ namespace SA
                 if(canUse)
                 {
                     Debug.Log("Place card down");
-                    Settings.DropCreatureCard(card.value.transform, areaGrid.value.transform, c);
+                    Settings.DropCreatureCard(card.value.transform, areaGrid.value.transform, card.value);
                     card.value.currentLogic = cardDownLogic;
                 }
 

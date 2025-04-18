@@ -31,10 +31,11 @@ namespace SA
             return results;
         }
 
-        public static void DropCreatureCard(Transform c, Transform p, Card card)
+        public static void DropCreatureCard(Transform c, Transform p, CardInstance cardInst)
         {
             SetParentForCard(c, p);
-            gameManager.currentPlayer.UseResourceCards(card.cost);
+            gameManager.currentPlayer.UseResourceCards(cardInst.viz.card.cost);
+            gameManager.currentPlayer.DropCard(cardInst);
         }
 
         public static void SetParentForCard(Transform c, Transform p)

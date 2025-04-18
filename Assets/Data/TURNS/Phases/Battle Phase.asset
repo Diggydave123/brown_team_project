@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Battle Phase
   m_EditorClassIdentifier: 
   phaseName: Battle Phase
-  forceExit: 1
+  forceExit: 0
