@@ -15,10 +15,10 @@ MonoBehaviour:
   username: Player
   startingCards:
   - REPO
+  - REPO
+  - REPO
   - SPELL
   - SPELL
-  - RESOURCE
-  - RESOURCE
   - RESOURCE
   - RESOURCE
   - RESOURCE

@@ -21,21 +21,35 @@ namespace SA
                 return;
             }
 
-            if (card.value.viz.card.cardType == creatureType)
+            Card c = card.value.viz.card;
+
+            if (c.cardType == creatureType)
             {
-                Debug.Log("Place card down");
-                Settings.SetParentForCard(card.value.transform, areaGrid.value.transform);
+                bool canUse = Settings.gameManager.currentPlayer.CanUseCard(c);
+
+                if(canUse)
+                {
+                    Debug.Log("Place card down");
+                    Settings.DropCreatureCard(card.value.transform, areaGrid.value.transform, c);
+                    card.value.currentLogic = cardDownLogic;
+                }
+
                 card.value.transform.gameObject.SetActive(true);
-                card.value.currentLogic = cardDownLogic;
                 // Place card down
             }
 
-            else if (card.value.viz.card.cardType == resourceType)
+            else if (c.cardType == resourceType)
             {
+                bool canUse = Settings.gameManager.currentPlayer.CanUseCard(c);
+
+                if(canUse)
+                {
+                    Settings.SetParentForCard(card.value.transform, resourceGrid.value.transform);
+                    card.value.currentLogic = cardDownLogic;
+                    Settings.gameManager.currentPlayer.AddResourceCard(card.value.gameObject);
+                }
                 
-                Settings.SetParentForCard(card.value.transform, resourceGrid.value.transform);
                 card.value.transform.gameObject.SetActive(true);
-                card.value.currentLogic = cardDownLogic;
             }
         }
     }

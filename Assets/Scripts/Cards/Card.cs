@@ -8,6 +8,7 @@ namespace SA
     [CreateAssetMenu(menuName = "Card")]
     public class Card : ScriptableObject {
         public CardType cardType;
+        public int cost;
         public CardProperties[] properties;
         
 
