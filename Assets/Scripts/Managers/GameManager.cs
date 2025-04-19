@@ -2,11 +2,13 @@ using SA.GameStates;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 namespace SA 
 {
     public class GameManager : MonoBehaviour
     {
+        [System.NonSerialized]
         public PlayerHolder[] all_players;
         public PlayerHolder currentPlayer;
         public CardHolders playerOneHolder;
@@ -22,6 +24,14 @@ namespace SA
         private void Awake()
         {
             singleton = this;
+
+            all_players = new PlayerHolder[turns.Length];
+            for (int i = 0; i < turns.Length; i++)
+            {
+                all_players[i] = turns[i].player;
+            }
+
+            currentPlayer = turns[0].player;
         }
 
         public int turnIndex;
@@ -99,6 +109,9 @@ namespace SA
                     turnIndex = 0;
                 }
 
+                // The current player has changed here
+                currentPlayer = turns[turnIndex].player;
+                turns[turnIndex].OnTurnStart();
                 turnText.value = turns[turnIndex].player.username;
                 onTurnChanged.Raise();
             }

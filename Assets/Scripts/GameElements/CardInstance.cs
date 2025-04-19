@@ -7,6 +7,7 @@ namespace SA
     {
         public CardViz viz;
         public SA.GameElements.GE_Logic currentLogic;
+        public bool isFlatfooted;
 
         void Start()
         {

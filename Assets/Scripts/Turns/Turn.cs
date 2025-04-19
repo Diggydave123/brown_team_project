@@ -14,6 +14,21 @@ namespace SA
         public int index = 0;
         public PhaseVariable currentPhase;
         public Phase[] phases;
+        public PlayerAction[] turnStartActions;
+
+        public void OnTurnStart()
+    	{
+            if (turnStartActions == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < turnStartActions.Length; i++)
+            {
+                turnStartActions[i].Execute(player);
+            }
+        }
+
         public bool Execute()
         {
             bool result = false;

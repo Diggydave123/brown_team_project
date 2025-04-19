@@ -9,8 +9,19 @@ namespace SA
         public override bool IsValid()
         {
             GameManager gm = GameManager.singleton;
+            PlayerHolder p = gm.currentPlayer;
 
-            if(gm.currentPlayer.cardsDown.Count > 0)
+            int count = p.cardsDown.Count;
+
+            for (int i = 0; i < p.cardsDown.Count; i++)
+            {
+                if(p.cardsDown[i].isFlatfooted)
+                {
+                    count--;
+                }
+            }
+
+            if(count > 0)
             {
                 return true;
             }

@@ -45,7 +45,16 @@ namespace SA
 
         public static void DropCreatureCard(Transform c, Transform p, CardInstance cardInst)
         {
+            cardInst.isFlatfooted = true;
+
+            // Execute Any Special Card Abilities On Drop
             SetParentForCard(c, p);
+
+            if(cardInst.isFlatfooted)
+            {
+                c.localEulerAngles = new Vector3(0, 0, 90);
+            }
+
             gameManager.currentPlayer.UseResourceCards(cardInst.viz.card.cost);
             gameManager.currentPlayer.DropCard(cardInst);
         }
