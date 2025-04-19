@@ -17,6 +17,13 @@ namespace SA
         public SO.GameEvent onPhaseChanged;
         public SO.StringVariable turnText;
 
+        public static GameManager singleton;
+
+        private void Awake()
+        {
+            singleton = this;
+        }
+
         public int turnIndex;
         public Turn[] turns;
 
