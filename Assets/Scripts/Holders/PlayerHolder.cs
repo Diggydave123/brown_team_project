@@ -9,6 +9,7 @@ namespace SA
     public class PlayerHolder : ScriptableObject
     {
         public string username;
+        public Color playerColor;
         public string[] startingCards;
 
         public int resourcesPerTurn = 1;
@@ -46,6 +47,8 @@ namespace SA
 
             resourcesList.Add(resourceHolder);
             resourcesDroppedThisTurn++;
+            
+            Settings.RegisterEvent(username + " drops resources card", Color.white);
         }
 
         public int NonUsedCards()
@@ -69,6 +72,8 @@ namespace SA
                 handCards.Remove(inst);
             }
             cardsDown.Add(inst);
+
+            Settings.RegisterEvent(username + " used " + inst.viz.card.name + " for " + inst.viz.card.cost + " resources", Color.white);
         }
 
         public bool CanUseCard(Card c)

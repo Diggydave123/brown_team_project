@@ -8,6 +8,18 @@ namespace SA
     {
         public static GameManager gameManager;
         private static ResourcesManager _resourcesManager;
+        private static ConsoleHook _consoleManager;
+
+        public static void RegisterEvent(string e, Color color)
+        {
+            if (_consoleManager == null)
+            {
+                _consoleManager = Resources.Load("ConsoleHook") as ConsoleHook;
+            }
+
+            _consoleManager.RegisterEvent(e, color);
+        }
+
         public static ResourcesManager GetResourcesManager()
         {
             if (_resourcesManager == null)

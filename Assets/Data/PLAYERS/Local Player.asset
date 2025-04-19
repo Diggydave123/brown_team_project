@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Local Player
   m_EditorClassIdentifier: 
   username: Player
+  playerColor: {r: 0.09985429, g: 0.003144443, b: 1, a: 1}
   startingCards:
   - REPO
   - REPO

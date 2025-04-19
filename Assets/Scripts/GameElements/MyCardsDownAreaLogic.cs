@@ -33,8 +33,12 @@ namespace SA
                     Settings.DropCreatureCard(card.value.transform, areaGrid.value.transform, card.value);
                     card.value.currentLogic = cardDownLogic;
                 }
+                else
+                {
+                    Settings.RegisterEvent("Not enough resources to use card", Color.red);
+                }
 
-                card.value.transform.gameObject.SetActive(true);
+                card.value.gameObject.SetActive(true);
                 // Place card down
             }
 
@@ -47,6 +51,10 @@ namespace SA
                     Settings.SetParentForCard(card.value.transform, resourceGrid.value.transform);
                     card.value.currentLogic = cardDownLogic;
                     Settings.gameManager.currentPlayer.AddResourceCard(card.value.gameObject);
+                }
+                else
+                {
+                    Settings.RegisterEvent("Cant drop more than one resource card per turn", Color.red);
                 }
                 
                 card.value.transform.gameObject.SetActive(true);

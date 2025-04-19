@@ -65,6 +65,8 @@ namespace SA
                     all_players[p].handCards.Add(inst);
             
                 }
+
+                Settings.RegisterEvent("Created cards for player " + all_players[p].username, all_players[p].playerColor);
             }
         }
 
@@ -107,6 +109,8 @@ namespace SA
 
         public void EndCurrentPhase()
         {
+            Settings.RegisterEvent(turns[turnIndex].name + " finished", currentPlayer.playerColor);
+
             turns[turnIndex].EndCurrentPhase();
         }
     }
