@@ -9,9 +9,13 @@ namespace SA
     public class PlayerHolder : ScriptableObject
     {
         public string username;
+        public Sprite portrait;
         public Color playerColor;
-        public string[] startingCards;
+        public int health = 20;
+        public PlayerStatsUI statsUI;
 
+        public string[] startingCards;
+        
         public int resourcesPerTurn = 1;
         [System.NonSerialized]
         public int resourcesDroppedThisTurn;
@@ -28,6 +32,8 @@ namespace SA
         public List<CardInstance> handCards = new List<CardInstance>();
         [System.NonSerialized]
         public List<CardInstance> cardsDown = new List<CardInstance>();
+        [System.NonSerialized]
+        public List<CardInstance> attackingCards = new List<CardInstance>();
         [System.NonSerialized]
         public List<ResourceHolder> resourcesList = new List<ResourceHolder>();
         public int resourcesCount
@@ -140,5 +146,21 @@ namespace SA
                 l[i].cardObj.transform.localEulerAngles = euler;
             }
         }
+
+        public void LoadPlayerOnStatsUI()
+        {
+            if(statsUI != null)
+            {
+                statsUI.player = this;
+                statsUI.UpdateAll();
+            }
+        }
+        public void DoDamage(int value)
+        {
+            health -= value;
+            if (statsUI != null)
+                statsUI.UpdateHealth();
+        }
+
     }
 }

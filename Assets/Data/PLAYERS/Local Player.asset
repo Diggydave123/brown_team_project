@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Local Player
   m_EditorClassIdentifier: 
   username: Player
+  portrait: {fileID: 21300000, guid: 63b26c6c43d52a4488c285e0cc55863d, type: 3}
   playerColor: {r: 0.09985429, g: 0.003144443, b: 1, a: 1}
+  health: 20
+  statsUI: {fileID: 0}
   startingCards:
   - REPO
   - REPO

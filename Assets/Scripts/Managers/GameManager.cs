@@ -19,6 +19,8 @@ namespace SA
         public SO.GameEvent onPhaseChanged;
         public SO.StringVariable turnText;
 
+        public PlayerStatsUI[] statsUI;
+
         public static GameManager singleton;
 
         private void Awake()
@@ -43,23 +45,29 @@ namespace SA
             Settings.gameManager = this;
 
             SetupPlayers();
-
             CreateStartingCards();
+            
             turnText.value = turns[turnIndex].player.username;
             onTurnChanged.Raise();
         }
 
         void SetupPlayers()
         {
-            foreach (PlayerHolder p in all_players)
+            for(int i = 0; i < all_players.Length; i++)
             {
-                if (p.isHumanPlayer)
+                if (all_players[i].isHumanPlayer)
                 {
-                    p.currentHolder = playerOneHolder;
+                    all_players[i].currentHolder = playerOneHolder;
                 }
                 else
                 {
-                    p.currentHolder = otherPlayersHolder;
+                    all_players[i].currentHolder = otherPlayersHolder;
+                }
+
+                if(i < 2)
+                {
+                    all_players[i].statsUI = statsUI[i];
+                    statsUI[i].player.LoadPlayerOnStatsUI();
                 }
             }
         }
@@ -95,8 +103,8 @@ namespace SA
             {
                 switchPlayer = false;
 
-                playerOneHolder.LoadPlayer(all_players[0]);
-                otherPlayersHolder.LoadPlayer(all_players[1]);
+                playerOneHolder.LoadPlayer(all_players[0],statsUI[0]);
+                otherPlayersHolder.LoadPlayer(all_players[1], statsUI[1]);
             }
 
             bool IsComplete = turns[turnIndex].Execute();
