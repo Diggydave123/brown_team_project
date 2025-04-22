@@ -25,9 +25,9 @@ namespace SA
 
             if (canAttack){
                 return true;
-            }
-            else
+            } else {
                 return false;
+            }
         }
     }
 }

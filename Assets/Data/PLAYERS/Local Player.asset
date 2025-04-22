@@ -12,21 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09306466c33389949a09e5c78e9309a6, type: 3}
   m_Name: Local Player
   m_EditorClassIdentifier: 
-  username: Player
+  username: First
   portrait: {fileID: 21300000, guid: 63b26c6c43d52a4488c285e0cc55863d, type: 3}
   playerColor: {r: 0.09985429, g: 0.003144443, b: 1, a: 1}
-  health: 20
   statsUI: {fileID: 0}
-  startingCards:
+  startingDeck:
+  - RESOURCE
+  - TAXMAN
+  - TAXMAN
+  - RESOURCE
+  - RESOURCE
   - REPO
-  - REPO
-  - REPO
+  - RESOURCE
   - SPELL
-  - SPELL
-  - RESOURCE
-  - RESOURCE
-  - RESOURCE
-  - RESOURCE
   - RESOURCE
   resourcesPerTurn: 1
   isHumanPlayer: 1

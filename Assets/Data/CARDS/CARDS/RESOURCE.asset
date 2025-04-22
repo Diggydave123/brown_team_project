@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RESOURCE
   m_EditorClassIdentifier: 
   cardType: {fileID: 11400000, guid: 95d45b01e3caf6848ba9d4d912dc79b0, type: 2}
+  cost: 0
   properties:
   - stringValue: RESOURCE
     intValue: 0
@@ -28,5 +29,5 @@ MonoBehaviour:
     element: {fileID: 11400000, guid: 0830778809d93db49b39b611052e20b6, type: 2}
   - stringValue: 
     intValue: 0
-    sprite: {fileID: 2564665033367742870, guid: 0d6ed7d3bf100924f9f7a52819f7d4a4, type: 3}
+    sprite: {fileID: 21300000, guid: 962e039059f2e584f90669d60faf6462, type: 3}
     element: {fileID: 11400000, guid: ce91656d33c1b2d448189930d2d9cfca, type: 2}

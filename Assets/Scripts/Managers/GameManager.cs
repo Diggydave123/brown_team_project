@@ -10,16 +10,67 @@ namespace SA
     {
         [System.NonSerialized]
         public PlayerHolder[] all_players;
+
+        public PlayerHolder GetEnemyOf(PlayerHolder p) {
+            for(int i = 0; i < all_players.Length; i++) {
+                if(all_players[i] != p) {
+                    return all_players[i];
+                }
+            }
+            return null;
+        }
+        
         public PlayerHolder currentPlayer;
         public CardHolders playerOneHolder;
         public CardHolders otherPlayersHolder;
+        
         public State currentState;
         public GameObject cardPrefab;
+
+        public int turnIndex;
+        public Turn[] turns;
         public SO.GameEvent onTurnChanged;
         public SO.GameEvent onPhaseChanged;
         public SO.StringVariable turnText;
 
         public PlayerStatsUI[] statsUI;
+        public SO.TransformVariable graveyardVariable;
+        List<CardInstance> graveyardCards = new List<CardInstance>();
+
+        Dictionary<CardInstance, BlockInstance> blockInstances = new Dictionary<CardInstance, BlockInstance>();
+
+        public Dictionary<CardInstance, BlockInstance> GetBlockInstances()
+        {
+            return blockInstances;
+        }
+
+        public void ClearBlockInstances()
+        {
+            blockInstances.Clear();
+        }
+
+        public void AddBlockInstance(CardInstance attacker, CardInstance blocker, ref int count) 
+        {
+            BlockInstance b = null;
+            b = GetBlockInstanceOfAttacker(attacker);
+            if(b == null) {
+                b = new BlockInstance();
+                b.attacker = attacker;
+                blockInstances.Add(attacker, b);
+            }
+
+            if(!b.blocker.Contains(blocker)) {
+                b.blocker.Add(blocker);
+            }
+            
+            count = b.blocker.Count;
+        }
+
+        BlockInstance GetBlockInstanceOfAttacker(CardInstance attacker){
+            BlockInstance r = null;
+            blockInstances.TryGetValue(attacker, out r);
+            return r;
+        }
 
         public static GameManager singleton;
 
@@ -36,77 +87,73 @@ namespace SA
             currentPlayer = turns[0].player;
         }
 
-        public int turnIndex;
-        public Turn[] turns;
-
-
         private void Start()
         {
             Settings.gameManager = this;
 
             SetupPlayers();
-            CreateStartingCards();
             
+            turns[0].OnTurnStart();
             turnText.value = turns[turnIndex].player.username;
             onTurnChanged.Raise();
         }
 
         void SetupPlayers()
         {
+            ResourcesManager rm = Settings.GetResourcesManager();
+
             for(int i = 0; i < all_players.Length; i++)
             {
-                if (all_players[i].isHumanPlayer)
-                {
+                all_players[i].Init();
+
+                if (i == 0) {
                     all_players[i].currentHolder = playerOneHolder;
-                }
-                else
-                {
+                } else {
                     all_players[i].currentHolder = otherPlayersHolder;
                 }
 
-                if(i < 2)
-                {
-                    all_players[i].statsUI = statsUI[i];
-                    statsUI[i].player.LoadPlayerOnStatsUI();
-                }
+                all_players[i].statsUI = statsUI[i];
+                all_players[i].currentHolder.LoadPlayer(all_players[i], all_players[i].statsUI);
             }
         }
 
-
-        void CreateStartingCards()
+        public void PickNewCardFromDeck(PlayerHolder p)
         {
-            ResourcesManager rm = Settings.GetResourcesManager();
-
-            for (int p = 0; p < all_players.Length; p++)
+            if(p.all_cards.Count == 0)
             {
-                for (int i = 0; i < all_players[p].startingCards.Length; i++)
-                {
-                    GameObject go = Instantiate(cardPrefab) as GameObject;
-                    CardViz v = go.GetComponent<CardViz>();
-                    v.LoadCard(rm.GetCardInstance(all_players[p].startingCards[i]));
-                    CardInstance inst = go.GetComponent<CardInstance>();
-                    inst.currentLogic = all_players[p].handLogic;
-                    Settings.SetParentForCard(go.transform, all_players[p].currentHolder.handGrid.value);
-                    all_players[p].handCards.Add(inst);
-            
-                }
-
-                Settings.RegisterEvent("Created cards for player " + all_players[p].username, all_players[p].playerColor);
+                Debug.Log("Game Over");
+                return;
             }
+            
+            ResourcesManager rm = Settings.GetResourcesManager();
+            string cardId = p.all_cards[0];
+            p.all_cards.RemoveAt(0);
+            GameObject go = Instantiate(cardPrefab) as GameObject;
+            CardViz v = go.GetComponent<CardViz>();
+            v.LoadCard(rm.GetCardInstance(cardId));
+            CardInstance inst = go.GetComponent<CardInstance>();
+            inst.owner = p;
+            inst.currentLogic = p.handLogic;
+            Settings.SetParentForCard(go.transform, p.currentHolder.handGrid.value);
+            p.handCards.Add(inst);
         }
 
-        public bool switchPlayer;
+        public void LoadPlayerOnActive(PlayerHolder p) 
+        {
+            PlayerHolder prevPlayer = playerOneHolder.playerHolder;
+            if (prevPlayer != p)
+            {
+                LoadPlayerOnHolder(prevPlayer, otherPlayersHolder, statsUI[1]);
+            }
+            LoadPlayerOnHolder(p, playerOneHolder, statsUI[0]);
+        }
+
+        public void LoadPlayerOnHolder(PlayerHolder p, CardHolders h, PlayerStatsUI ui){
+            h.LoadPlayer(p, ui);
+        }
 
         private void Update()
         {
-            if (switchPlayer)
-            {
-                switchPlayer = false;
-
-                playerOneHolder.LoadPlayer(all_players[0],statsUI[0]);
-                otherPlayersHolder.LoadPlayer(all_players[1], statsUI[1]);
-            }
-
             bool IsComplete = turns[turnIndex].Execute();
 
             if (IsComplete)
@@ -141,5 +188,20 @@ namespace SA
 
             turns[turnIndex].EndCurrentPhase();
         }
+
+        public void PutCardToGraveyard(CardInstance c)
+        {
+            c.owner.CardToGraveyard(c);
+            graveyardCards.Add(c);
+            c.transform.SetParent(graveyardVariable.value);
+            Vector3 p = Vector3.zero;
+            p.x = graveyardCards.Count * 3;
+            p.z = graveyardCards.Count * 3;
+
+            c.transform.localPosition = p;
+            c.transform.localRotation = Quaternion.identity;
+            c.transform.localScale = Vector3.one; 
+        } 
     }
+
 }

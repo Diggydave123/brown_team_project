@@ -50,10 +50,7 @@ namespace SA
             // Execute Any Special Card Abilities On Drop
             SetParentForCard(c, p);
 
-            if(cardInst.isFlatfooted)
-            {
-                c.localEulerAngles = new Vector3(0, 0, 90);
-            }
+            cardInst.SetFlatfooted(true);
 
             gameManager.currentPlayer.UseResourceCards(cardInst.viz.card.cost);
             gameManager.currentPlayer.DropCard(cardInst);
@@ -64,6 +61,23 @@ namespace SA
             c.SetParent(p);
             c.localPosition = Vector3.zero;
             c.localEulerAngles = Vector3.zero;
+            c.localScale = Vector3.one;
+        }
+
+        public static void SetCardForBlock(Transform c, Transform p, int count)
+        {
+            Vector3 blockPosition = Vector3.zero;
+            blockPosition.x += 10 * count;
+            blockPosition.y -= 15 * count;
+            SetParentForCard(c, p, blockPosition, Vector3.zero);
+
+        }
+        
+        public static void SetParentForCard(Transform c, Transform p, Vector3 localPosition, Vector3 euler)
+        {
+            c.SetParent(p);
+            c.localPosition = localPosition;
+            c.localEulerAngles = euler;
             c.localScale = Vector3.one;
         }
 

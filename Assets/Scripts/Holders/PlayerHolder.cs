@@ -11,11 +11,17 @@ namespace SA
         public string username;
         public Sprite portrait;
         public Color playerColor;
+
+        [System.NonSerialized]
         public int health = 20;
         public PlayerStatsUI statsUI;
 
-        public string[] startingCards;
-        
+        //public string[] startingCards;
+        public List<string> startingDeck = new List<string>();
+
+        [System.NonSerialized]
+        public List<string> all_cards = new List<string>();
+
         public int resourcesPerTurn = 1;
         [System.NonSerialized]
         public int resourcesDroppedThisTurn;
@@ -36,11 +42,33 @@ namespace SA
         public List<CardInstance> attackingCards = new List<CardInstance>();
         [System.NonSerialized]
         public List<ResourceHolder> resourcesList = new List<ResourceHolder>();
+
+        public void Init() 
+        {
+            health = 20;
+            all_cards.AddRange(startingDeck);
+        }
+
         public int resourcesCount
         {
             get 
             {
                 return currentHolder.resourcesGrid.value.GetComponentsInChildren<CardViz>().Length;
+            }
+        }
+
+        public void CardToGraveyard (CardInstance c) 
+        {
+            if(attackingCards.Contains(c))
+            {
+                attackingCards.Remove(c);
+            }
+            if(handCards.Contains(c))
+            {
+                handCards.Remove(c);
+            }
+            if(cardsDown.Contains(c)) {
+                cardsDown.Remove(c);
             }
         }
 
@@ -71,15 +99,20 @@ namespace SA
             return result;
         }
 
-        public void DropCard(CardInstance inst)
+        public void DropCard(CardInstance inst, bool registerEvent = true)
         {
             if(handCards.Contains(inst))
             {
                 handCards.Remove(inst);
             }
-            cardsDown.Add(inst);
+            if (!cardsDown.Contains(inst))
+            {
+                cardsDown.Add(inst);
+            }
 
-            Settings.RegisterEvent(username + " used " + inst.viz.card.name + " for " + inst.viz.card.cost + " resources", Color.white);
+            if(registerEvent) {
+                Settings.RegisterEvent(username + " used " + inst.viz.card.name + " for " + inst.viz.card.cost + " resources", Color.white);
+            }
         }
 
         public bool CanUseCard(Card c)

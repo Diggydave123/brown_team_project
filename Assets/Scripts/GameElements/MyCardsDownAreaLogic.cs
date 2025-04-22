@@ -11,6 +11,8 @@ namespace SA
         public CardVariable card;
         public CardType creatureType;
         public CardType resourceType;
+        public SO.TransformVariable downGrid;
+
         public SO.TransformVariable areaGrid;
         public SO.TransformVariable resourceGrid;
         public GameElements.GE_Logic cardDownLogic;
@@ -30,7 +32,7 @@ namespace SA
                 if(canUse)
                 {
                     Debug.Log("Place card down");
-                    Settings.DropCreatureCard(card.value.transform, areaGrid.value.transform, card.value);
+                    Settings.DropCreatureCard(card.value.transform, downGrid.value.transform, card.value);
                     card.value.currentLogic = cardDownLogic;
                 }
                 else

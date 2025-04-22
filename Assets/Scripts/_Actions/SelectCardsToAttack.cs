@@ -1,15 +1,16 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using SA.GameStates;
 using UnityEngine.EventSystems;
 
-namespace SA.GameStates
+namespace SA
 {
     [CreateAssetMenu(menuName = "Actions/SelectCardsToAttack")]
     public class SelectCardsToAttack : Action
     {
         public override void Execute(float d) {
-            if(Input.GetMouseButton(0))
+            if(Input.GetMouseButtonDown(0))
             {
                 List<RaycastResult> results = Settings.GetUIObjs();
 
@@ -21,12 +22,14 @@ namespace SA.GameStates
                     if (!p.cardsDown.Contains(inst))
                         return;
                     
-                    if (inst.CanAttack())
+                    if (inst.CanAttack() && !p.attackingCards.Contains(inst))
                     {
                         p.attackingCards.Add(inst);
+                        Debug.Log("Card added to attacking cards, number of attacking cards: " +  p.attackingCards.Count.ToString());
                         p.currentHolder.SetCardOnBattleLine(inst);
                     }
                 }
+                
             }
         }
     }

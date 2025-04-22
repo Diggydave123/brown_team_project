@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Creature
   m_EditorClassIdentifier: 
   typeName: Creature
+  canAttack: 1

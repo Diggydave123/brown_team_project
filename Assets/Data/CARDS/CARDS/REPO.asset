@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: REPO
   m_EditorClassIdentifier: 
   cardType: {fileID: 11400000, guid: 32ce99b694b1e9b4ba6b9d2c27be2ccb, type: 2}
-  cost: 2
+  cost: 1
   properties:
   - stringValue: MAMAHUEVO
     intValue: 0
@@ -29,17 +29,17 @@ MonoBehaviour:
     element: {fileID: 11400000, guid: 0830778809d93db49b39b611052e20b6, type: 2}
   - stringValue: 
     intValue: 0
-    sprite: {fileID: -1369081752325662867, guid: b14adea58775ddf4b8e5aa7015ee3081, type: 3}
+    sprite: {fileID: 8981109816921297343, guid: 1d0abb5603a39cf48bd8c03520643527, type: 3}
     element: {fileID: 11400000, guid: ce91656d33c1b2d448189930d2d9cfca, type: 2}
   - stringValue: 
-    intValue: 2
+    intValue: 1
     sprite: {fileID: 0}
     element: {fileID: 11400000, guid: 86f60e5e01ffc19488bdffbc3be62852, type: 2}
   - stringValue: 
-    intValue: 2
+    intValue: 3
     sprite: {fileID: 0}
     element: {fileID: 11400000, guid: facedc921affa6d42aaf0952347c0f76, type: 2}
   - stringValue: 
-    intValue: 4
+    intValue: 5
     sprite: {fileID: 0}
     element: {fileID: 11400000, guid: 20ea73442afb86f4cbd8429034087216, type: 2}
