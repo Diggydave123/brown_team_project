@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using SO;
+using System.Linq;
 
 namespace SA
 {
-    public class NetworkManager : MonoBehaviour
+    public class NetworkManager : Photon.PunBehaviour
     {
         public bool isMaster;
         public static NetworkManager singleton;
@@ -30,6 +32,12 @@ namespace SA
 
         ResourcesManager rm;
         int cardInstIds;
+        
+        public StringVariable logger;
+        public GameEvent loggerUpdated;
+        public GameEvent failedToConnect;
+        public GameEvent onConnected;
+        public GameEvent waitingForPlayer;
 
         private void Awake()
         {
@@ -45,7 +53,47 @@ namespace SA
             }
         }
 
+        private void Start()
+        {
+            PhotonNetwork.autoCleanUpPlayerObjects = false;
+            PhotonNetwork.autoJoinLobby = false;
+            PhotonNetwork.automaticallySyncScene = false;
+            Init();
+        }
+
+        public void Init() 
+        {
+            PhotonNetwork.ConnectUsingSettings("1");
+            logger.value = "Connecting";
+            loggerUpdated.Raise();
+
+        }
+
         #region My Calls
+        public void OnPlayGame()
+        {
+            JoinRandomRoom();
+        }
+
+        void JoinRandomRoom()
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }
+
+        void CreateRoom()
+        {
+            RoomOptions room = new RoomOptions();
+            room.MaxPlayers = 2;
+            PhotonNetwork.CreateRoom(RandomString(256), room, TypedLobby.Default);
+        }
+
+        private System.Random random = new System.Random();
+        public string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNUPQRSTUVWXYZ0123456789abcdefgolkip";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
 
         //Master only
         public void PlayerJoined(int ownerId, string[] cards)
@@ -97,6 +145,67 @@ namespace SA
         #endregion
 
         #region Photon Callbacks
+        public override void OnConnectedToMaster()
+        {
+            base.OnConnectedToMaster();
+            logger.value = "Connected";
+            loggerUpdated.Raise();
+            onConnected.Raise();
+        }
+
+        public override void OnFailedToConnectToPhoton(DisconnectCause cause)
+        {
+            base.OnFailedToConnectToPhoton(cause);
+            logger.value = "Failed To Connect";
+            loggerUpdated.Raise();
+            failedToConnect.Raise();
+        }
+
+        public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
+        {
+            base.OnPhotonRandomJoinFailed(codeAndMsg);
+            CreateRoom();
+        }
+
+        public override void OnCreatedRoom()
+        {
+            base.OnCreatedRoom();
+            isMaster = true;
+        }
+
+        public override void OnJoinedRoom()
+        {
+            base.OnJoinedRoom();
+            logger.value = "Waiting for player";
+            loggerUpdated.Raise();
+            waitingForPlayer.Raise();
+        }
+
+        public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+        {
+            if(isMaster)
+            {
+                if(PhotonNetwork.playerList.Length > 1)
+                {
+                    logger.value = "Ready for match";
+                    loggerUpdated.Raise();
+
+                    PhotonNetwork.room.IsOpen = false;
+                    //SessionManager.singleton.LoadGameLevel();
+                }
+            }
+        }
+
+        public override void OnDisconnectedFromPhoton()
+        {
+            base.OnDisconnectedFromPhoton();
+        }
+
+        public override void OnLeftRoom()
+        {
+            base.OnLeftRoom();
+        }
+
         #endregion
 
         #region RPCs
