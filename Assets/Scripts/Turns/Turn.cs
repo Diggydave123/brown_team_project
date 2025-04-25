@@ -32,6 +32,7 @@ namespace SA
         public bool Execute()
         {
             bool result = false;
+
             currentPhase.value = phases[index];
             phases[index].OnStartPhase();
 
@@ -46,10 +47,6 @@ namespace SA
                     index = 0;
                     result = true;
                 }
-
-                //currentPhase.value = phases[index];
-                //onPhaseComplete.Raise();
-
             }
             return result;
         }

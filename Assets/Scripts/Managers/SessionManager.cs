@@ -23,14 +23,15 @@ namespace SA
             }
         }
 
-        public void LoadGameLevel()
+        public void LoadGameLevel(OnSceneLoaded callback)
         {
-            StartCoroutine("gameScene");
+            onSceneLoaded = callback;
+            StartCoroutine(LoadLevel("gameScene"));
         }
         
         public void LoadMenu()
         {
-            StartCoroutine("Menu");
+            StartCoroutine(LoadLevel("Menu"));
 
         }
 

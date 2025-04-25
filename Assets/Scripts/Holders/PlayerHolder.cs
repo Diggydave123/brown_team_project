@@ -13,6 +13,10 @@ namespace SA
         public Color playerColor;
 
         [System.NonSerialized]
+        public int photonId = -1;
+
+
+        [System.NonSerialized]
         public int health = 20;
         public PlayerStatsUI statsUI;
 
@@ -42,6 +46,10 @@ namespace SA
         public List<CardInstance> attackingCards = new List<CardInstance>();
         [System.NonSerialized]
         public List<ResourceHolder> resourcesList = new List<ResourceHolder>();
+        [System.NonSerialized]
+        public List<int> cardInstIds = new List<int>();
+
+        public List<Card> allCardInstances = new List<Card>();
 
         public void Init() 
         {

@@ -8,7 +8,7 @@ namespace SA
 {
     public class NetworkManager : Photon.PunBehaviour
     {
-        public bool isMaster;
+        public static bool isMaster;
         public static NetworkManager singleton;
 
         List<MultiplayerHolder> multiplayerHolders= new List<MultiplayerHolder>();
@@ -124,23 +124,23 @@ namespace SA
         }
 
 
-        void CreateCardClient_call (string cardId, int instId, int ownerId) 
-        {
-            Card c = CreateCardClient(cardId, instId);
-            if (c != null) 
-            {
-                MultiplayerHolder h = GetHolder(ownerId);
-                h.RegisterCard(c);
-            }
-        }
+        // void CreateCardClient_call (string cardId, int instId, int ownerId) 
+        // {
+        //     Card c = CreateCardClient(cardId, instId);
+        //     if (c != null) 
+        //     {
+        //         MultiplayerHolder h = GetHolder(ownerId);
+        //         h.RegisterCard(c);
+        //     }
+        // }
 
-        Card CreateCardClient(string cardId, int instId)
-        {
-            Card card = rm.GetCardInstance(cardId);
-            card.instId = instId;
+        // Card CreateCardClient(string cardId, int instId)
+        // {
+        //     Card card = rm.GetCardInstance(cardId);
+        //     card.instId = instId;
 
-            return card;
-        }
+        //     return card;
+        // }
 
         #endregion
 
@@ -191,9 +191,19 @@ namespace SA
                     loggerUpdated.Raise();
 
                     PhotonNetwork.room.IsOpen = false;
-                    //SessionManager.singleton.LoadGameLevel();
+                    PhotonNetwork.Instantiate("MultiplayerManager", Vector3.zero, Quaternion.identity, 0);
                 }
             }
+        }
+
+        public void LoadGameScene() 
+        {
+            SessionManager.singleton.LoadGameLevel(OnGameSceneLoaded);
+        }
+
+        void OnGameSceneLoaded()
+        {
+            MultiplayerManager.singleton.countPlayers = true;
         }
 
         public override void OnDisconnectedFromPhoton()

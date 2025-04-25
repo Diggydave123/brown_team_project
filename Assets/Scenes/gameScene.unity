@@ -1208,7 +1208,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d44132ccf998941b89555d65de3d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourcesManager: {fileID: 11400000, guid: 345aed0dd20416d41a91f73b40b90ba2, type: 2}
+  isMultiplayer: 0
   currentPlayer: {fileID: 11400000, guid: e63d73a87ce0b5143af0d36b643c77c2, type: 2}
+  localPlayer: {fileID: 11400000, guid: e63d73a87ce0b5143af0d36b643c77c2, type: 2}
+  clientPlayer: {fileID: 11400000, guid: b6afc4703bec10e4086c3e41250d46b8, type: 2}
   playerOneHolder: {fileID: 11400000, guid: 01d5343a000df12499995460bb76cea5, type: 2}
   otherPlayersHolder: {fileID: 11400000, guid: d765b5a8811caec489a7d898b7b6e05b, type: 2}
   currentState: {fileID: 0}
