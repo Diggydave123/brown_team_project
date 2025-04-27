@@ -15,6 +15,6 @@ MonoBehaviour:
   typeElement: {fileID: 11400000, guid: 662ab4a2ad039224b9828b721a2b88c7, type: 2}
   allCards:
   - {fileID: 11400000, guid: 12337d916415de14a947d2aba7e6c856, type: 2}
-  - {fileID: 11400000, guid: 3f40ddc1b1ea638488b36982dc2a03ef, type: 2}
   - {fileID: 11400000, guid: 6207b1e0cc1b985489f79cc3409fb0b9, type: 2}
   - {fileID: 11400000, guid: 0da4dd4d6a7e68548900d3df5a35f8e9, type: 2}
+  - {fileID: 11400000, guid: 3f40ddc1b1ea638488b36982dc2a03ef, type: 2}

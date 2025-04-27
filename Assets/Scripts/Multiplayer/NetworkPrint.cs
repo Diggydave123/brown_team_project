@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -14,6 +15,23 @@ namespace SA
         public string[] GetStartingCardIds()
         {
             return cardIds;
+        }
+
+        public PlayerHolder playerHolder;
+        Dictionary<int, Card> myCards = new Dictionary<int, Card>();
+        public List<Card> deckCards = new List<Card>();
+
+        public void AddCard(Card card)
+        {
+            myCards.Add(card.instId, card);
+            deckCards.Add(card);
+        }
+
+        public Card GetCard(int instId)
+        {
+            Card c = null;
+            myCards.TryGetValue(instId, out c);
+            return c;
         }
 
         void OnPhotonInstantiate(PhotonMessageInfo info)

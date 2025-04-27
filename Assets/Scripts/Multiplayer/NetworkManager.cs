@@ -55,6 +55,7 @@ namespace SA
 
         private void Start()
         {
+            rm.Init();
             PhotonNetwork.autoCleanUpPlayerObjects = false;
             PhotonNetwork.autoJoinLobby = false;
             PhotonNetwork.automaticallySyncScene = false;

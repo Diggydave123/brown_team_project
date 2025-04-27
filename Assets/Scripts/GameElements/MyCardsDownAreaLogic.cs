@@ -46,20 +46,21 @@ namespace SA
 
             else if (c.cardType == resourceType)
             {
-                bool canUse = Settings.gameManager.currentPlayer.CanUseCard(c);
+                MultiplayerManager.singleton.PlayerWantsToUseCard(c.instId, GameManager.singleton.localPlayer.photonId, MultiplayerManager.CardOperation.dropResourcesCard);
+                // bool canUse = Settings.gameManager.currentPlayer.CanUseCard(c);
 
-                if(canUse)
-                {
-                    Settings.SetParentForCard(card.value.transform, resourceGrid.value.transform);
-                    card.value.currentLogic = cardDownLogic;
-                    Settings.gameManager.currentPlayer.AddResourceCard(card.value.gameObject);
-                }
-                else
-                {
-                    Settings.RegisterEvent("Cant drop more than one resource card per turn", Color.red);
-                }
+                // if(canUse)
+                // {
+                //     // Settings.SetParentForCard(card.value.transform, resourceGrid.value.transform);
+                //     // card.value.currentLogic = cardDownLogic;
+                //     // Settings.gameManager.currentPlayer.AddResourceCard(card.value.gameObject);
+                // }
+                // else
+                // {
+                //     Settings.RegisterEvent("Cant drop more than one resource card per turn", Color.red);
+                // }
                 
-                card.value.transform.gameObject.SetActive(true);
+                // card.value.transform.gameObject.SetActive(true);
             }
         }
     }

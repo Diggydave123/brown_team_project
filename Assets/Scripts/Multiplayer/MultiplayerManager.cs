@@ -8,14 +8,22 @@ namespace SA
         #region Variables
         public static MultiplayerManager singleton;
         Transform multiplayerReferences;
+        public MainDataHolder dataHolder;
 
-        public PlayerHolder localPlayerHolder;
-        public PlayerHolder clientPlayerHolder;
+        int playersReady = 0;
+        int totalCardsToCreate = 0;
+        int cardsCreated = 0;
+
+
+        // public PlayerHolder localPlayerHolder;
+        // public PlayerHolder clientPlayerHolder;
 
         bool gameStarted;
         public bool countPlayers;
-        GameManager gm {
-            get {
+        GameManager gm
+        {
+            get
+            {
                 return GameManager.singleton;
             }
         }
@@ -28,8 +36,9 @@ namespace SA
         NetworkPrint localPlayer;
         NetworkPrint GetPlayer(int photonId)
         {
-            for(int i = 0; i < players.Count; i++) {
-                if(players[i].photonId == photonId)
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (players[i].photonId == photonId)
                 {
                     return players[i];
                 }
@@ -40,7 +49,7 @@ namespace SA
         #endregion
 
         #region Init
-        void OnPhotonInstantiate(PhotonMessageInfo info) 
+        void OnPhotonInstantiate(PhotonMessageInfo info)
         {
             multiplayerReferences = new GameObject("references").transform;
             DontDestroyOnLoad(multiplayerReferences.gameObject);
@@ -65,9 +74,9 @@ namespace SA
         #region Tick
         private void Update()
         {
-            if(!gameStarted && countPlayers)
+            if (!gameStarted && countPlayers)
             {
-                if(players.Count > 1)
+                if (players.Count > 1)
                 {
                     gameStarted = true;
                     StartMatch();
@@ -81,15 +90,17 @@ namespace SA
         #region Starting the match
         public void StartMatch()
         {
+            ResourcesManager rm = gm.resourcesManager;
+
             if (NetworkManager.isMaster)
             {
-                ResourcesManager rm = gm.resourcesManager;
-
+                cardsCreated = 0;
+                totalCardsToCreate = 0;
                 List<int> playerId = new List<int>();
                 List<int> cardInstId = new List<int>();
                 List<string> cardName = new List<string>();
 
-                foreach(NetworkPrint p in players)
+                foreach (NetworkPrint p in players)
                 {
                     foreach (string id in p.GetStartingCardIds())
                     {
@@ -98,48 +109,84 @@ namespace SA
                         cardInstId.Add(card.instId);
                         cardName.Add(id);
 
-                        if(p.isLocal)
+                        if (p.isLocal)
                         {
-                            localPlayer.photonId = p.photonId;
-                            localPlayerHolder.allCardInstances.Add(card);
+                            p.playerHolder = gm.localPlayer;
+                            p.playerHolder.photonId = p.photonId;
+                        }
+                        else
+                        {
+                            p.playerHolder = gm.clientPlayer;
+                            p.playerHolder.photonId = p.photonId;
+
                         }
                     }
                 }
 
-                    /* if (p.isLocal)
-                    // {
-                    //     localPlayerHolder.photonId = p.photonId;
-                    //     localPlayerHolder.all_cards.Clear();
-                    //     localPlayerHolder.all_cards.AddRange(p.GetStartingCardIds());
-                    // }
-                    // else
-                    // {
-                    //     clientPlayerHolder.photonId = p.photonId;
-                    //     clientPlayerHolder.all_cards.Clear();
-                    //     clientPlayerHolder.all_cards.AddRange(p.GetStartingCardIds());
-                        
-                    //     foreach (string id in p.GetStartingCardIds())
-                    //     {
-                    //         Card inst = rm.GetCardInstance(id);
-                    //         clientPlayerHolder.allCardInstances.Add(inst);
-                    //     }
-                    */ 
-            
+                totalCardsToCreate = playerId.Count;
+
+                for (int i = 0; i < playerId.Count; i++)
+                {
+                    Debug.Log("RPC_PLAYERCREATESCARD");
+                    photonView.RPC("RPC_PlayerCreatesCard", PhotonTargets.All, playerId[i], cardInstId[i], cardName[i]);
+                }
+
+                /* if (p.isLocal)
+                // {
+                //     localPlayerHolder.photonId = p.photonId;
+                //     localPlayerHolder.all_cards.Clear();
+                //     localPlayerHolder.all_cards.AddRange(p.GetStartingCardIds());
+                // }
+                // else
+                // {
+                //     clientPlayerHolder.photonId = p.photonId;
+                //     clientPlayerHolder.all_cards.Clear();
+                //     clientPlayerHolder.all_cards.AddRange(p.GetStartingCardIds());
+
+                //     foreach (string id in p.GetStartingCardIds())
+                //     {
+                //         Card inst = rm.GetCardInstance(id);
+                //         clientPlayerHolder.allCardInstances.Add(inst);
+                //     }
+                */
+
             }
-            photonView.RPC("RPC_InitGame", PhotonTargets.All, 1);
+            else
+            {
+                foreach (NetworkPrint p in players)
+                {
+                    if (p.isLocal)
+                    {
+                        p.playerHolder = gm.localPlayer;
+                        p.playerHolder.photonId = p.photonId;
+                    }
+                    else
+                    {
+                        p.playerHolder = gm.clientPlayer;
+                        p.playerHolder.photonId = p.photonId;
+                    }
+                }
+            }
         }
 
         [PunRPC]
-        public void RPC_PlayerHasCard(int photonId, int cardId, string name)
+        public void RPC_PlayerCreatesCard(int photonId, int instId, string cardName)
         {
-            if (NetworkManager.isMaster)
-            {
-                return;
-            }
+            Card c = gm.resourcesManager.GetCardInstance(cardName);
+            c.instId = instId;
 
+            NetworkPrint p = GetPlayer(photonId);
+            p.AddCard(c);
+
+            cardsCreated++;
+            if (NetworkManager.isMaster && cardsCreated == totalCardsToCreate)
+            {
+                Debug.Log("RPC_INITGAME");
+                photonView.RPC("RPC_InitGame", PhotonTargets.All, 1);
+            }
         }
-        
-        
+
+
         [PunRPC]
         public void RPC_InitGame(int startingPlayer)
         {
@@ -158,7 +205,7 @@ namespace SA
         }
 
         #endregion
-    
+
         #region End Turn
         public void PlayerEndsTurn(int photonId)
         {
@@ -169,8 +216,8 @@ namespace SA
         public void RPC_PlayerEndsTurn(int photonId)
         {
             if (photonId == gm.currentPlayer.photonId)
-            {                
-                if(NetworkManager.isMaster)
+            {
+                if (NetworkManager.isMaster)
                 {
                     int targetId = gm.GetNextPlayerID();
                     photonView.RPC("RPC_PlayerStartsTurn", PhotonTargets.All, targetId);
@@ -183,29 +230,87 @@ namespace SA
         {
             gm.ChangeCurrentTurn(photonId);
         }
-        #endregion    
-    
+        #endregion
+
         #region Card Checks
-        public void PlayerWantsToUseCard(int cardInst, int photonId) 
+        public void PlayerPicksCardFromDeck(PlayerHolder playerHolder)
         {
-            photonView.RPC("RPC_PlayerWantsToUseCard", PhotonTargets.MasterClient, cardInst, photonId);
+            NetworkPrint p = GetPlayer(playerHolder.photonId);
+            
+            Card c = p.deckCards[0];
+            p.deckCards.RemoveAt(0);
+
+            PlayerWantsToUseCard(c.instId, p.photonId, CardOperation.pickCardFromDeck);
+
+        }
+
+
+        public void PlayerWantsToUseCard(int cardInst, int photonId, CardOperation operation)
+        {
+            photonView.RPC("RPC_PlayerWantsToUseCard", PhotonTargets.MasterClient, cardInst, photonId, operation);
         }
 
         [PunRPC]
-        public void RPC_PlayerWantsToUseCard(int cardInst, int photonId)
+        public void RPC_PlayerWantsToUseCard(int cardInst, int photonId, CardOperation operation)
         {
             if (!NetworkManager.isMaster)
             {
                 return;
             }
+            bool hasCard = PlayerHasCard(cardInst, photonId);
+
+            if (hasCard)
+            {
+                photonView.RPC("RPC_PlayerUsesCard", PhotonTargets.All, cardInst, photonId, operation);
+            }
+
+
         }
 
-        // bool PlayerHasCard(int cardInst, int photonId)
-        // {
-        //     NetworkPrint player = GetPlayer(photonId);
+        bool PlayerHasCard(int cardInst, int photonId)
+        {
+            NetworkPrint player = GetPlayer(photonId);
+            Card c = player.GetCard(cardInst);
+            return (c != null);
+        }
+        #endregion
 
-        //     if (player.GetSt)
-        // }
+        #region Card Operations
+        public enum CardOperation
+        {
+            dropResourcesCard,
+            pickCardFromDeck
+        }
+
+        [PunRPC]
+        public void RPC_PlayerUsesCard(int instId, int photonId, CardOperation operation)
+        {
+            NetworkPrint p = GetPlayer(photonId);
+            Card card = p.GetCard(instId);
+
+            switch (operation)
+            {
+                case CardOperation.dropResourcesCard:
+                    Settings.SetParentForCard(card.cardPhysicalInstance.transform, p.playerHolder.currentHolder.resourcesGrid.value);
+                    card.cardPhysicalInstance.currentLogic = dataHolder.cardDownLogic;
+                    p.playerHolder.AddResourceCard(card.cardPhysicalInstance.gameObject);
+                    card.cardPhysicalInstance.transform.gameObject.SetActive(true);
+                    break;
+                case CardOperation.pickCardFromDeck:
+                    GameObject go = Instantiate(dataHolder.cardPrefab) as GameObject;
+                    CardViz v = go.GetComponent<CardViz>();
+                    v.LoadCard(card);
+                    card.cardPhysicalInstance = go.GetComponent<CardInstance>();
+                    card.cardPhysicalInstance.currentLogic = dataHolder.handCard;
+                    Settings.SetParentForCard(go.transform, p.playerHolder.currentHolder.handGrid.value);
+                    p.playerHolder.handCards.Add(card.cardPhysicalInstance);
+                    break;
+
+                default:
+                    break;
+
+            }
+        }
         #endregion
     }
 

@@ -97,6 +97,7 @@ namespace SA
             for (int i = 0; i < turns.Length; i++)
             {
                 all_players[i] = turns[i].player;
+                Debug.Log("Player: " + all_players[i] + " , ID: " + all_players[i].photonId + " , Starting player: " + startingPlayer);
 
                 if (all_players[i].photonId == startingPlayer)
                 {
@@ -139,23 +140,7 @@ namespace SA
 
         public void PickNewCardFromDeck(PlayerHolder p)
         {
-            if(p.all_cards.Count == 0)
-            {
-                Debug.Log("Game Over");
-                return;
-            }
-            
-            // ResourcesManager rm = Settings.GetResourcesManager();
-            string cardId = p.all_cards[0];
-            p.all_cards.RemoveAt(0);
-            GameObject go = Instantiate(cardPrefab) as GameObject;
-            CardViz v = go.GetComponent<CardViz>();
-            // v.LoadCard(rm.GetCardInstance(cardId));
-            CardInstance inst = go.GetComponent<CardInstance>();
-            inst.owner = p;
-            inst.currentLogic = p.handLogic;
-            Settings.SetParentForCard(go.transform, p.currentHolder.handGrid.value);
-            p.handCards.Add(inst);
+            MultiplayerManager.singleton.PlayerPicksCardFromDeck(p);
         }
 
         public void LoadPlayerOnActive(PlayerHolder p) 

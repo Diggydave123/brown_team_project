@@ -12,7 +12,7 @@ namespace SA
         public Sprite portrait;
         public Color playerColor;
 
-        [System.NonSerialized]
+        // [System.NonSerialized]
         public int photonId = -1;
 
 

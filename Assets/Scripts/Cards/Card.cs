@@ -12,7 +12,9 @@ namespace SA
         public int instId;
         [System.NonSerialized]
         public CardViz cardViz;
-
+        [System.NonSerialized]
+        public CardInstance cardPhysicalInstance;
+        
         public CardType cardType;
         public int cost;
         public CardProperties[] properties;

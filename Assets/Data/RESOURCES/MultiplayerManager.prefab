@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e19c6f96611804a91b4103fb0594ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPlayerHolder: {fileID: 11400000, guid: e63d73a87ce0b5143af0d36b643c77c2, type: 2}
-  clientPlayerHolder: {fileID: 11400000, guid: b6afc4703bec10e4086c3e41250d46b8, type: 2}
+  dataHolder: {fileID: 11400000, guid: 156af6e5d032d4443b0427dce8344e98, type: 2}
+  countPlayers: 0
 --- !u!114 &6042374858915634566
 MonoBehaviour:
   m_ObjectHideFlags: 0

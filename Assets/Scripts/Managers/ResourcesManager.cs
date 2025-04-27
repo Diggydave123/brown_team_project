@@ -8,10 +8,15 @@ namespace SA
     {
         public Element typeElement;
         public Card[] allCards;
+        [System.NonSerialized]
         Dictionary<string, Card> cardsDict = new Dictionary<string, Card>();
+
+        int cardInstIndexes;
+
 
         public void Init()
         {
+            cardInstIndexes = -1;
             cardsDict.Clear();
             for (int i = 0; i < allCards.Length; i++)
             {
@@ -24,10 +29,14 @@ namespace SA
             Card originalCard = GetCard(id);
 
             if (originalCard == null)
-            return null;
+            {
+                return null;
+            }
 
             Card newInst = Instantiate(originalCard);
             newInst.name = originalCard.name;
+            newInst.instId = cardInstIndexes;
+            cardInstIndexes++;
             return newInst;
         }
 
