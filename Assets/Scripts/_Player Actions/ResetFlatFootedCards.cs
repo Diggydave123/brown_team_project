@@ -7,13 +7,8 @@ namespace SA
     {
         public override void Execute(PlayerHolder player)
         {
-            foreach (CardInstance c in player.cardsDown)
-            {
-                if (c.isFlatfooted)
-                {
-                    c.SetFlatfooted(false);
-                }
-            }
+            MultiplayerManager.singleton.PlayerWantsToResetResourcesCards(player.photonId);
+            MultiplayerManager.singleton.PlayerWantsToResetFlatfootedCards(player.photonId);
         }
     }
 }

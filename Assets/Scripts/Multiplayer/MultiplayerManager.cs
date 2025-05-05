@@ -236,7 +236,7 @@ namespace SA
         public void PlayerPicksCardFromDeck(PlayerHolder playerHolder)
         {
             NetworkPrint p = GetPlayer(playerHolder.photonId);
-            
+
             Card c = p.deckCards[0];
             p.deckCards.RemoveAt(0);
 
@@ -249,6 +249,7 @@ namespace SA
         {
             photonView.RPC("RPC_PlayerWantsToUseCard", PhotonTargets.MasterClient, cardInst, photonId, operation);
         }
+
 
         [PunRPC]
         public void RPC_PlayerWantsToUseCard(int cardInst, int photonId, CardOperation operation)
@@ -279,7 +280,10 @@ namespace SA
         public enum CardOperation
         {
             dropResourcesCard,
-            pickCardFromDeck
+            pickCardFromDeck,
+            dropCreatureCard,
+            setCardForBattle,
+            cardToGraveyard
         }
 
         [PunRPC]
@@ -305,12 +309,237 @@ namespace SA
                     Settings.SetParentForCard(go.transform, p.playerHolder.currentHolder.handGrid.value);
                     p.playerHolder.handCards.Add(card.cardPhysicalInstance);
                     break;
+                case CardOperation.dropCreatureCard:
+                    bool canUse = p.playerHolder.CanUseCard(card);
 
+                    if (canUse)
+                    {
+                        Settings.DropCreatureCard(card.cardPhysicalInstance.transform, p.playerHolder.currentHolder.downGrid.value.transform, card.cardPhysicalInstance);
+                        card.cardPhysicalInstance.currentLogic = dataHolder.cardDownLogic;
+                    }
+                    else
+                    {
+                        Settings.RegisterEvent("Not enough resources to use card", Color.red);
+                    }
+                    card.cardPhysicalInstance.gameObject.SetActive(true);
+                    break;
+                case CardOperation.setCardForBattle:
+                    if (p.playerHolder.attackingCards.Contains(card.cardPhysicalInstance))
+                    {
+                        p.playerHolder.attackingCards.Remove(card.cardPhysicalInstance);
+                        p.playerHolder.currentHolder.SetCardDown(card.cardPhysicalInstance);
+                    }
+                    else
+                    {
+                        if (card.cardPhysicalInstance.CanAttack() && !p.playerHolder.attackingCards.Contains(card.cardPhysicalInstance))
+                        {
+                            p.playerHolder.attackingCards.Add(card.cardPhysicalInstance);
+                            // Debug.Log("Card added to attacking cards, number of attacking cards: " +  p.attackingCards.Count.ToString());
+                            p.playerHolder.currentHolder.SetCardOnBattleLine(card.cardPhysicalInstance);
+                        }
+                    }
+                    break;
+                case CardOperation.cardToGraveyard:
+                    card.cardPhysicalInstance.CardInstanceToGraveyard();
+                    break;
                 default:
                     break;
 
             }
         }
+
+        #endregion
+
+        #region Battle Resolve
+        public void SetBattleResolvePhase()
+        {
+            photonView.RPC("RPC_BattleResolve", PhotonTargets.MasterClient);
+        }
+
+        [PunRPC]
+        public void RPC_BattleResolve()
+        {
+            if (!NetworkManager.isMaster)
+            {
+                return;
+            }
+
+            BattleResolveForPlayers();
+        }
+
+        void BattleResolveForPlayers()
+        {
+            PlayerHolder p = Settings.gameManager.currentPlayer;
+            PlayerHolder e = Settings.gameManager.GetEnemyOf(p);
+
+            if (p.attackingCards.Count == 0)
+            {
+                photonView.RPC("RPC_BattleResolveCallback", PhotonTargets.All, p.photonId);
+                return;
+            }
+
+            Dictionary<CardInstance, BlockInstance> blockDict = Settings.gameManager.GetBlockInstances();
+
+            for (int i = 0; i < p.attackingCards.Count; i++)
+            {
+                CardInstance inst = p.attackingCards[i];
+                Card c = inst.viz.card;
+                CardProperties attack = c.GetProperty(dataHolder.attackElement);
+                if (attack == null)
+                {
+                    Debug.LogError("You are attacking with a card that can't attack");
+                    continue;
+                }
+
+                int attackValue = attack.intValue;
+
+                // BlockInstance bi = GetBlockInstanceOfAttacker(inst, blockDict);
+                // if (bi != null)
+                // {
+                //     for (int b = 0; b < bi.blocker.Count; b++)
+                //     {
+                //         CardInstance blockInst = bi.blocker[b];
+                //         Card blockingCard = blockInst.viz.card;
+                //         CardProperties def = blockingCard.GetProperty(dataHolder.defenseElement);
+                //         if (def == null)
+                //         {
+                //             Debug.LogWarning("You are trying to block with a card with no defense element!");
+                //             continue;
+                //         }
+
+                //         attackValue -= def.intValue;
+
+                //         if (def.intValue <= attack.intValue)
+                //         {
+                //             // Card dies
+                //             blockInst.CardInstanceToGraveyard();
+                //         }
+                //     }
+                // }
+
+                Debug.Log("Attack Value:" + attackValue);
+                if (attackValue <= 0)
+                {
+                    Debug.Log("Attacker dies");
+                    attackValue = 0;
+                    PlayerWantsToUseCard(inst.viz.card.instId, p.photonId, CardOperation.cardToGraveyard);
+                }
+
+
+                p.DropCard(inst, false);
+                // p.currentHolder.SetCardDown(inst);
+                // inst.SetFlatfooted(true);
+
+                e.DoDamage(attackValue);
+                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, e.photonId, e.health);
+                Debug.Log("Damage done: " + attack.intValue.ToString());
+            }
+
+            photonView.RPC("RPC_BattleResolveCallback", PhotonTargets.All, p.photonId);
+            return;
+        }
+
+        [PunRPC]
+        public void RPC_SyncPlayerHealth(int photonId, int health)
+        {
+            NetworkPrint p = GetPlayer(photonId);
+            p.playerHolder.health = health;
+            p.playerHolder.statsUI.UpdateHealth();
+        }
+
+        [PunRPC]
+        public void RPC_BattleResolveCallback(int photonId)
+        {
+            Settings.gameManager.ClearBlockInstances();
+
+            foreach (NetworkPrint p in players)
+            {
+                if (p.photonId == photonId)
+                {
+                    if (p == localPlayer)
+                    {
+                        gm.LocalPlayerEndsBattleResolve();
+                    }
+                }
+
+                foreach (CardInstance c in p.playerHolder.attackingCards)
+                {
+                    p.playerHolder.currentHolder.SetCardDown(c);
+                    c.SetFlatfooted(true);
+
+                }
+
+                p.playerHolder.attackingCards.Clear();
+            }
+        }
+
+        #endregion
+
+        #region Multiple Card Operations
+        #region Flatfooted Cards
+        public void PlayerWantsToResetFlatfootedCards(int photonId)
+        {
+            photonView.RPC("RPC_ResetFlatfootedCardsForPlayer_Master", PhotonTargets.MasterClient, photonId);
+        }
+
+        [PunRPC]
+        public void RPC_ResetFlatfootedCardsForPlayer_Master(int photonId)
+        {
+            NetworkPrint p = GetPlayer(photonId);
+            if (gm.turns[gm.turnIndex].player == p.playerHolder)
+            {
+                photonView.RPC("RPC_ResetFlatfootedCardsForPlayer", PhotonTargets.All, photonId);
+
+            }
+        }
+
+        [PunRPC]
+        public void RPC_ResetFlatfootedCardsForPlayer(int photonId)
+        {
+            NetworkPrint p = GetPlayer(photonId);
+            foreach (CardInstance c in p.playerHolder.cardsDown)
+            {
+                if (c.isFlatfooted)
+                {
+                    c.SetFlatfooted(false);
+                }
+            }
+        }
+        #endregion
+
+        #region Resource Cards
+        public void PlayerWantsToResetResourcesCards(int photonId)
+        {
+            photonView.RPC("RPC_PlayerWantsToResetResourcesCards_Master", PhotonTargets.MasterClient, photonId);
+        }
+
+        [PunRPC]
+        public void RPC_PlayerWantsToResetResourcesCards_Master(int photonId)
+        {
+            NetworkPrint p = GetPlayer(photonId);
+            if (gm.turns[gm.turnIndex].player == p.playerHolder)
+            {
+                photonView.RPC("RPC_ResetResourcesCardsForPlayer", PhotonTargets.All, photonId);
+
+            }
+        }
+
+        [PunRPC]
+        public void RPC_ResetResourcesCardsForPlayer(int photonId)
+        {
+            NetworkPrint p = GetPlayer(photonId);
+            p.playerHolder.MakeAllResourceCardsUsable();
+        }
+        #endregion
+
+        // #region Battle
+        // [PunRPC]
+        // public void RPC_PlayerSetsCardForBattle(int photonId, int cardInst)
+        // {
+        //     NetworkPrint p = GetPlayer(photonId);
+
+        // }
+        // #endregion
         #endregion
     }
 

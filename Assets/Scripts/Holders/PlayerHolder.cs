@@ -15,9 +15,8 @@ namespace SA
         // [System.NonSerialized]
         public int photonId = -1;
 
-
         [System.NonSerialized]
-        public int health = 20;
+        public int health;
         public PlayerStatsUI statsUI;
 
         //public string[] startingCards;

@@ -10,7 +10,7 @@ namespace SA
     {
         public override bool IsComplete()
         {
-            Settings.gameManager.currentPlayer.MakeAllResourceCardsUsable();
+            // MultiplayerManager.singleton.PlayerWantsToResetResourcesCards();
             return true;
         }
 

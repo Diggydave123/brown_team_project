@@ -21,13 +21,15 @@ namespace SA
 
                     if (!p.cardsDown.Contains(inst))
                         return;
+
+                    MultiplayerManager.singleton.PlayerWantsToUseCard(inst.viz.card.instId, p.photonId, MultiplayerManager.CardOperation.setCardForBattle);
                     
-                    if (inst.CanAttack() && !p.attackingCards.Contains(inst))
-                    {
-                        p.attackingCards.Add(inst);
-                        Debug.Log("Card added to attacking cards, number of attacking cards: " +  p.attackingCards.Count.ToString());
-                        p.currentHolder.SetCardOnBattleLine(inst);
-                    }
+                    // if (inst.CanAttack() && !p.attackingCards.Contains(inst))
+                    // {
+                    //     p.attackingCards.Add(inst);
+                    //     // Debug.Log("Card added to attacking cards, number of attacking cards: " +  p.attackingCards.Count.ToString());
+                    //     p.currentHolder.SetCardOnBattleLine(inst);
+                    // }
                 }
                 
             }

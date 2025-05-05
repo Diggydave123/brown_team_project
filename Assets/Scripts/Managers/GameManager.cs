@@ -257,6 +257,12 @@ namespace SA
             c.transform.localRotation = Quaternion.identity;
             c.transform.localScale = Vector3.one; 
         } 
+
+        public void LocalPlayerEndsBattleResolve()
+        {
+            Debug.Log("LocalPlayerEndsBattleResolve");
+            turns[turnIndex].EndCurrentPhase();
+        }
     }
 
 }
