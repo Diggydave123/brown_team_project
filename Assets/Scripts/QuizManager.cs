@@ -5,62 +5,71 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-// Question model - supports both single and multiple correct answers
+// --------------------
+// Data Models
+// --------------------
+
+// Defines a Question, supporting both single and multi-answer types
 [System.Serializable]
 public class Question
 {
-    public string question;
-    public string[] options;
-    public string correct_answer;      // used for single-answer questions
-    public string[] correct_answers;   // used for multi-answer questions
+    public string question;                // The text of the question
+    public string[] options;               // All possible answer options
+    public string correct_answer;          // Single correct answer (used for single-answer)
+    public string[] correct_answers;       // Multiple correct answers (used for multi-answer)
 
+    // Property to check if this is a multi-answer question
     public bool IsMultiAnswer => correct_answers != null && correct_answers.Length > 0;
 }
 
-// Wrapper class for JSON deserialization
+// Wrapper class to hold a list of questions when deserializing JSON
 [System.Serializable]
 public class QuestionList
 {
     public List<Question> questions;
 }
 
+// --------------------
+// Main Quiz Manager Logic
+// --------------------
+
 public class QuizManager : MonoBehaviour
 {
+    // UI references set in the Inspector
     [Header("UI References")]
-    public GameObject topicSelectionPanel; // initial topic selection screen
-    public Toggle aiToggle, dataToggle, cyberToggle;
-    public Button startQuizButton;
+    public GameObject topicSelectionPanel;           // Panel to pick quiz topics
+    public Toggle aiToggle, dataToggle, cyberToggle; // Topic toggles
+    public Button startQuizButton;                  // Button to start quiz
 
-    public GameObject quizPanel; // main quiz display (containing both question UIs)
-    public TMP_Text singleQuestionText; // text for single-answer questions
-    public TMP_Text multiQuestionText;  // text for multi-answer questions
+    public GameObject quizPanel;                   // Panel containing quiz interface
+    public TMP_Text singleQuestionText;           // Text for single-answer questions
+    public TMP_Text multiQuestionText;           // Text for multi-answer questions
 
-    public GameObject singleQuizPanel, multiQuizPanel; // containers for each quiz mode
+    public GameObject singleQuizPanel, multiQuizPanel;    // Panels for single and multi modes
+    public Transform singleOptionContainer, multiOptionContainer; // Parents where options spawn
+    public GameObject answerButtonPrefab, answerToggleBoxPrefab; // Prefabs for button/toggle
 
-    public Transform singleOptionContainer, multiOptionContainer; // where options will be spawned
+    public Button singleContinueButton, multiContinueButton, multiSubmitButton; // Action buttons
 
-    public GameObject answerButtonPrefab, answerToggleBoxPrefab; // prefabs for answers
+    private List<GameObject> spawnedOptions = new List<GameObject>(); // Holds spawned answer buttons/toggles
+    private QuestionList questionList;               // Loaded question set
+    private int currentQuestionIndex = 0;           // Index of current question
 
-    public Button singleContinueButton, multiContinueButton, multiSubmitButton;
-
-    private List<GameObject> spawnedOptions = new List<GameObject>(); // holds spawned UI elements
-    private QuestionList questionList;
-    private int currentQuestionIndex = 0;
-
-    public bool wasAnswerCorrect = false; // used to track if the user got it right
+    public bool wasAnswerCorrect = false;           // Tracks correctness of last answer
 
     void Start()
     {
-        topicSelectionPanel.SetActive(true); // show topic UI on start
-        quizPanel.SetActive(false);          // hide quiz initially
-        startQuizButton.onClick.AddListener(StartQuiz); // bind quiz start
+        topicSelectionPanel.SetActive(true);         // Show topic screen on start
+        quizPanel.SetActive(false);                 // Hide quiz interface
+
+        startQuizButton.onClick.AddListener(StartQuiz); // Link start button to start quiz logic
     }
 
     void StartQuiz()
     {
         List<Question> combinedQuestions = new List<Question>();
 
-        // Load questions based on selected toggles
+        // Load selected topics from JSON
         if (aiToggle.isOn)
         {
             combinedQuestions.AddRange(LoadQuestionsFromJson("AI_Questions"));
@@ -77,23 +86,25 @@ public class QuizManager : MonoBehaviour
             combinedQuestions.AddRange(LoadQuestionsFromJson("Cybersecurity_Multiple_Choice_Questions"));
         }
 
-        // Safety check if nothing was selected
+        // Show warning if no topics selected
         if (combinedQuestions.Count == 0)
         {
             Debug.LogWarning("❌ No topic selected!");
             return;
         }
 
-        Shuffle(combinedQuestions); // randomize questions
+        Shuffle(combinedQuestions); // Randomize question order
+
         questionList = new QuestionList { questions = combinedQuestions };
         currentQuestionIndex = 0;
 
         topicSelectionPanel.SetActive(false);
         quizPanel.SetActive(true);
-        DisplayQuestion();
+
+        DisplayQuestion(); // Show first question
     }
 
-    // Loads a JSON file from Resources
+    // Loads questions from a JSON file in Resources
     List<Question> LoadQuestionsFromJson(string fileName)
     {
         TextAsset json = Resources.Load<TextAsset>(fileName);
@@ -106,7 +117,7 @@ public class QuizManager : MonoBehaviour
         return JsonUtility.FromJson<QuestionList>(json.text)?.questions ?? new List<Question>();
     }
 
-    // Fisher-Yates shuffle
+    // Shuffles the question list randomly (Fisher-Yates algorithm)
     void Shuffle(List<Question> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -116,10 +127,10 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    // Core logic for displaying each question
+    // Displays current question and dynamically generates UI
     void DisplayQuestion()
     {
-        ClearOptions(); // remove old answers
+        ClearOptions(); // Remove old answer buttons/toggles
 
         if (currentQuestionIndex >= questionList.questions.Count)
         {
@@ -129,22 +140,22 @@ public class QuizManager : MonoBehaviour
 
         Question q = questionList.questions[currentQuestionIndex];
 
-        // Set question text depending on type
+        // Show question text in correct panel
         if (q.IsMultiAnswer)
             multiQuestionText.text = q.question;
         else
             singleQuestionText.text = q.question;
 
-        // Toggle UI mode
+        // Toggle between single or multi mode
         bool isMulti = q.IsMultiAnswer;
         singleQuizPanel.SetActive(!isMulti);
         multiQuizPanel.SetActive(isMulti);
 
-        // Select which container/prefab to use
+        // Choose container and prefab type
         Transform container = isMulti ? multiOptionContainer : singleOptionContainer;
         GameObject prefab = isMulti ? answerToggleBoxPrefab : answerButtonPrefab;
 
-        // Spawn all answer options
+        // Dynamically create answer options
         foreach (string option in q.options)
         {
             GameObject optionObj = Instantiate(prefab, container);
@@ -167,14 +178,13 @@ public class QuizManager : MonoBehaviour
             spawnedOptions.Add(optionObj);
         }
 
-        // Reset and configure button interactions
+        // Reset and wire up Continue/Submit buttons
         multiContinueButton.onClick.RemoveAllListeners();
         multiSubmitButton.onClick.RemoveAllListeners();
         singleContinueButton.onClick.RemoveAllListeners();
 
         if (isMulti)
         {
-            // Setup for multi-answer
             multiContinueButton.interactable = false;
             multiSubmitButton.interactable = true;
 
@@ -193,7 +203,6 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            // Setup for single-answer
             singleContinueButton.interactable = false;
             multiContinueButton.gameObject.SetActive(false);
             multiSubmitButton.gameObject.SetActive(false);
@@ -201,12 +210,13 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    // When a single-answer question is answered
+    // Process single-answer click
     void HandleSingleAnswer(Button selectedBtn, string selectedText, Question q)
     {
         wasAnswerCorrect = selectedText == q.correct_answer;
         Debug.Log($"wasAnswerCorrect = {wasAnswerCorrect}");
 
+        // Mark correct and incorrect buttons
         foreach (GameObject obj in spawnedOptions)
         {
             Button btn = obj.GetComponentInChildren<Button>();
@@ -222,12 +232,13 @@ public class QuizManager : MonoBehaviour
             btn.interactable = false;
         }
 
+        // Enable Continue button
         singleContinueButton.onClick.RemoveAllListeners();
         singleContinueButton.onClick.AddListener(() => NextQuestion());
         singleContinueButton.interactable = true;
     }
 
-    // When a multi-answer question is submitted
+    // Process multi-answer submit
     void HandleMultiAnswer(Question q)
     {
         List<string> selected = new List<string>();
@@ -244,6 +255,7 @@ public class QuizManager : MonoBehaviour
         wasAnswerCorrect = correctSet.SetEquals(selected);
         Debug.Log($"wasAnswerCorrect = {wasAnswerCorrect}");
 
+        // Mark correct and incorrect toggles
         foreach (var obj in spawnedOptions)
         {
             Toggle toggle = obj.GetComponentInChildren<Toggle>();
@@ -258,25 +270,23 @@ public class QuizManager : MonoBehaviour
 
             toggle.interactable = false;
         }
-
-        // Waits for user to hit Continue now
     }
 
-    // Optional coroutine if you want auto-advance (not currently used)
+    // Optional coroutine to auto-advance (currently unused)
     IEnumerator AutoNextQuestion()
     {
         yield return new WaitForSeconds(5f);
         NextQuestion();
     }
 
-    // Move to next question
+    // Advance to next question
     void NextQuestion()
     {
         currentQuestionIndex++;
         DisplayQuestion();
     }
 
-    // Destroy all dynamically spawned buttons/toggles
+    // Clear all dynamically created options
     void ClearOptions()
     {
         foreach (var obj in spawnedOptions)
@@ -286,6 +296,7 @@ public class QuizManager : MonoBehaviour
         spawnedOptions.Clear();
     }
 }
+
 
 
 
