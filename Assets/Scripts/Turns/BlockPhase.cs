@@ -5,7 +5,6 @@ namespace SA
     [CreateAssetMenu(menuName = "Turns/Block Phase")]
     public class BlockPhase : Phase
     {
-        public PlayerAction changeActivePlayer;
         public GameStates.State playerControlState;
         public override bool IsComplete()
         {
@@ -36,19 +35,34 @@ namespace SA
                 gm.onPhaseChanged.Raise();
                 isInit = true;
 
-                if(gm.currentPlayer.attackingCards.Count == 0) {
-                    forceExit = true;
-                    return;
-                }
+                
 
-                if (gm.otherPlayersHolder.playerHolder.isHumanPlayer)
-                {
-                    gm.LoadPlayerOnActive(gm.otherPlayersHolder.playerHolder);
-                }
-                else
-                {
+                // PlayerHolder e = gm.GetEnemyOf(gm.currentPlayer);
+                // if (e.attackingCards.Count == 0)
+                // {
+                //     forceExit = true;
+                //     return;
+                // }
 
-                }
+                // int availableCards = 0;
+                // foreach(CardInstance c in gm.currentPlayer.cardsDown)
+                // {
+                //     if (!c.isFlatfooted)
+                //     {
+                //         availableCards++;
+                //     }
+                // }
+
+                // if(availableCards <= 0)
+                // {
+                //     forceExit = true;
+                //     return;
+                // }
+
+                // if(gm.currentPlayer.attackingCards.Count == 0) {
+                //     forceExit = true;
+                //     return;
+                // }
             }
         }
     }

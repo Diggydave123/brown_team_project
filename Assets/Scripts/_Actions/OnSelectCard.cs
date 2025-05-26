@@ -11,32 +11,38 @@ namespace SA.GameStates
         public SO.GameEvent onCurrentCardSelected;
         public CardVariable currentCard;
         public GameStates.State holdingCard;
-        
+
         public override void Execute(float d)
         {
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 List<RaycastResult> results = Settings.GetUIObjs();
 
                 foreach (RaycastResult r in results)
                 {
                     CardInstance c = r.gameObject.GetComponentInParent<CardInstance>();
-                    if(c != null)
+                    if (c != null)
                     {
                         GameManager gm = Settings.gameManager;
                         PlayerHolder enemy = gm.GetEnemyOf(gm.currentPlayer);
-                        
-                        if (c.owner == enemy)
+
+                        if (c.owner != enemy)
                         {
-                            Debug.Log(c.name);
-                            currentCard.value = c;
-                            gm.SetState(holdingCard);
-                            onCurrentCardSelected.Raise();
+                            if (gm.currentPlayer.cardsDown.Contains(c))
+                            {
+                                if (!c.isFlatfooted)
+                                {
+                                    Debug.Log(c.name);
+                                    currentCard.value = c;
+                                    gm.SetState(holdingCard);
+                                    onCurrentCardSelected.Raise();
+                                }
+                            }
                         }
                         return;
                     }
                 }
-            }  
-        }   
+            }
+        }
     }
 }

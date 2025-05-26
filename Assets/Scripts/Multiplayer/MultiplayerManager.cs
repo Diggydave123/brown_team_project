@@ -306,6 +306,7 @@ namespace SA
                     v.LoadCard(card);
                     card.cardPhysicalInstance = go.GetComponent<CardInstance>();
                     card.cardPhysicalInstance.currentLogic = dataHolder.handCard;
+                    card.cardPhysicalInstance.owner = p.playerHolder;
                     Settings.SetParentForCard(go.transform, p.playerHolder.currentHolder.handGrid.value);
                     p.playerHolder.handCards.Add(card.cardPhysicalInstance);
                     break;
@@ -369,20 +370,20 @@ namespace SA
 
         void BattleResolveForPlayers()
         {
-            PlayerHolder p = Settings.gameManager.currentPlayer;
-            PlayerHolder e = Settings.gameManager.GetEnemyOf(p);
+            PlayerHolder player = Settings.gameManager.currentPlayer;
+            PlayerHolder enemy = Settings.gameManager.GetEnemyOf(player);
 
-            if (p.attackingCards.Count == 0)
+            if (enemy.attackingCards.Count == 0)
             {
-                photonView.RPC("RPC_BattleResolveCallback", PhotonTargets.All, p.photonId);
+                photonView.RPC("RPC_BattleResolveCallback", PhotonTargets.All, enemy.photonId);
                 return;
             }
 
             Dictionary<CardInstance, BlockInstance> blockDict = Settings.gameManager.GetBlockInstances();
 
-            for (int i = 0; i < p.attackingCards.Count; i++)
+            for (int i = 0; i < enemy.attackingCards.Count; i++)
             {
-                CardInstance inst = p.attackingCards[i];
+                CardInstance inst = enemy.attackingCards[i];
                 Card c = inst.viz.card;
                 CardProperties attack = c.GetProperty(dataHolder.attackElement);
                 if (attack == null)
@@ -393,50 +394,58 @@ namespace SA
 
                 int attackValue = attack.intValue;
 
-                // BlockInstance bi = GetBlockInstanceOfAttacker(inst, blockDict);
-                // if (bi != null)
-                // {
-                //     for (int b = 0; b < bi.blocker.Count; b++)
-                //     {
-                //         CardInstance blockInst = bi.blocker[b];
-                //         Card blockingCard = blockInst.viz.card;
-                //         CardProperties def = blockingCard.GetProperty(dataHolder.defenseElement);
-                //         if (def == null)
-                //         {
-                //             Debug.LogWarning("You are trying to block with a card with no defense element!");
-                //             continue;
-                //         }
+                BlockInstance bi = GetBlockInstanceOfAttacker(inst, blockDict);
+                if (bi != null)
+                {
+                    Debug.Log("There is block");
+                    for (int b = 0; b < bi.blocker.Count; b++)
+                    {
+                        CardInstance blockInst = bi.blocker[b];
+                        Card blockingCard = blockInst.viz.card;
+                        CardProperties def = blockingCard.GetProperty(dataHolder.defenseElement);
+                        if (def == null)
+                        {
+                            Debug.LogWarning("You are trying to block with a card with no defense element!");
+                            continue;
+                        }
 
-                //         attackValue -= def.intValue;
+                        attackValue -= def.intValue;
 
-                //         if (def.intValue <= attack.intValue)
-                //         {
-                //             // Card dies
-                //             blockInst.CardInstanceToGraveyard();
-                //         }
-                //     }
-                // }
+                        if (def.intValue <= attack.intValue)
+                        {
+                            // Card dies
+                            blockInst.CardInstanceToGraveyard();
+                        }
+                    }
+                }
 
                 Debug.Log("Attack Value:" + attackValue);
                 if (attackValue <= 0)
                 {
                     Debug.Log("Attacker dies");
                     attackValue = 0;
-                    PlayerWantsToUseCard(inst.viz.card.instId, p.photonId, CardOperation.cardToGraveyard);
+                    PlayerWantsToUseCard(inst.viz.card.instId, enemy.photonId, CardOperation.cardToGraveyard);
                 }
 
 
-                p.DropCard(inst, false);
+                enemy.DropCard(inst, false);
                 // p.currentHolder.SetCardDown(inst);
                 // inst.SetFlatfooted(true);
 
-                e.DoDamage(attackValue);
-                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, e.photonId, e.health);
+                player.DoDamage(attackValue);
+                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, player.photonId, player.health);
                 Debug.Log("Damage done: " + attack.intValue.ToString());
             }
 
-            photonView.RPC("RPC_BattleResolveCallback", PhotonTargets.All, p.photonId);
+            photonView.RPC("RPC_BattleResolveCallback", PhotonTargets.All, enemy.photonId);
             return;
+        }
+
+        BlockInstance GetBlockInstanceOfAttacker(CardInstance attacker, Dictionary<CardInstance, BlockInstance> blockInstances)
+        {
+            BlockInstance r = null;
+            blockInstances.TryGetValue(attacker, out r);
+            return r;
         }
 
         [PunRPC]
@@ -450,18 +459,8 @@ namespace SA
         [PunRPC]
         public void RPC_BattleResolveCallback(int photonId)
         {
-            Settings.gameManager.ClearBlockInstances();
-
             foreach (NetworkPrint p in players)
             {
-                if (p.photonId == photonId)
-                {
-                    if (p == localPlayer)
-                    {
-                        gm.LocalPlayerEndsBattleResolve();
-                    }
-                }
-
                 foreach (CardInstance c in p.playerHolder.attackingCards)
                 {
                     p.playerHolder.currentHolder.SetCardDown(c);
@@ -469,8 +468,63 @@ namespace SA
 
                 }
 
+                if (p.photonId == photonId)
+                {
+                    if (p == localPlayer)
+                    {
+                        gm.EndCurrentPhase();
+                    }
+                }
+
                 p.playerHolder.attackingCards.Clear();
             }
+
+            foreach (BlockInstance bi in gm.GetBlockInstances().Values)
+            {
+                foreach(CardInstance c in bi.blocker)
+                {
+                    c.owner.currentHolder.SetCardDown(c);
+                    // c.SetFlatfooted(true);
+                }
+            }
+
+            gm.ClearBlockInstances();
+        }
+
+        #endregion
+
+        #region Blocking
+        public void PlayerBlocksTargetCard(int cardInst, int photonId, int targetInst, int blocked)
+        {
+            photonView.RPC("RPC_PlayerBlocksTargetCard_Master", PhotonTargets.MasterClient, cardInst, photonId, targetInst, blocked);
+        }
+
+        [PunRPC]
+        public void RPC_PlayerBlocksTargetCard_Master(int cardInst, int photonId, int targetInst, int blocked)
+        {
+            NetworkPrint blockerPlayer = GetPlayer(photonId);
+            Card blockerCard = blockerPlayer.GetCard(cardInst);
+            NetworkPrint blockedPlayer = GetPlayer(blocked);
+            Card blockedCard = blockedPlayer.GetCard(targetInst);
+
+            int count = 0;
+
+            Settings.gameManager.AddBlockInstance(blockedCard.cardPhysicalInstance, blockerCard.cardPhysicalInstance, ref count);
+
+            photonView.RPC("RPC_PlayerBlocksTargetCard_Client", PhotonTargets.All, cardInst, photonId, targetInst, blocked, count);
+
+        }
+
+        [PunRPC]
+        public void RPC_PlayerBlocksTargetCard_Client(int cardInst, int photonId, int targetInst, int blocked, int count)
+        {
+            NetworkPrint blockerPlayer = GetPlayer(photonId);
+            Card blockerCard = blockerPlayer.GetCard(cardInst);
+            NetworkPrint blockedPlayer = GetPlayer(blocked);
+            Card blockedCard = blockedPlayer.GetCard(targetInst);
+
+            Settings.SetCardForBlock(blockerCard.cardPhysicalInstance.transform, blockedCard.cardPhysicalInstance.transform, count);
+
         }
 
         #endregion
@@ -540,6 +594,20 @@ namespace SA
 
         // }
         // #endregion
+
+        #region Management
+        public void SendPhase(string holder, string phase)
+        {
+            // photonView.RPC("RPC_MessagePhase", PhotonTargets.All, phase, holder);
+        }
+
+        [PunRPC]
+        public void RPC_MessagePhase(string phase, string holder)
+        {
+            // Debug.Log(phase + " " + holder);
+        }
+
+        #endregion
         #endregion
     }
 

@@ -43,7 +43,7 @@ namespace SA
                 //or cases like that should be here
 
                 if(result) {
-                    Settings.gameManager.AddBlockInstance(this, block, ref count);
+                    // Settings.gameManager.AddBlockInstance(this, block, ref count);
                 }
 
                 return result;

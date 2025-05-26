@@ -54,7 +54,10 @@ namespace SA.GameStates
 
                             if (block)
                             {
-                                Settings.SetCardForBlock(currentCard.value.transform, c.transform, count);
+                                CardInstance myCard = currentCard.value;
+
+                                MultiplayerManager.singleton.PlayerBlocksTargetCard(myCard.viz.card.instId, myCard.owner.photonId, c.viz.card.instId, c.owner.photonId);
+                                // Settings.SetCardForBlock(currentCard.value.transform, c.transform, count);
                             }
 
                             currentCard.value.gameObject.SetActive(true);

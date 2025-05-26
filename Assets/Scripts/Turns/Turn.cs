@@ -27,6 +27,9 @@ namespace SA
             {
                 turnStartActions[i].Execute(player);
             }
+
+            MultiplayerManager.singleton.SendPhase(player.name, phases[index].name);
+
         }
 
         public bool Execute()
@@ -47,6 +50,8 @@ namespace SA
                     index = 0;
                     result = true;
                 }
+
+                MultiplayerManager.singleton.SendPhase(player.name, phases[index].name);
             }
             return result;
         }
