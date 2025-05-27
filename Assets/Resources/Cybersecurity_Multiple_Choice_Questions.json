@@ -1,0 +1,38 @@
+{
+    "questions": [
+        {
+            "question": "What are signs of a phishing email? Select all choices that apply.",
+            "options": [
+                "The email has spelling errors.",
+                "The email contains a suspicious link.",
+                "The sender requests your password.",
+                "The sender greets you by name."
+            ],
+            "correct_answers": [
+                "The email has spelling errors.",
+                "The email contains a suspicious link.",
+                "The sender requests your password."
+            ]
+        },
+        {
+            "question": "Which of the following skills are important for Steffen to describe?",
+            "options": [
+                "Selling ability",
+                "Problem solving",
+                "Adaptability",
+                "Communication"
+            ],
+            "correct_answers": ["Problem solving", "Adaptability", "Communication"]
+        },
+        {
+            "question": "Which of the following items is an industry-recognized cybersecurity certification that you can consider in the future?",
+            "options": [
+                "CompTIA Cybersecurity Analyst (CySA+)",
+                "Certified Ethical Hacker (CEH)",
+                "CompTIA Data Guardian (CDG)",
+                "Certified Virus Defense Specialist (CVDS)"
+            ],
+            "correct_answers": ["CompTIA Cybersecurity Analyst (CySA+)", "Certified Ethical Hacker (CEH)"]
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+{
+    "questions": [
+        {
+            "question": "Which of the following conclusions can you make about structured data? Select the two that apply.",
+            "options": [
+                "Examples can include images, text messages, and social media posts.",
+                "It's organized into rows and columns in a spreadsheet or database.",
+                "It's raw data that is stored in its original, undefined format.",
+                "Examples can include names, dates, and addresses."
+            ],
+            "correct_answers": [
+                "It's organized into rows and columns in a spreadsheet or database.",
+                "Examples can include names, dates, and addresses."
+            ]
+        },
+        {
+            "question": "What is the purpose of a data visualization? Select the two that apply.",
+            "options": [
+              "Organize data in a usable format, such as a spreadsheet, for people to easily access.",
+              "Communicate results and help people understand the insights to make decisions.",
+              "Explore and interpret data during analysis to identify patterns or trends."
+            ],
+            "correct_answers": [
+              "Communicate results and help people understand the insights to make decisions.",
+              "Explore and interpret data during analysis to identify patterns or trends."
+            ]
+          },
+          {
+            "question": "Which of the following are examples of unstructured data? Select all that apply.",
+            "options": [
+                "CSV files",
+                "Facebook images",
+                "Records in IBM DB2 database",
+                "Twitter feeds"
+            ],
+            "correct_answers": [
+                "Facebook images",
+                "Twitter feeds"
+            ]
+        },
+        {
+            "question": "The field of data science is the process of ______________. Select all that apply.",
+            "options": [
+                "Preparing data for analysis and processing",
+                "Working exclusively with spreadsheets and tables",
+                "Performing advanced data analysis",
+                "Visualizing the results to reveal patterns"
+            ],
+            "correct_answers": [
+                "Preparing data for analysis and processing",
+                "Performing advanced data analysis",
+                "Visualizing the results to reveal patterns"
+            ]
+        }
+    ]
+}
