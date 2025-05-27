@@ -14,6 +14,7 @@ namespace SA
         
         public override void Execute()
         {
+            Debug.Log("My Card Down Area Logic Execute");
             if (card.value == null)
             {
                 return;

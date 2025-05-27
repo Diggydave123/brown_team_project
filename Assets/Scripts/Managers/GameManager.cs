@@ -40,7 +40,7 @@ namespace SA
 
         public PlayerStatsUI[] statsUI;
         public SO.TransformVariable graveyardVariable;
-        List<CardInstance> graveyardCards = new List<CardInstance>();
+        public List<CardInstance> graveyardCards = new List<CardInstance>();
 
         bool isInit;
 
@@ -154,6 +154,7 @@ namespace SA
         }
 
         public void LoadPlayerOnHolder(PlayerHolder p, CardHolders h, PlayerStatsUI ui){
+            Debug.Log("Load Player");
             h.LoadPlayer(p, ui);
         }
 
@@ -244,9 +245,9 @@ namespace SA
             }
         }
 
-        public void PutCardToGraveyard(CardInstance c)
+        public void PutCardToGraveyard(CardInstance c, PlayerHolder playerHolder)
         {
-            c.owner.CardToGraveyard(c);
+            playerHolder.CardToGraveyard(c);
             graveyardCards.Add(c);
             c.transform.SetParent(graveyardVariable.value);
             Vector3 p = Vector3.zero;

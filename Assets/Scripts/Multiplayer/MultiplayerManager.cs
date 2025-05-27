@@ -283,7 +283,8 @@ namespace SA
             pickCardFromDeck,
             dropCreatureCard,
             setCardForBattle,
-            cardToGraveyard
+            cardToGraveyard,
+            cardToStandby
         }
 
         [PunRPC]
@@ -332,7 +333,7 @@ namespace SA
                     }
                     else
                     {
-                        if (card.cardPhysicalInstance.CanAttack() && !p.playerHolder.attackingCards.Contains(card.cardPhysicalInstance))
+                        if (card.cardPhysicalInstance.CanAttack() && !p.playerHolder.attackingCards.Contains(card.cardPhysicalInstance) && !card.cardPhysicalInstance.isFlatfooted)
                         {
                             p.playerHolder.attackingCards.Add(card.cardPhysicalInstance);
                             // Debug.Log("Card added to attacking cards, number of attacking cards: " +  p.attackingCards.Count.ToString());
@@ -340,8 +341,12 @@ namespace SA
                         }
                     }
                     break;
+                case CardOperation.cardToStandby:
+                    Settings.DropCreatureCardWithoutResources(card.cardPhysicalInstance.transform, p.playerHolder.currentHolder.downGrid.value.transform, card.cardPhysicalInstance);
+                    card.cardPhysicalInstance.currentLogic = dataHolder.cardDownLogic;
+                    break;
                 case CardOperation.cardToGraveyard:
-                    card.cardPhysicalInstance.CardInstanceToGraveyard();
+                    card.cardPhysicalInstance.CardInstanceToGraveyard(p.playerHolder);
                     break;
                 default:
                     break;
@@ -414,7 +419,13 @@ namespace SA
                         if (def.intValue <= attack.intValue)
                         {
                             // Card dies
-                            blockInst.CardInstanceToGraveyard();
+                            Debug.Log("Defensor dies");
+                            PlayerWantsToUseCard(blockingCard.instId, player.photonId, CardOperation.cardToGraveyard);
+                            // blockInst.CardInstanceToGraveyard();
+                        }
+                        else
+                        {
+                            PlayerWantsToUseCard(blockingCard.instId, player.photonId, CardOperation.cardToStandby);
                         }
                     }
                 }
@@ -428,7 +439,7 @@ namespace SA
                 }
 
 
-                enemy.DropCard(inst, false);
+                // enemy.DropCard(inst, false);
                 // p.currentHolder.SetCardDown(inst);
                 // inst.SetFlatfooted(true);
 
@@ -483,6 +494,11 @@ namespace SA
             {
                 foreach(CardInstance c in bi.blocker)
                 {
+                    if (gm.graveyardCards.Contains(c))
+                    {
+                        continue;
+                    }
+                    Debug.Log("Block Instance set card down.");
                     c.owner.currentHolder.SetCardDown(c);
                     // c.SetFlatfooted(true);
                 }

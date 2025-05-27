@@ -66,16 +66,21 @@ namespace SA
 
         public void CardToGraveyard (CardInstance c) 
         {
-            if(attackingCards.Contains(c))
+            Debug.Log(c + " Card to grave");
+            if (attackingCards.Contains(c))
             {
+                Debug.Log("atCard sent to grave");
                 attackingCards.Remove(c);
             }
-            if(handCards.Contains(c))
+            if (handCards.Contains(c))
             {
                 handCards.Remove(c);
+                Debug.Log("handCard sent to grave");
             }
-            if(cardsDown.Contains(c)) {
+            if (cardsDown.Contains(c))
+            {
                 cardsDown.Remove(c);
+                Debug.Log("dwCard sent to grave");
             }
         }
 
@@ -198,8 +203,14 @@ namespace SA
         public void DoDamage(int value)
         {
             health -= value;
+            if (health <= 0)
+            {
+                health = 0;
+                // TODO: add Game over screen
+                Debug.Log("Game over for " + username);
+            }
             if (statsUI != null)
-                statsUI.UpdateHealth();
+                    statsUI.UpdateHealth();
         }
 
     }

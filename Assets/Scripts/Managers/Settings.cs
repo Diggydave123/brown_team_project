@@ -56,6 +56,17 @@ namespace SA
             gameManager.currentPlayer.DropCard(cardInst);
         }
 
+        public static void DropCreatureCardWithoutResources(Transform c, Transform p, CardInstance cardInst)
+        {
+            cardInst.isFlatfooted = true;
+
+            SetParentForCard(c, p);
+
+            cardInst.SetFlatfooted(true);
+
+            gameManager.currentPlayer.DropCard(cardInst);
+        }
+
         public static void SetParentForCard(Transform c, Transform p)
         {
             c.SetParent(p);

@@ -25,10 +25,10 @@ namespace SA
             viz = GetComponent<CardViz>();
         }
 
-        public void CardInstanceToGraveyard() 
+        public void CardInstanceToGraveyard(PlayerHolder p) 
         {
             Debug.Log(this);
-            Settings.gameManager.PutCardToGraveyard(this);
+            Settings.gameManager.PutCardToGraveyard(this, p);
         }
 
         public bool CanBeBlocked(CardInstance block, ref int count) 

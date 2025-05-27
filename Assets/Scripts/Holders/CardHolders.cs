@@ -44,7 +44,9 @@ namespace SA
             
             foreach (CardInstance c in holder.cardsDown)
             {
-                if (!holder.attackingCards.Contains(c)) {
+                Debug.Log(c + " in cardDown");
+                if (!holder.attackingCards.Contains(c))
+                {
                     Settings.SetParentForCard(c.viz.gameObject.transform, downGrid.value.transform);
                 }
             }
