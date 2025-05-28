@@ -15,7 +15,4 @@ MonoBehaviour:
   card: {fileID: 11400000, guid: 1e3c4621a10592844a31030c6687f012, type: 2}
   creatureType: {fileID: 11400000, guid: 32ce99b694b1e9b4ba6b9d2c27be2ccb, type: 2}
   resourceType: {fileID: 11400000, guid: 95d45b01e3caf6848ba9d4d912dc79b0, type: 2}
-  downGrid: {fileID: 11400000, guid: 543f3cba6b120b5469e7ce9fdedf7b9e, type: 2}
-  areaGrid: {fileID: 11400000, guid: 21064e1d010f3024296e257241a05616, type: 2}
-  resourceGrid: {fileID: 11400000, guid: 8afbf19a191d4b64ab2f6401a8bca441, type: 2}
-  cardDownLogic: {fileID: 11400000, guid: 8fb5a97eac83a8641aaf62141c69079c, type: 2}
+  spellType: {fileID: 11400000, guid: 96e148ae33b68304f8eca0cc816e929f, type: 2}

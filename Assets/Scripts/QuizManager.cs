@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem.LowLevel;
 
 // --------------------
 // Data Models
@@ -57,9 +58,18 @@ public class QuizManager : MonoBehaviour
 
     public bool wasAnswerCorrect = false;           // Tracks correctness of last answer
 
+    public static QuizManager singleton;
+    public System.Action<bool> OnQuestionFinished; // bool = wasAnswerCorrect
+
+    void Awake()
+    {
+        singleton = this;
+    }
+
     void Start()
     {
-        topicSelectionPanel.SetActive(true);         // Show topic screen on start
+        topicSelectionPanel.SetActive(false);         // Show topic screen on start
+        // topicSelectionPanel.SetActive(true);         // Show topic screen on start
         quizPanel.SetActive(false);                 // Hide quiz interface
 
         startQuizButton.onClick.AddListener(StartQuiz); // Link start button to start quiz logic
@@ -283,7 +293,14 @@ public class QuizManager : MonoBehaviour
     void NextQuestion()
     {
         currentQuestionIndex++;
-        DisplayQuestion();
+
+        // Hide quiz panel after question
+        quizPanel.SetActive(false);
+
+        // Notify game logic with result
+        OnQuestionFinished?.Invoke(wasAnswerCorrect);
+        
+        //DisplayQuestion();
     }
 
     // Clear all dynamically created options
@@ -295,19 +312,37 @@ public class QuizManager : MonoBehaviour
         }
         spawnedOptions.Clear();
     }
+
+    // CODE TO FUNCTION WITH GAME SPELL CARDS:
+    public void TriggerNextQuestionFromGame()
+    {
+        if (questionList == null || questionList.questions.Count == 0)
+        {
+            List<Question> combinedQuestions = new List<Question>();
+            combinedQuestions.AddRange(LoadQuestionsFromJson("AI_Questions"));
+            combinedQuestions.AddRange(LoadQuestionsFromJson("AI_Multiple_Choice_Questions"));
+
+            combinedQuestions.AddRange(LoadQuestionsFromJson("Data_Questions"));
+            combinedQuestions.AddRange(LoadQuestionsFromJson("Data_Multiple_Choice_Questions"));
+
+            combinedQuestions.AddRange(LoadQuestionsFromJson("Cybersecurity_Questions"));
+            combinedQuestions.AddRange(LoadQuestionsFromJson("Cybersecurity_Multiple_Choice_Questions"));
+            Shuffle(combinedQuestions);
+
+            questionList = new QuestionList { questions = combinedQuestions };
+            currentQuestionIndex = 0;
+
+        }
+
+        if (currentQuestionIndex < questionList.questions.Count)
+        {
+            quizPanel.SetActive(true);
+            DisplayQuestion();
+        }
+        else
+        {
+            Debug.Log("✅ No more quiz questions.");
+            quizPanel.SetActive(false);
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

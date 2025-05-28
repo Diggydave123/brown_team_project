@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Realtime;
 
 namespace SA
 {
@@ -25,6 +26,14 @@ namespace SA
             get
             {
                 return GameManager.singleton;
+            }
+        }
+
+        QuizManager qm
+        {
+            get
+            {
+                return QuizManager.singleton;
             }
         }
 
@@ -63,12 +72,36 @@ namespace SA
 
         void InstantiateNetworkPrint()
         {
-            PlayerProfile profile = Resources.Load("PlayerProfile") as PlayerProfile;
+            int actorId = PhotonNetwork.player.ID;
+
+            PlayerProfile profile = CreateProfileForPlayer(actorId); //Resources.Load("PlayerProfile") as PlayerProfile;
+
             object[] data = new object[1];
             data[0] = profile.cardIds;
 
             PhotonNetwork.Instantiate("NetworkPrint", Vector3.zero, Quaternion.identity, 0, data);
         }
+
+        PlayerProfile CreateProfileForPlayer(int actorId)
+        {
+            PlayerProfile profile = ScriptableObject.CreateInstance<PlayerProfile>();
+
+            if (actorId == 1)
+            {
+                profile.cardIds = new string[] { "RESOURCE", "REPO", "SPELL", "TAXMAN", "REPO" };
+            }
+            else if (actorId == 2)
+            {
+                profile.cardIds = new string[] { "RESOURCE", "TAXMAN", "SPELL", "REPO", "RESOURCE" };
+            }
+            else
+            {
+                profile.cardIds = new string[] { "RESOURCE", "REPO", "SPELL", "TAXMAN", "REPO" };
+            }
+
+            return profile;
+        }
+
         #endregion
 
         #region Tick
@@ -284,7 +317,8 @@ namespace SA
             dropCreatureCard,
             setCardForBattle,
             cardToGraveyard,
-            cardToStandby
+            cardToStandby,
+            dropSpellCard
         }
 
         [PunRPC]
@@ -292,6 +326,8 @@ namespace SA
         {
             NetworkPrint p = GetPlayer(photonId);
             Card card = p.GetCard(instId);
+            PlayerHolder player = Settings.gameManager.currentPlayer;
+            PlayerHolder enemy = Settings.gameManager.GetEnemyOf(player);
 
             switch (operation)
             {
@@ -324,6 +360,30 @@ namespace SA
                         Settings.RegisterEvent("Not enough resources to use card", Color.red);
                     }
                     card.cardPhysicalInstance.gameObject.SetActive(true);
+                    break;
+                case CardOperation.dropSpellCard:
+                    if (PhotonNetwork.player.ID == photonId)
+                    {
+                        qm.OnQuestionFinished = (bool correct) =>
+                        {
+                            if (correct)
+                            {
+                                Debug.Log("✅ Correct! Trigger spell effect. Damage done to enemy 2");
+                                enemy.DoDamage(2);
+                                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, enemy.photonId, enemy.health);
+                            }
+                            else
+                            {
+                                Debug.Log("❌ Incorrect! Small Backfire Spell effect. Damage done to self 1");
+                                player.DoDamage(1);
+                                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, player.photonId, player.health);
+                                
+                            }
+                        };
+                        qm.TriggerNextQuestionFromGame();
+                    }
+                    card.cardPhysicalInstance.CardInstanceToGraveyard(p.playerHolder);
+
                     break;
                 case CardOperation.setCardForBattle:
                     if (p.playerHolder.attackingCards.Contains(card.cardPhysicalInstance))
@@ -492,7 +552,7 @@ namespace SA
 
             foreach (BlockInstance bi in gm.GetBlockInstances().Values)
             {
-                foreach(CardInstance c in bi.blocker)
+                foreach (CardInstance c in bi.blocker)
                 {
                     if (gm.graveyardCards.Contains(c))
                     {

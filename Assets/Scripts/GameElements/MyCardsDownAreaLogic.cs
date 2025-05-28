@@ -11,7 +11,8 @@ namespace SA
         public CardVariable card;
         public CardType creatureType;
         public CardType resourceType;
-        
+        public CardType spellType;
+
         public override void Execute()
         {
             Debug.Log("My Card Down Area Logic Execute");
@@ -30,6 +31,11 @@ namespace SA
             else if (c.cardType == resourceType)
             {
                 MultiplayerManager.singleton.PlayerWantsToUseCard(c.instId, GameManager.singleton.localPlayer.photonId, MultiplayerManager.CardOperation.dropResourcesCard);
+            }
+
+            else if (c.cardType == spellType)
+            {
+                MultiplayerManager.singleton.PlayerWantsToUseCard(c.instId, GameManager.singleton.localPlayer.photonId, MultiplayerManager.CardOperation.dropSpellCard);
             }
         }
     }

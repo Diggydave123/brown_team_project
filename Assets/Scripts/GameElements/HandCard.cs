@@ -11,10 +11,14 @@ namespace SA.GameElements
         public SA.GameStates.State holdingCard;
         public override void OnClick(CardInstance inst)
         {
-            Debug.Log("this card is on my hand");
-            currentCard.Set(inst);
-            Settings.gameManager.SetState(holdingCard);
-            onCurrentCardSelected.Raise();
+            if (!Settings.gameManager.graveyardCards.Contains(inst))
+            {
+                Debug.Log("this card is on my hand");
+                currentCard.Set(inst);
+                Settings.gameManager.SetState(holdingCard);
+                onCurrentCardSelected.Raise();
+
+            }
         }
 
         public override void OnHighlight(CardInstance inst)
