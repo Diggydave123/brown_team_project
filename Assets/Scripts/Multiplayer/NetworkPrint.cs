@@ -36,11 +36,13 @@ namespace SA
 
         void OnPhotonInstantiate(PhotonMessageInfo info)
         {
+            this.tag = "Persistent";
             photonId = photonView.ownerId;
             isLocal = photonView.isMine;
             
             object[] data = photonView.instantiationData;
             cardIds = (string[])data[0];
+            Debug.Log(cardIds);
 
             MultiplayerManager.singleton.AddPlayer(this);
         }

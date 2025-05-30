@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SO;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 namespace SA
 {
@@ -11,14 +12,15 @@ namespace SA
         public static bool isMaster;
         public static NetworkManager singleton;
 
-        List<MultiplayerHolder> multiplayerHolders= new List<MultiplayerHolder>();
+        List<MultiplayerHolder> multiplayerHolders = new List<MultiplayerHolder>();
         public MultiplayerHolder GetHolder(int ownerId)
         {
-            for(int i = 0; i < multiplayerHolders.Count; i++) {
-                if(multiplayerHolders[i].ownerId == ownerId)
+            for (int i = 0; i < multiplayerHolders.Count; i++)
+            {
+                if (multiplayerHolders[i].ownerId == ownerId)
                 {
                     return multiplayerHolders[i];
-                
+
                 }
             }
             return null;
@@ -32,7 +34,7 @@ namespace SA
 
         ResourcesManager rm;
         int cardInstIds;
-        
+
         public StringVariable logger;
         public GameEvent loggerUpdated;
         public GameEvent failedToConnect;
@@ -41,15 +43,20 @@ namespace SA
 
         private void Awake()
         {
-            if (singleton == null)
-            {
-                rm = Resources.Load("ResourcesManager") as ResourcesManager;
-                singleton = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-            else
+            if (singleton != null && singleton != this)
             {
                 Destroy(this.gameObject);
+                return;
+            }
+
+            singleton = this;
+            DontDestroyOnLoad(this.gameObject);
+
+            gameObject.tag = "Persistent";
+
+            if (rm == null)
+            {
+                rm = Resources.Load("ResourcesManager") as ResourcesManager;
             }
         }
 
@@ -62,7 +69,7 @@ namespace SA
             Init();
         }
 
-        public void Init() 
+        public void Init()
         {
             PhotonNetwork.ConnectUsingSettings("1");
             logger.value = "Connecting";
@@ -102,9 +109,11 @@ namespace SA
             MultiplayerHolder m = new MultiplayerHolder();
             m.ownerId = ownerId;
 
-            for(int i = 0; i < cards.Length-1; i++) {
+            for (int i = 0; i < cards.Length - 1; i++)
+            {
                 Card c = CreateCardMaster(cards[i]);
-                if (c == null) {
+                if (c == null)
+                {
                     continue;
                 }
                 m.RegisterCard(c);
@@ -184,9 +193,9 @@ namespace SA
 
         public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
         {
-            if(isMaster)
+            if (isMaster)
             {
-                if(PhotonNetwork.playerList.Length > 1)
+                if (PhotonNetwork.playerList.Length > 1)
                 {
                     logger.value = "Ready for match";
                     loggerUpdated.Raise();
@@ -197,10 +206,23 @@ namespace SA
             }
         }
 
-        public void LoadGameScene() 
+        public void LoadGameScene()
         {
             SessionManager.singleton.LoadGameLevel(OnGameSceneLoaded);
         }
+
+        public void LoadMenu()
+        {
+            if (PhotonNetwork.inRoom)
+            {
+                PhotonNetwork.LeaveRoom(); // OnLeftRoom handles loading the menu
+            }
+            else
+            {
+                SceneManager.LoadScene("Menu");
+            }
+        }
+
 
         void OnGameSceneLoaded()
         {
@@ -215,9 +237,34 @@ namespace SA
         public override void OnLeftRoom()
         {
             base.OnLeftRoom();
+            // Debug.Log("Left room. Cleaning up and returning to menu.");
+            // DestroyPersistentObjects();
+
+            // StartCoroutine(DelayedReturnToMenu());
         }
 
+        private IEnumerator DelayedReturnToMenu()
+        {
+            yield return new WaitForSeconds(1); // Small delay to ensure Photon is ready
+            SceneManager.LoadScene("Menu");
+        }
+
+
         #endregion
+
+        private void DestroyPersistentObjects()
+        {
+            GameObject[] persistents = GameObject.FindGameObjectsWithTag("Persistent");
+
+            foreach (GameObject go in persistents)
+            {
+                Destroy(go);
+            }
+
+            // Or destroy known objects manually if tag-based fails:
+            // Destroy(MultiplayerManager.singleton?.gameObject);
+        }
+
 
         #region RPCs
 
@@ -225,7 +272,8 @@ namespace SA
 
     }
 
-    public class MultiplayerHolder {
+    public class MultiplayerHolder
+    {
         public int ownerId;
         Dictionary<int, Card> cards = new Dictionary<int, Card>();
 

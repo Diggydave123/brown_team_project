@@ -408,7 +408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ab1f7ce68e7334ba7ed8683f59ba20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMaster: 0
   logger: {fileID: 11400000, guid: 4e9dd5d2c547d754cabafabf63246407, type: 2}
   loggerUpdated: {fileID: 11400000, guid: 7cc00eb0247b5864292badc48d48125e, type: 2}
   failedToConnect: {fileID: 11400000, guid: b8be05ffc30976a4c92b5aa25248725f, type: 2}

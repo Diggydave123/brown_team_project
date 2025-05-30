@@ -35,42 +35,98 @@ namespace SA
 
         public void LoadPlayer(PlayerHolder holder, PlayerStatsUI statsUI)
         {
-        
-            if (holder == null) {
+
+            if (holder == null)
+            {
                 return;
             }
             playerHolder = holder;
             holder.currentHolder = this;
-            
+
             foreach (CardInstance c in holder.cardsDown)
             {
-                Debug.Log(c + " in cardDown");
-                if (!holder.attackingCards.Contains(c))
+                if (c != null && c.viz != null && c.viz.gameObject != null)
                 {
-                    Settings.SetParentForCard(c.viz.gameObject.transform, downGrid.value.transform);
+                    Debug.Log(c + " in cardDown");
+                    if (!holder.attackingCards.Contains(c))
+                    {
+                        Settings.SetParentForCard(c.viz.gameObject.transform, downGrid.value.transform);
+                    }
                 }
             }
 
             foreach (CardInstance c in holder.handCards)
             {
-                if (c.viz != null) {
+                if (c != null && c.viz != null && c.viz.gameObject != null)
+                {
                     Settings.SetParentForCard(c.viz.gameObject.transform, handGrid.value.transform);
                 }
             }
 
             foreach (ResourceHolder c in holder.resourcesList)
             {
-                Settings.SetParentForCard(c.cardObj.transform, resourcesGrid.value.transform);
+                if (c != null && c.cardObj != null && c.cardObj.transform != null)
+                {
+                    Settings.SetParentForCard(c.cardObj.transform, resourcesGrid.value.transform);
+                }
             }
 
-            foreach (CardInstance c in holder.attackingCards) 
+            foreach (CardInstance c in holder.attackingCards)
             {
-                SetCardOnBattleLine(c);
+                if (c != null && c.viz != null && c.viz.gameObject != null)
+                {
+                    SetCardOnBattleLine(c);
+                }
             }
+
+
+            // foreach (CardInstance c in holder.cardsDown)
+            // {
+            //     Debug.Log(c + " in cardDown");
+            //     if (!holder.attackingCards.Contains(c))
+            //     {
+            //         Settings.SetParentForCard(c.viz.gameObject.transform, downGrid.value.transform);
+            //     }
+            // }
+
+            // foreach (CardInstance c in holder.handCards)
+            // {
+            //     if (c.viz != null)
+            //     {
+            //         Settings.SetParentForCard(c.viz.gameObject.transform, handGrid.value.transform);
+            //     }
+            // }
+
+            // foreach (ResourceHolder c in holder.resourcesList)
+            // {
+            //     Settings.SetParentForCard(c.cardObj.transform, resourcesGrid.value.transform);
+            // }
+
+            // foreach (CardInstance c in holder.attackingCards)
+            // {
+            //     SetCardOnBattleLine(c);
+            // }
 
             holder.statsUI = statsUI;
             holder.LoadPlayerOnStatsUI();
         }
+        public void ClearAllCards()
+        {
+            ClearGrid(handGrid.value.transform);
+            ClearGrid(resourcesGrid.value.transform);
+            ClearGrid(downGrid.value.transform);
+            ClearGrid(battleLine.value.transform);
+        }
+
+        private void ClearGrid(Transform grid)
+        {
+            for (int i = grid.childCount - 1; i >= 0; i--)
+            {
+                Destroy(grid.GetChild(i).gameObject);
+            }
+        }
+
+
     }
 }
 

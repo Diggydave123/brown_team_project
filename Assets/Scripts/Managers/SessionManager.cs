@@ -12,15 +12,15 @@ namespace SA
 
         void Awake()
         {
-            if (singleton == null)
-            {
-                singleton = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-            else
+            if (singleton != null && singleton != this)
             {
                 Destroy(this.gameObject);
             }
+
+            singleton = this;
+            DontDestroyOnLoad(this.gameObject);
+
+            gameObject.tag = "Persistent";
         }
 
         public void LoadGameLevel(OnSceneLoaded callback)
@@ -33,6 +33,11 @@ namespace SA
         {
             StartCoroutine(LoadLevel("Menu"));
 
+        }
+
+        public void LoadEndScreen()
+        {
+            StartCoroutine(LoadLevel("endScene"));
         }
 
         IEnumerator LoadLevel(string level) 

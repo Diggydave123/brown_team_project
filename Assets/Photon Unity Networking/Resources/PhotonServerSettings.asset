@@ -61,4 +61,5 @@ MonoBehaviour:
   - RPC_PlayerBlocksTargetCard
   - RPC_PlayerBlocksTargetCard_Client
   - RPC_PlayerBlocksTargetCard_Master
+  - RPC_OnPlayerDied
   DisableAutoOpenWizard: 1

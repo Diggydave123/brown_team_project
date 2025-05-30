@@ -12,45 +12,31 @@ namespace SA
         public Sprite portrait;
         public Color playerColor;
 
-        // [System.NonSerialized]
         public int photonId = -1;
 
-        [System.NonSerialized]
-        public int health;
+        [System.NonSerialized] public int health;
         public PlayerStatsUI statsUI;
 
-        //public string[] startingCards;
         public List<string> startingDeck = new List<string>();
 
-        [System.NonSerialized]
-        public List<string> all_cards = new List<string>();
-
+        [System.NonSerialized] public List<string> all_cards = new List<string>();
         public int resourcesPerTurn = 1;
-        [System.NonSerialized]
-        public int resourcesDroppedThisTurn;
+        [System.NonSerialized] public int resourcesDroppedThisTurn;
 
         public bool isHumanPlayer;
 
         public GE_Logic handLogic;
         public GE_Logic downLogic;
 
-        [System.NonSerialized]
-        public CardHolders currentHolder;
-
-        [System.NonSerialized]
-        public List<CardInstance> handCards = new List<CardInstance>();
-        [System.NonSerialized]
-        public List<CardInstance> cardsDown = new List<CardInstance>();
-        [System.NonSerialized]
-        public List<CardInstance> attackingCards = new List<CardInstance>();
-        [System.NonSerialized]
-        public List<ResourceHolder> resourcesList = new List<ResourceHolder>();
-        [System.NonSerialized]
-        public List<int> cardInstIds = new List<int>();
-
+        [System.NonSerialized] public CardHolders currentHolder;
+        [System.NonSerialized] public List<CardInstance> handCards = new List<CardInstance>();
+        [System.NonSerialized] public List<CardInstance> cardsDown = new List<CardInstance>();
+        [System.NonSerialized] public List<CardInstance> attackingCards = new List<CardInstance>();
+        [System.NonSerialized] public List<ResourceHolder> resourcesList = new List<ResourceHolder>();
+        [System.NonSerialized] public List<int> cardInstIds = new List<int>();
         public List<Card> allCardInstances = new List<Card>();
 
-        public void Init() 
+        public void Init()
         {
             health = 20;
             all_cards.AddRange(startingDeck);
@@ -58,34 +44,24 @@ namespace SA
 
         public int resourcesCount
         {
-            get 
+            get
             {
                 return currentHolder.resourcesGrid.value.GetComponentsInChildren<CardViz>().Length;
             }
         }
 
-        public void CardToGraveyard (CardInstance c) 
+        public void CardToGraveyard(CardInstance c)
         {
             Debug.Log(c + " Card to grave");
-            if (attackingCards.Contains(c))
-            {
-                Debug.Log("atCard sent to grave");
-                attackingCards.Remove(c);
-            }
-            if (handCards.Contains(c))
-            {
-                handCards.Remove(c);
-                Debug.Log("handCard sent to grave");
-            }
-            if (cardsDown.Contains(c))
-            {
-                cardsDown.Remove(c);
-                Debug.Log("dwCard sent to grave");
-            }
+            if (attackingCards.Contains(c)) attackingCards.Remove(c);
+            if (handCards.Contains(c)) handCards.Remove(c);
+            if (cardsDown.Contains(c)) cardsDown.Remove(c);
         }
 
         public void AddResourceCard(GameObject cardObj)
         {
+            if (cardObj == null) return;
+
             ResourceHolder resourceHolder = new ResourceHolder
             {
                 cardObj = cardObj
@@ -93,7 +69,7 @@ namespace SA
 
             resourcesList.Add(resourceHolder);
             resourcesDroppedThisTurn++;
-            
+
             Settings.RegisterEvent(username + " drops resources card", Color.white);
         }
 
@@ -103,7 +79,7 @@ namespace SA
 
             for (int i = 0; i < resourcesList.Count; i++)
             {
-                if(!resourcesList[i].isUsed)
+                if (resourcesList[i] != null && !resourcesList[i].isUsed)
                 {
                     result++;
                 }
@@ -113,53 +89,36 @@ namespace SA
 
         public void DropCard(CardInstance inst, bool registerEvent = true)
         {
-            if(handCards.Contains(inst))
-            {
-                handCards.Remove(inst);
-            }
-            if (!cardsDown.Contains(inst))
-            {
-                cardsDown.Add(inst);
-            }
+            if (handCards.Contains(inst)) handCards.Remove(inst);
+            if (!cardsDown.Contains(inst)) cardsDown.Add(inst);
 
-            if(registerEvent) {
+            if (registerEvent)
+            {
                 Settings.RegisterEvent(username + " used " + inst.viz.card.name + " for " + inst.viz.card.cost + " resources", Color.white);
             }
         }
 
         public bool CanUseCard(Card c)
         {
-            bool result = false;
-            if(c.cardType is CreatureCard || c.cardType is SpellCard)
+            if (c.cardType is CreatureCard || c.cardType is SpellCard)
             {
-                int currentResources = NonUsedCards();
-
-                if (c.cost <= currentResources)
-                    result = true;
-
-                return result;
+                return c.cost <= NonUsedCards();
             }
-            else
+            else if (c.cardType is ResourcesCard)
             {
-                if(c.cardType is ResourcesCard)
-                {
-                    if (resourcesPerTurn - resourcesDroppedThisTurn > 0)
-                    {
-                        result = true;
-                    }
-                }
+                return (resourcesPerTurn - resourcesDroppedThisTurn) > 0;
             }
-            
-            return result; 
+
+            return false;
         }
 
         public List<ResourceHolder> GetUnusedResources()
         {
             List<ResourceHolder> result = new List<ResourceHolder>();
 
-            for (int i = 0; i < resourcesList.Count; i ++)
+            for (int i = 0; i < resourcesList.Count; i++)
             {
-                if (!resourcesList[i].isUsed)
+                if (resourcesList[i] != null && !resourcesList[i].isUsed)
                 {
                     result.Add(resourcesList[i]);
                 }
@@ -170,10 +129,17 @@ namespace SA
 
         public void MakeAllResourceCardsUsable()
         {
-            for (int i = 0; i < resourcesList.Count; i ++)
+            // Clean up destroyed objects
+            resourcesList.RemoveAll(r => r == null || r.cardObj == null);
+
+            foreach (var r in resourcesList)
             {
-                resourcesList[i].isUsed = false;
-                resourcesList[i].cardObj.transform.localEulerAngles = Vector3.zero;
+                r.isUsed = false;
+
+                if (r.cardObj != null && r.cardObj.transform != null)
+                {
+                    r.cardObj.transform.localEulerAngles = Vector3.zero;
+                }
             }
 
             resourcesDroppedThisTurn = 0;
@@ -182,36 +148,65 @@ namespace SA
         public void UseResourceCards(int amount)
         {
             Vector3 euler = new Vector3(0, 0, 90);
-
             List<ResourceHolder> l = GetUnusedResources();
 
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < amount && i < l.Count; i++)
             {
-                l[i].isUsed = true;
-                l[i].cardObj.transform.localEulerAngles = euler;
+                if (l[i].cardObj != null && l[i].cardObj.transform != null)
+                {
+                    l[i].isUsed = true;
+                    l[i].cardObj.transform.localEulerAngles = euler;
+                }
             }
         }
 
         public void LoadPlayerOnStatsUI()
         {
-            if(statsUI != null)
+            if (statsUI != null)
             {
                 statsUI.player = this;
                 statsUI.UpdateAll();
             }
         }
-        public void DoDamage(int value)
+
+        public bool DoDamage(int value)
         {
             health -= value;
+
+            if (statsUI != null)
+                statsUI.UpdateHealth();
+
             if (health <= 0)
             {
                 health = 0;
-                // TODO: add Game over screen
                 Debug.Log("Game over for " + username);
+                return true;
             }
-            if (statsUI != null)
-                    statsUI.UpdateHealth();
+
+            return false;
         }
 
+        public void ClearPlayerState()
+        {
+            handCards.Clear();
+            cardsDown.Clear();
+            attackingCards.Clear();
+            cardInstIds.Clear();
+
+            // Remove null or destroyed objects
+            resourcesList.RemoveAll(r => r == null || r.cardObj == null);
+
+            // Destroy any lingering resource objects
+            foreach (var r in resourcesList)
+            {
+                if (r.cardObj != null)
+                {
+                    Object.Destroy(r.cardObj);
+                }
+            }
+
+            resourcesList.Clear();
+            resourcesDroppedThisTurn = 0;
+        }
     }
 }

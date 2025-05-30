@@ -3,6 +3,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace SA 
 {
@@ -13,22 +16,25 @@ namespace SA
         [System.NonSerialized]
         public PlayerHolder[] all_players;
 
-        public PlayerHolder GetEnemyOf(PlayerHolder p) {
-            for(int i = 0; i < all_players.Length; i++) {
-                if(all_players[i] != p) {
+        public PlayerHolder GetEnemyOf(PlayerHolder p)
+        {
+            for (int i = 0; i < all_players.Length; i++)
+            {
+                if (all_players[i] != p)
+                {
                     return all_players[i];
                 }
             }
             return null;
         }
-        
+
         public PlayerHolder currentPlayer;
 
         public PlayerHolder localPlayer;
         public PlayerHolder clientPlayer;
         public CardHolders playerOneHolder;
         public CardHolders otherPlayersHolder;
-        
+
         public State currentState;
         public GameObject cardPrefab;
 
@@ -41,6 +47,8 @@ namespace SA
         public PlayerStatsUI[] statsUI;
         public SO.TransformVariable graveyardVariable;
         public List<CardInstance> graveyardCards = new List<CardInstance>();
+        public GameObject gameOverPanel;
+        public TextMeshProUGUI gameOverText;
 
         bool isInit;
 
@@ -56,24 +64,27 @@ namespace SA
             blockInstances.Clear();
         }
 
-        public void AddBlockInstance(CardInstance attacker, CardInstance blocker, ref int count) 
+        public void AddBlockInstance(CardInstance attacker, CardInstance blocker, ref int count)
         {
             BlockInstance b = null;
             b = GetBlockInstanceOfAttacker(attacker);
-            if(b == null) {
+            if (b == null)
+            {
                 b = new BlockInstance();
                 b.attacker = attacker;
                 blockInstances.Add(attacker, b);
             }
 
-            if(!b.blocker.Contains(blocker)) {
+            if (!b.blocker.Contains(blocker))
+            {
                 b.blocker.Add(blocker);
             }
-            
+
             count = b.blocker.Count;
         }
 
-        BlockInstance GetBlockInstanceOfAttacker(CardInstance attacker){
+        BlockInstance GetBlockInstanceOfAttacker(CardInstance attacker)
+        {
             BlockInstance r = null;
             blockInstances.TryGetValue(attacker, out r);
             return r;
@@ -85,6 +96,7 @@ namespace SA
         {
             Settings.gameManager = this;
             singleton = this;
+            gameOverPanel.SetActive(false);
 
         }
 
@@ -110,9 +122,9 @@ namespace SA
             }
 
             turns = _turns;
-         
+
             SetupPlayers();
-            
+
             turnText.value = turns[turnIndex].player.username;
             onTurnChanged.Raise();
             turns[0].OnTurnStart();
@@ -121,15 +133,16 @@ namespace SA
 
         void SetupPlayers()
         {
-            ResourcesManager rm = Settings.GetResourcesManager();
-
-            for(int i = 0; i < all_players.Length; i++)
+            for (int i = 0; i < all_players.Length; i++)
             {
                 all_players[i].Init();
 
-                if (i == 0) {
+                if (i == 0)
+                {
                     all_players[i].currentHolder = playerOneHolder;
-                } else {
+                }
+                else
+                {
                     all_players[i].currentHolder = otherPlayersHolder;
                 }
 
@@ -143,7 +156,7 @@ namespace SA
             MultiplayerManager.singleton.PlayerPicksCardFromDeck(p);
         }
 
-        public void LoadPlayerOnActive(PlayerHolder p) 
+        public void LoadPlayerOnActive(PlayerHolder p)
         {
             PlayerHolder prevPlayer = playerOneHolder.playerHolder;
             if (prevPlayer != p)
@@ -153,7 +166,8 @@ namespace SA
             LoadPlayerOnHolder(p, playerOneHolder, statsUI[0]);
         }
 
-        public void LoadPlayerOnHolder(PlayerHolder p, CardHolders h, PlayerStatsUI ui){
+        public void LoadPlayerOnHolder(PlayerHolder p, CardHolders h, PlayerStatsUI ui)
+        {
             Debug.Log("Load Player");
             h.LoadPlayer(p, ui);
         }
@@ -167,7 +181,7 @@ namespace SA
 
             bool IsComplete = turns[turnIndex].Execute();
 
-            if(!isMultiplayer)
+            if (!isMultiplayer)
             {
                 if (IsComplete)
                 {
@@ -186,7 +200,7 @@ namespace SA
             }
             else
             {
-                if(IsComplete)
+                if (IsComplete)
                 {
                     MultiplayerManager.singleton.PlayerEndsTurn(currentPlayer.photonId);
                 }
@@ -200,7 +214,8 @@ namespace SA
 
         int GetPlayerTurnIndex(int photonId)
         {
-            for(int i = 0; i < turns.Length; i++) {
+            for (int i = 0; i < turns.Length; i++)
+            {
                 if (turns[i].player.photonId == photonId)
                 {
                     return i;
@@ -213,9 +228,9 @@ namespace SA
         public int GetNextPlayerID()
         {
             int r = turnIndex;
-            
+
             r++;
-            if(r > turns.Length-1)
+            if (r > turns.Length - 1)
             {
                 r = 0;
             }
@@ -256,14 +271,15 @@ namespace SA
 
             c.transform.localPosition = p;
             c.transform.localRotation = Quaternion.identity;
-            c.transform.localScale = Vector3.one; 
-        } 
+            c.transform.localScale = Vector3.one;
+        }
 
         public void LocalPlayerEndsBattleResolve()
         {
             Debug.Log("LocalPlayerEndsBattleResolve");
             turns[turnIndex].EndCurrentPhase();
         }
+        
     }
 
 }

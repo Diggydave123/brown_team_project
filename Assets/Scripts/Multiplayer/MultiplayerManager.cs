@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using System.Collections;
 
 namespace SA
 {
@@ -14,6 +17,7 @@ namespace SA
         int playersReady = 0;
         int totalCardsToCreate = 0;
         int cardsCreated = 0;
+        bool isDead = false;
 
 
         // public PlayerHolder localPlayerHolder;
@@ -60,11 +64,14 @@ namespace SA
         #region Init
         void OnPhotonInstantiate(PhotonMessageInfo info)
         {
+            Debug.Log(gameStarted);
             multiplayerReferences = new GameObject("references").transform;
             DontDestroyOnLoad(multiplayerReferences.gameObject);
+            multiplayerReferences.gameObject.tag = "Persistent";
 
             singleton = this;
             DontDestroyOnLoad(this.gameObject);
+            gameObject.tag = "Persistent";
 
             InstantiateNetworkPrint();
             NetworkManager.singleton.LoadGameScene();
@@ -73,6 +80,7 @@ namespace SA
         void InstantiateNetworkPrint()
         {
             int actorId = PhotonNetwork.player.ID;
+            Debug.Log("Actor Id: " + actorId);
 
             PlayerProfile profile = CreateProfileForPlayer(actorId); //Resources.Load("PlayerProfile") as PlayerProfile;
 
@@ -88,7 +96,7 @@ namespace SA
 
             if (actorId == 1)
             {
-                profile.cardIds = new string[] { "RESOURCE", "REPO", "SPELL", "TAXMAN", "REPO" };
+                profile.cardIds = new string[] { "RESOURCE", "TAXMAN", "TAXMAN", "SPELL", "REPO" };
             }
             else if (actorId == 2)
             {
@@ -369,15 +377,15 @@ namespace SA
                             if (correct)
                             {
                                 Debug.Log("✅ Correct! Trigger spell effect. Damage done to enemy 2");
-                                enemy.DoDamage(2);
-                                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, enemy.photonId, enemy.health);
+                                isDead = enemy.DoDamage(2);
+                                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, enemy.photonId, enemy.health, isDead);
                             }
                             else
                             {
                                 Debug.Log("❌ Incorrect! Small Backfire Spell effect. Damage done to self 1");
-                                player.DoDamage(1);
-                                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, player.photonId, player.health);
-                                
+                                isDead = player.DoDamage(1);
+                                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, player.photonId, player.health, isDead);
+
                             }
                         };
                         qm.TriggerNextQuestionFromGame();
@@ -503,8 +511,8 @@ namespace SA
                 // p.currentHolder.SetCardDown(inst);
                 // inst.SetFlatfooted(true);
 
-                player.DoDamage(attackValue);
-                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, player.photonId, player.health);
+                isDead = player.DoDamage(attackValue);
+                photonView.RPC("RPC_SyncPlayerHealth", PhotonTargets.All, player.photonId, player.health, isDead);
                 Debug.Log("Damage done: " + attack.intValue.ToString());
             }
 
@@ -520,11 +528,16 @@ namespace SA
         }
 
         [PunRPC]
-        public void RPC_SyncPlayerHealth(int photonId, int health)
+        public void RPC_SyncPlayerHealth(int photonId, int health, bool isDead)
         {
             NetworkPrint p = GetPlayer(photonId);
             p.playerHolder.health = health;
             p.playerHolder.statsUI.UpdateHealth();
+
+            if (isDead)
+            {
+                photonView.RPC("RPC_OnPlayerDied", PhotonTargets.All, photonId);
+            }
         }
 
         [PunRPC]
@@ -684,6 +697,34 @@ namespace SA
         }
 
         #endregion
+        #endregion
+
+        #region Game Over
+
+        [PunRPC]
+        void RPC_OnPlayerDied(int deadPlayerId)
+        {
+            int localId = PhotonNetwork.player.ID;
+
+
+            if (localId == deadPlayerId)
+            {
+                ShowGameOver("You Lose");
+            }
+            else
+            {
+                ShowGameOver("You Win");
+            }
+        }
+
+        void ShowGameOver(string message)
+        {
+            gm.gameOverText.text = message;
+            gm.gameOverPanel.SetActive(true);
+            Time.timeScale = 0f;
+
+        }
+
         #endregion
     }
 
