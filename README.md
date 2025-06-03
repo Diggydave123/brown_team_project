@@ -4,7 +4,8 @@ IBM Skills Build: Educational Card Game
 This project is a prototype for an educational strategy card game that merges interactive gameplay with real-world learning. Developed in collaboration with IBM's Skills Build platform, the game is inspired by Star Trek Adversaries and aims to make learning AI, Cybersecurity, Data Analytics, and Threat Intelligence fun, engaging, and adaptive.
 
 Players collect, upgrade, and battle with cards—unlocking boosts and new abilities by correctly answering quiz questions drawn from official IBM Skills Build badges. The experience is designed to reinforce learning through rewards and immediate feedback, creating a unique fusion of gaming and education.
-⚠️ Disclaimer
+
+⚠️ Disclaimer:
 This version is a prototype intended for academic and demonstration purposes. While several features such as multiplayer and quiz-driven progression are functional, others like adaptive AI difficulty, feedback explanations, and progression systems are planned for future development.
 
 
